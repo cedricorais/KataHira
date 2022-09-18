@@ -1,4 +1,4 @@
-package com.learnjp.katahira;
+package ths.learnjp.katahira;
 
 import org.junit.Test;
 

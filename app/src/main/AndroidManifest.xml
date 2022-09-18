@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KataHira">
         <activity
-            android:name="com.learnjp.katahira.KatakanaCharacters"
+            android:name="ths.learnjp.katahira.KatakanaCharacters"
             android:exported="false" />
         <activity
-            android:name="com.learnjp.katahira.HiraganaCharacters"
+            android:name="ths.learnjp.katahira.HiraganaCharacters"
             android:exported="false" />
         <activity
-            android:name="com.learnjp.katahira.MainActivity"
+            android:name="ths.learnjp.katahira.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="3dp"
-    tools:context=".KatakanaCharacters">
+    tools:context="ths.learnjp.katahira.KatakanaCharacters">
 
     <TextView
         android:gravity="center"

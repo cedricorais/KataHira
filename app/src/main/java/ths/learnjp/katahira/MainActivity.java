@@ -1,8 +1,7 @@
-package com.learnjp.katahira;
+package ths.learnjp.katahira;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.learnjp.katahira.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
