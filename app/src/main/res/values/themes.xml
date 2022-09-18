@@ -19,7 +19,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.KataHira1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.KataHira.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.KataHira1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.KataHira.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

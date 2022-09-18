@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     TextView scoreVal, attemptsVal, shownChar;
 
     String[] selected_option = new String[]{"Select Option", "Katakana to Romaji", "Hiragana to Romaji"};
-    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
+//    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +79,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, selected_option) {
             @Override
             public boolean isEnabled(int position) {
-                if(position == 0) {
-                    return  false;
-                } else {
-                    return true;
-                }
+//                if(position == 0) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+                return position != 0;
             }
 
             @Override
@@ -105,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedText = (String) parent.getItemAtPosition(position);
-                if(position > 0) {
-                    // some code
-                }
+//                if(position > 0) {
+//                    // some code
+//                }
             }
 
             @Override
@@ -116,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        attemptsVal = (TextView) findViewById(R.id.attemptsValTxt);
-        scoreVal = (TextView) findViewById(R.id.scoreValTxt);
-        shownChar = (TextView) findViewById(R.id.showChar);
+        attemptsVal = findViewById(R.id.attemptsValTxt);
+        scoreVal = findViewById(R.id.scoreValTxt);
+        shownChar = findViewById(R.id.showChar);
 
         welcomeToast();
 
@@ -309,7 +310,6 @@ public class MainActivity extends AppCompatActivity {
                 attemptsVal.setText("0");
                 optionsSpin.setSelection(0);
                 scoreVal.setText(Integer.toString(Global.score));
-                shownChar.setText("〇");
 
                 initialLaunch();
             }
@@ -334,35 +334,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initialLaunch() {
+        scoreVal.setText("0");
+        attemptsVal.setText("0");
+        optionsSpin.setEnabled(true);
+        shownChar.setText("〇");
+        generateBtn.setEnabled(true);
         choice1Btn.setEnabled(false);
         choice2Btn.setEnabled(false);
         choice3Btn.setEnabled(false);
         answerVal.setEnabled(false);
-        generateBtn.setEnabled(true);
+        submitBtn.setEnabled(false);
+        resetBtn.setEnabled(false);
         kataBtn.setEnabled(true);
         hiraBtn.setEnabled(true);
-        optionsSpin.setEnabled(true);
-        resetBtn.setEnabled(false);
-        submitBtn.setEnabled(false);
     }
 
     public void startSession() {
+        optionsSpin.setEnabled(false);
+        generateBtn.setEnabled(false);
         choice1Btn.setEnabled(true);
         choice2Btn.setEnabled(true);
         choice3Btn.setEnabled(true);
         answerVal.getText().clear();
         answerVal.setEnabled(true);
-        generateBtn.setEnabled(false);
+        submitBtn.setEnabled(true);
+        resetBtn.setEnabled(true);
         kataBtn.setEnabled(false);
         hiraBtn.setEnabled(false);
-        optionsSpin.setEnabled(false);
-        resetBtn.setEnabled(true);
-        submitBtn.setEnabled(true);
     }
 
     public void welcomeToast() {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);
@@ -379,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void nooptionToast() {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);
@@ -396,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void emptyAnsToast() {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);
@@ -413,7 +416,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void correctAnsToast() {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);
@@ -430,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void zeroAttemptsToast() {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);

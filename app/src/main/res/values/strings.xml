@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">KataHira</string>
-    <string name="answer"><u>Your Answer:</u></string>
-<!--remove?    <string name="choices"><u>Choices:</u></string>-->
+    <string name="score">"Score: "</string>
+    <string name="attempts">"Attempts: "</string>
+    <string name="show_char">〇</string>
+    <string name="generate_character">Generate Character</string>
+    <string name="choices"><u>Choices</u></string>
+    <string name="reset">Reset</string>
+    <string name="view_katakana">View Katakana Characters</string>
+    <string name="view_hiragana">View Hiragana Characters</string>
 </resources>
