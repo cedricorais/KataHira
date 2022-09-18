@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/scoreTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/scoreValTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20dp"
+        android:layout_toRightOf="@id/scoreTxt"/>
+
+    <TextView
+        android:id="@+id/attemptsTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scoreTxt"
+        android:text="Attempts: "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/attemptsValTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20dp"
+        android:layout_below="@+id/scoreTxt"
+        android:layout_toRightOf="@id/attemptsTxt"/>
+
+    <Spinner
+        android:id="@+id/options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/attemptsTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/showChar"
+        android:layout_width="225dp"
+        android:layout_height="220dp"
+        android:layout_below="@+id/options"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:text="〇"
+        android:textSize="150dp" />
+
+    <Button
+        android:id="@+id/generateChar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/showChar"
+        android:layout_centerHorizontal="true"
+        android:text="Generate Character" />
+
+    <TextView
+        android:id="@+id/answerTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/generateChar"
+        android:layout_centerInParent="true"
+        android:text="@string/answer"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/choice1"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/answerTxt"
+        android:layout_toLeftOf="@+id/choice2"
+        android:text="1" />
+
+    <Button
+        android:id="@+id/choice2"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/answerTxt"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="2" />
+
+    <Button
+        android:id="@+id/choice3"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/answerTxt"
+        android:layout_toRightOf="@+id/choice2"
+        android:text="3" />
+
+    <EditText
+        android:id="@+id/answerEdt"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/choice1"
+        android:layout_centerInParent="true"
+        android:maxLength="3" />
+
+    <Button
+        android:id="@+id/submitChar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/choice1"
+        android:layout_toRightOf="@id/answerEdt"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/answerEdt"
+        android:layout_centerHorizontal="true"
+        android:text="Reset All" />
+
+    <Button
+        android:id="@+id/showKata"
+        android:backgroundTint="@color/red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Katakana Character"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/reset"/>
+
+    <Button
+        android:id="@+id/showHira"
+        android:backgroundTint="#66FF33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/showKata"
+        android:layout_centerHorizontal="true"
+        android:text="View Hiragana Character" />
+
+</RelativeLayout>

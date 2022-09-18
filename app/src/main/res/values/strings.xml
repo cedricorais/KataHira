@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">KataHira</string>
+    <string name="answer"><u>Your Answer:</u></string>
+<!--remove?    <string name="choices"><u>Choices:</u></string>-->
+</resources>
