@@ -131,17 +131,7 @@ public class MainActivity extends AppCompatActivity {
 //                    zeroAttemptsToast(); // debug purpose
                 }
                 else if(optionsSpin.getSelectedItemPosition() == 1) {
-                    choice1Btn.setEnabled(true);
-                    choice2Btn.setEnabled(true);
-                    choice3Btn.setEnabled(true);
-                    answerVal.getText().clear();
-                    answerVal.setEnabled(true);
-                    generateBtn.setEnabled(false);
-                    kataBtn.setEnabled(false);
-                    hiraBtn.setEnabled(false);
-                    optionsSpin.setEnabled(false);
-                    resetBtn.setEnabled(true);
-                    submitBtn.setEnabled(true);
+                    startSession();
 
                     int random = new Random().nextInt(((Global.attempts - 1)) + 1);
                     attemptsVal.setText(Integer.toString(Global.attempts));
@@ -203,17 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
                 else if(optionsSpin.getSelectedItemPosition() == 2) {
-                    choice1Btn.setEnabled(true);
-                    choice2Btn.setEnabled(true);
-                    choice3Btn.setEnabled(true);
-                    answerVal.getText().clear();
-                    answerVal.setEnabled(true);
-                    generateBtn.setEnabled(false);
-                    kataBtn.setEnabled(false);
-                    hiraBtn.setEnabled(false);
-                    optionsSpin.setEnabled(false);
-                    resetBtn.setEnabled(true);
-                    submitBtn.setEnabled(true);
+                    startSession();
 
                     int random = new Random().nextInt(((Global.attempts - 1)) + 1);
                     attemptsVal.setText(Integer.toString(Global.attempts));
@@ -363,6 +343,20 @@ public class MainActivity extends AppCompatActivity {
         optionsSpin.setEnabled(true);
         resetBtn.setEnabled(false);
         submitBtn.setEnabled(false);
+    }
+
+    public void startSession() {
+        choice1Btn.setEnabled(true);
+        choice2Btn.setEnabled(true);
+        choice3Btn.setEnabled(true);
+        answerVal.getText().clear();
+        answerVal.setEnabled(true);
+        generateBtn.setEnabled(false);
+        kataBtn.setEnabled(false);
+        hiraBtn.setEnabled(false);
+        optionsSpin.setEnabled(false);
+        resetBtn.setEnabled(true);
+        submitBtn.setEnabled(true);
     }
 
     public void welcomeToast() {
