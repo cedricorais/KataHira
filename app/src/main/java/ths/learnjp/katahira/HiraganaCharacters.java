@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.learnjp.katahira.R;
-
 public class HiraganaCharacters extends AppCompatActivity {
 
     @Override

@@ -18,8 +18,11 @@
         <entry key="..\:/Users/Zed/AndroidStudioProjects/KataHira1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.233" />
         <entry key="..\:/Users/Zed/AndroidStudioProjects/KataHira1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.222" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/drawable/border.xml" value="0.233" />
-        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_main.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_hiragana_characters.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_katakana_characters.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/spinner_item.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/toast_layout.xml" value="0.32222222222222224" />
       </map>
     </option>
   </component>

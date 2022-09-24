@@ -2,10 +2,18 @@
     <string name="app_name">KataHira</string>
     <string name="score">"Score: "</string>
     <string name="attempts">"Attempts: "</string>
-    <string name="show_char">〇</string>
+    <string name="option1">Select Option</string>
+    <string name="option2">Katakana to Romaji</string>
+    <string name="option3">Hiragana to Romaji</string>
+    <string name="default_char">〇</string>
     <string name="generate_character">Generate Character</string>
     <string name="choices"><u>Choices</u></string>
     <string name="reset">Reset</string>
-    <string name="view_katakana">View Katakana Characters</string>
-    <string name="view_hiragana">View Hiragana Characters</string>
+    <string name="view_katakana">Katakana Characters</string>
+    <string name="view_hiragana">Hiragana Characters</string>
+    <string name="welcome_toast">Welcome!</string>
+    <string name="invalid_option_toast">Please select an option.</string>
+    <string name="correct_toast">Correct! Generate again.</string>r
+    <string name="zero_attempts_toast">No Attempts left. Press Reset to try again.</string>
+    <string name="wrong_toast">Wrong. Answer should be \'%s\'</string>
 </resources>

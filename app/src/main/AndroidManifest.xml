@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.learnjp.katahira">
+    package="ths.learnjp.katahira">
 
     <application
         android:allowBackup="true"
@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KataHira">
         <activity
-            android:name="ths.learnjp.katahira.KatakanaCharacters"
+            android:name=".KatakanaCharacters"
             android:exported="false" />
         <activity
-            android:name="ths.learnjp.katahira.HiraganaCharacters"
+            android:name=".HiraganaCharacters"
             android:exported="false" />
         <activity
-            android:name="ths.learnjp.katahira.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

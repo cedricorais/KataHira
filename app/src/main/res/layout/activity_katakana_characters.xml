@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="3dp"
-    tools:context="ths.learnjp.katahira.KatakanaCharacters">
+    tools:context=".KatakanaCharacters">
 
     <TextView
         android:gravity="center"
         android:text="Katakana Basic Characters"
         android:textSize="24dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TableRow android:background="@color/gray">
         <TextView

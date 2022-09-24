@@ -3,44 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ths.learnjp.katahira.MainActivity"
-    android:padding="5dp">
+    android:padding="5dp"
+    tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/scoreTxt"
+        android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/scoreValTxt"
+        android:id="@+id/scoreValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/scoreTxt"
+        android:layout_toEndOf="@id/score"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/attemptsTxt"
+        android:id="@+id/attempts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scoreTxt"
+        android:layout_below="@+id/score"
         android:text="@string/attempts"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/attemptsValTxt"
+        android:id="@+id/attemptsValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scoreTxt"
-        android:layout_toEndOf="@id/attemptsTxt"
+        android:layout_below="@+id/score"
+        android:layout_toEndOf="@id/attempts"
         android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/attemptsTxt"
+        android:layout_below="@+id/attempts"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:textSize="24sp" />
@@ -53,7 +53,6 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/border"
         android:gravity="center"
-        android:text="@string/show_char"
         android:textSize="150sp" />
 
     <Button
@@ -78,8 +77,7 @@
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/choices"
-        android:layout_toStartOf="@+id/choice2"
-        android:text="1" />
+        android:layout_toStartOf="@+id/choice2" />
 
     <Button
         android:id="@+id/choice2"
@@ -88,58 +86,49 @@
         android:layout_below="@+id/choices"
         android:layout_centerInParent="true"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="2" />
+        android:layout_marginRight="5dp" />
 
     <Button
         android:id="@+id/choice3"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/choices"
-        android:layout_toEndOf="@+id/choice2"
-        android:text="3" />
-
-    <EditText
-        android:id="@+id/answerEdt"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/choice1"
-        android:layout_centerInParent="true"
-        android:maxLength="3" /><!---->
-
-    <Button
-        android:id="@+id/submitChar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/choice1"
-        android:layout_toEndOf="@id/answerEdt"
-        android:text="Submit" /><!---->
+        android:layout_toEndOf="@+id/choice2" />
 
     <Button
         android:id="@+id/reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_below="@+id/answerEdt"
+        android:layout_below="@+id/choice1"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
         android:text="@string/reset" />
 
     <Button
         android:id="@+id/showKata"
-        android:backgroundTint="@color/red"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/reset"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/red"
         android:text="@string/view_katakana" />
 
     <Button
         android:id="@+id/showHira"
-        android:backgroundTint="#66FF33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/showKata"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="#66FF33"
         android:text="@string/view_hiragana" />
+
+    <Switch
+        android:id="@+id/toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/showHira"
+        android:text="Light Mode"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
 
 </RelativeLayout>

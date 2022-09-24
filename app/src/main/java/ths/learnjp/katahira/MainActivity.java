@@ -1,7 +1,6 @@
 package ths.learnjp.katahira;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,38 +11,43 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.learnjp.katahira.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static class Global {
-        public static String[] kata = {"ア", "力", "サ", "タ", "ナ", "ハ", "マ", "ヤ", "ラ", "ワ", "ガ", "ザ", "ダ", "バ", "パ",
-                                        "イ", "キ", "シ", "チ", "二", "ヒ", "ミ", "リ", "ギ", "ジ", "ヂ", "ビ", "ピ",
-                                        "ウ", "ク", "ス", "ツ", "ヌ", "フ", "ム", "ユ", "ル", "ン", "グ", "ズ", "ヅ", "ブ", "プ",
-                                        "エ", "ケ", "セ", "テ", "ネ", "へ", "メ", "レ", "ゲ", "ゼ", "デ", "べ", "ぺ",
-                                        "オ", "コ", "ソ", "ト", "ノ", "ホ", "モ", "ヨ", "ロ", "ヲ", "ゴ", "ゾ", "ド", "ボ", "ポ"};
-        public static String[] hira = {"あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ", "が", "ざ", "だ", "ば", "ぱ",
-                                        "い", "き", "し", "ち", "に", "ひ", "み", "り", "ぎ", "じ", "ぢ", "び", "ぴ",
-                                        "う", "く", "す", "つ", "ぬ", "ふ", "む", "ゆ", "る", "ん", "ぐ", "ず", "づ", "ぶ", "ぷ",
-                                        "え", "け", "せ", "て", "ね", "へ", "め", "れ", "げ", "ぜ", "で", "べ", "ぺ",
-                                        "お", "こ", "そ", "と", "の", "ほ", "も", "よ", "ろ", "を", "ご", "ぞ", "ど", "ぼ", "ぽ"};
-        public static String[] roma = {"a", "ka", "sa", "ta", "na", "ha", "ma", "ya", "ra", "wa", "ga", "za", "da", "ba", "pa",
-                                        "i", "ki", "shi", "chi", "ni", "hi", "mi", "ri", "gi", "ji", "dji", "bi", "pi",
-                                        "u", "ku", "su", "tsu", "nu", "fu", "mu", "yu", "ru", "n", "gu", "zu", "dzu", "bu", "pu",
-                                        "e", "ke", "se", "te", "ne", "he", "me", "re", "ge", "ze", "de", "be", "pe",
-                                        "o", "ko", "so", "to", "no", "ho", "mo", "yo", "ro", "wo", "go", "zo", "do", "bo", "po"};
+    public static class globalVar {
+        public static String[] kata = {"ア", "力", "サ", "タ", "ナ"};
+        public static String[] hira = {"あ", "か", "さ", "た", "な"};
+        public static String[] roma = {"a", "ka", "sa", "ta", "na"};
+//        public static String[] kata = {"ア", "力", "サ", "タ", "ナ", "ハ", "マ", "ヤ", "ラ", "ワ", "ガ", "ザ", "ダ", "バ", "パ",
+//                                        "イ", "キ", "シ", "チ", "二", "ヒ", "ミ", "リ", "ギ", "ジ", "ヂ", "ビ", "ピ",
+//                                        "ウ", "ク", "ス", "ツ", "ヌ", "フ", "ム", "ユ", "ル", "ン", "グ", "ズ", "ヅ", "ブ", "プ",
+//                                        "エ", "ケ", "セ", "テ", "ネ", "へ", "メ", "レ", "ゲ", "ゼ", "デ", "べ", "ぺ",
+//                                        "オ", "コ", "ソ", "ト", "ノ", "ホ", "モ", "ヨ", "ロ", "ヲ", "ゴ", "ゾ", "ド", "ボ", "ポ"};
+//        public static String[] hira = {"あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ", "が", "ざ", "だ", "ば", "ぱ",
+//                                        "い", "き", "し", "ち", "に", "ひ", "み", "り", "ぎ", "じ", "ぢ", "び", "ぴ",
+//                                        "う", "く", "す", "つ", "ぬ", "ふ", "む", "ゆ", "る", "ん", "ぐ", "ず", "づ", "ぶ", "ぷ",
+//                                        "え", "け", "せ", "て", "ね", "へ", "め", "れ", "げ", "ぜ", "で", "べ", "ぺ",
+//                                        "お", "こ", "そ", "と", "の", "ほ", "も", "よ", "ろ", "を", "ご", "ぞ", "ど", "ぼ", "ぽ"};
+//        public static String[] roma = {"a", "ka", "sa", "ta", "na", "ha", "ma", "ya", "ra", "wa", "ga", "za", "da", "ba", "pa",
+//                                        "i", "ki", "shi", "chi", "ni", "hi", "mi", "ri", "gi", "ji", "dji", "bi", "pi",
+//                                        "u", "ku", "su", "tsu", "nu", "fu", "mu", "yu", "ru", "n", "gu", "zu", "dzu", "bu", "pu",
+//                                        "e", "ke", "se", "te", "ne", "he", "me", "re", "ge", "ze", "de", "be", "pe",
+//                                        "o", "ko", "so", "to", "no", "ho", "mo", "yo", "ro", "wo", "go", "zo", "do", "bo", "po"};
         public static List<String> kataChars = new ArrayList<>(Arrays.asList(kata));
         public static List<String> hiraChars = new ArrayList<>(Arrays.asList(hira));
         public static List<String> romaChars = new ArrayList<>(Arrays.asList(roma));
@@ -51,30 +55,23 @@ public class MainActivity extends AppCompatActivity {
         public static int attempts = romaChars.size(), score = 0;
     }
 
-    Button choice1Btn, choice2Btn, choice3Btn, kataBtn, hiraBtn, generateBtn, resetBtn, submitBtn;
-    EditText answerVal;
+    Button generateBtn, choice1Btn, choice2Btn, choice3Btn, resetBtn, kataBtn, hiraBtn;
     Spinner optionsSpin;
-    TextView scoreVal, attemptsVal, shownChar;
+    TextView scoreValue, attemptValue, shownChar;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    Switch toggleTheme;
 
-    String[] selected_option = new String[]{"Select Option", "Katakana to Romaji", "Hiragana to Romaji"};
-//    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        choice1Btn = findViewById(R.id.choice1);
-        choice2Btn = findViewById(R.id.choice2);
-        choice3Btn = findViewById(R.id.choice3);
-        kataBtn = findViewById(R.id.showKata);
-        hiraBtn = findViewById(R.id.showHira);
-        generateBtn = findViewById(R.id.generateChar);
-        resetBtn = findViewById(R.id.reset);
-        submitBtn = findViewById(R.id.submitChar);
+        attemptValue = findViewById(R.id.attemptsValue);
+        scoreValue = findViewById(R.id.scoreValue);
 
-        answerVal = findViewById(R.id.answerEdt);
-
+        String[] selected_option = new String[]{getString(R.string.option1), getString(R.string.option2), getString(R.string.option3)};
+//    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
         optionsSpin = findViewById(R.id.options);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, selected_option) {
             @Override
@@ -88,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView txtView = (TextView) view;
                 if(position == 0){
                     txtView.setTextColor(Color.GRAY);
                 }
                 else {
-                    txtView.setTextColor(Color.BLACK);
+                    txtView.setTextColor(Color.GRAY);
                 }
                 return view;
             }
@@ -117,204 +114,82 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        attemptsVal = findViewById(R.id.attemptsValTxt);
-        scoreVal = findViewById(R.id.scoreValTxt);
         shownChar = findViewById(R.id.showChar);
 
-        welcomeToast();
-
-        initialLaunch();
-
+        generateBtn = findViewById(R.id.generateChar);
         generateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(optionsSpin.getSelectedItemPosition() == 0) {
-                    nooptionToast();
-//                    zeroAttemptsToast(); // debug purpose
-                }
-                else if(optionsSpin.getSelectedItemPosition() == 1) {
-                    startSession();
-
-                    int random = new Random().nextInt(((Global.attempts - 1)) + 1);
-                    attemptsVal.setText(Integer.toString(Global.attempts));
-                    shownChar.setText(Global.kataChars.get(random));
-                    answerVal.setText(Global.romaChars.get(random)); // debug purpose
-
-                    submitBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if(answerVal.getText().toString().isEmpty()) {
-                                emptyAnsToast();
-                            }
-                            else if(answerVal.getText().toString().toLowerCase(Locale.ROOT).equals(Global.romaChars.get(random))) {
-                                correctAnsToast();
-
-                                Global.attempts--;
-                                attemptsVal.setText(Integer.toString(Global.attempts));
-                                Global.score++;
-                                scoreVal.setText(Integer.toString(Global.score));
-                                Global.kataChars.remove(random);
-                                Global.romaChars.remove(random);
-
-                                answerVal.setEnabled(false);
-                                generateBtn.setEnabled(true);
-                                kataBtn.setEnabled(true);
-                                hiraBtn.setEnabled(true);
-                                submitBtn.setEnabled(false);
-                            }
-                            else {
-                                Global.attempts--;
-                                attemptsVal.setText(Integer.toString(Global.attempts));
-
-                                answerVal.setEnabled(false);
-                                generateBtn.setEnabled(true);
-                                kataBtn.setEnabled(true);
-                                hiraBtn.setEnabled(true);
-                                submitBtn.setEnabled(false);
-
-                                LayoutInflater inflater = getLayoutInflater();
-                                View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
-
-                                TextView toastText = layout.findViewById(R.id.toast_text);
-                                ImageView toastImage = layout.findViewById(R.id.toast_image);
-
-                                toastText.setText(String.format("Wrong. Answer should be '%s'", Global.romaChars.get(random)));
-                                toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
-
-                                Toast toast = new Toast(getApplicationContext());
-                                toast.setGravity(Gravity.BOTTOM, 0, 65);
-                                toast.setDuration(Toast.LENGTH_LONG);
-                                toast.setView(layout);
-                                toast.show();
-                            }
-                            if(Global.attempts == 0) {
-                                generateBtn.setEnabled(false);
-                                zeroAttemptsToast();
-                            }
-                        }
-                    });
-                }
-                else if(optionsSpin.getSelectedItemPosition() == 2) {
-                    startSession();
-
-                    int random = new Random().nextInt(((Global.attempts - 1)) + 1);
-                    attemptsVal.setText(Integer.toString(Global.attempts));
-                    shownChar.setText(Global.hiraChars.get(random));
-                    answerVal.setText(Global.romaChars.get(random)); // debug purpose
-
-                    submitBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if(answerVal.getText().toString().isEmpty()) {
-                                emptyAnsToast();
-                            } else if(answerVal.getText().toString().toLowerCase(Locale.ROOT).equals(Global.romaChars.get(random))) {
-                                correctAnsToast();
-
-                                Global.attempts--;
-                                attemptsVal.setText(Integer.toString(Global.attempts));
-                                Global.score++;
-                                scoreVal.setText(Integer.toString(Global.score));
-                                Global.hiraChars.remove(random);
-                                Global.romaChars.remove(random);
-
-                                answerVal.setEnabled(false);
-                                generateBtn.setEnabled(true);
-                                kataBtn.setEnabled(true);
-                                hiraBtn.setEnabled(true);
-                                submitBtn.setEnabled(false);
-                            } else {
-                                Global.attempts--;
-                                attemptsVal.setText(Integer.toString(Global.attempts));
-
-                                answerVal.setEnabled(false);
-                                generateBtn.setEnabled(true);
-                                kataBtn.setEnabled(true);
-                                hiraBtn.setEnabled(true);
-                                submitBtn.setEnabled(false);
-
-                                LayoutInflater inflater = getLayoutInflater();
-                                View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
-
-                                TextView toastText = layout.findViewById(R.id.toast_text);
-                                ImageView toastImage = layout.findViewById(R.id.toast_image);
-
-                                toastText.setText(String.format("Wrong. Answer should be '%s'", Global.romaChars.get(random)));
-                                toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
-
-                                Toast toast = new Toast(getApplicationContext());
-                                toast.setGravity(Gravity.BOTTOM, 0, 65);
-                                toast.setDuration(Toast.LENGTH_LONG);
-                                toast.setView(layout);
-                                toast.show();
-                            }
-                            if(Global.attempts == 0) {
-                                generateBtn.setEnabled(false);
-                                zeroAttemptsToast();
-                            }
-                        }
-                    });
-
-//                    int rng = new Random().nextInt(((3 - 1) - 0) + 1) + 0;
-//                    switch(rng) {
-//                        case 0:
-//                            //Set option 1 to answer
-//                            int rng1 = new Random().nextInt(((roma.length - 1) - 0) + 1) + 0;
-//                            choice1Btn.setText(roma[rng1]);
-//                            break;
-//
-//                        case 1:
-//                            //Set option 2 to answer
-//                            int rng2 = new Random().nextInt(((roma.length - 1) - 0) + 1) + 0;
-//                            choice2Btn.setText(roma[rng2]);
-//                            break;
-//
-//                        case 2:
-//                            //Set option 3 to answer
-//                            int rng3 = new Random().nextInt(((roma.length - 1) - 0) + 1) + 0;
-//                            choice3Btn.setText(roma[rng3]);
-//                            break;
-//                    }
+                int random = new Random().nextInt(((globalVar.attempts - 1)) + 1);
+                switch (optionsSpin.getSelectedItemPosition()) {
+                    case 0:
+                        noOptionToast();
+                        break;
+                    case 1:
+                        startSession();
+                        attemptValue.setText(Integer.toString(globalVar.attempts));
+                        shownChar.setText(globalVar.kataChars.get(random));
+                        generateAnswers(random);
+                        break;
+                    case 2:
+                        startSession();
+                        attemptValue.setText(Integer.toString(globalVar.attempts));
+                        shownChar.setText(globalVar.hiraChars.get(random));
+                        generateAnswers(random);
+                        break;
                 }
             }
         });
 
+        choice1Btn = findViewById(R.id.choice1);
+        choice2Btn = findViewById(R.id.choice2);
+        choice3Btn = findViewById(R.id.choice3);
+
+        resetBtn = findViewById(R.id.reset);
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] kata = {"ア", "力", "サ", "タ", "ナ", "ハ", "マ", "ヤ", "ラ", "ワ", "ガ", "ザ", "ダ", "バ", "パ",
-                                "イ", "キ", "シ", "チ", "二", "ヒ", "ミ", "リ", "ギ", "ジ", "ヂ", "ビ", "ピ",
-                                "ウ", "ク", "ス", "ツ", "ヌ", "フ", "ム", "ユ", "ル", "ン", "グ", "ズ", "ヅ", "ブ", "プ",
-                                "エ", "ケ", "セ", "テ", "ネ", "へ", "メ", "レ", "ゲ", "ゼ", "デ", "べ", "ぺ",
-                                "オ", "コ", "ソ", "ト", "ノ", "ホ", "モ", "ヨ", "ロ", "ヲ", "ゴ", "ゾ", "ド", "ボ", "ポ"};
-                String[] hira = {"あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ", "が", "ざ", "だ", "ば", "ぱ",
-                                "い", "き", "し", "ち", "に", "ひ", "み", "り", "ぎ", "じ", "ぢ", "び", "ぴ",
-                                "う", "く", "す", "つ", "ぬ", "ふ", "む", "ゆ", "る", "ん", "ぐ", "ず", "づ", "ぶ", "ぷ",
-                                "え", "け", "せ", "て", "ね", "へ", "め", "れ", "げ", "ぜ", "で", "べ", "ぺ",
-                                "お", "こ", "そ", "と", "の", "ほ", "も", "よ", "ろ", "を", "ご", "ぞ", "ど", "ぼ", "ぽ"};
-                String[] roma = {"a", "ka", "sa", "ta", "na", "ha", "ma", "ya", "ra", "wa", "ga", "za", "da", "ba", "pa",
-                                "i", "ki", "shi", "chi", "ni", "hi", "mi", "ri", "gi", "ji", "dji", "bi", "pi",
-                                "u", "ku", "su", "tsu", "nu", "fu", "mu", "yu", "ru", "n", "gu", "zu", "dzu", "bu", "pu",
-                                "e", "ke", "se", "te", "ne", "he", "me", "re", "ge", "ze", "de", "be", "pe",
-                                "o", "ko", "so", "to", "no", "ho", "mo", "yo", "ro", "wo", "go", "zo", "do", "bo", "po"};
+                String[] kata = {"ア", "力", "サ", "タ", "ナ"};
+                String[] hira = {"あ", "か", "さ", "た", "な"};
+                String[] roma = {"a", "ka", "sa", "ta", "na"};
+//                String[] kata = {"ア", "力", "サ", "タ", "ナ", "ハ", "マ", "ヤ", "ラ", "ワ", "ガ", "ザ", "ダ", "バ", "パ",
+//                                "イ", "キ", "シ", "チ", "二", "ヒ", "ミ", "リ", "ギ", "ジ", "ヂ", "ビ", "ピ",
+//                                "ウ", "ク", "ス", "ツ", "ヌ", "フ", "ム", "ユ", "ル", "ン", "グ", "ズ", "ヅ", "ブ", "プ",
+//                                "エ", "ケ", "セ", "テ", "ネ", "へ", "メ", "レ", "ゲ", "ゼ", "デ", "べ", "ぺ",
+//                                "オ", "コ", "ソ", "ト", "ノ", "ホ", "モ", "ヨ", "ロ", "ヲ", "ゴ", "ゾ", "ド", "ボ", "ポ"};
+//                String[] hira = {"あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ", "が", "ざ", "だ", "ば", "ぱ",
+//                                "い", "き", "し", "ち", "に", "ひ", "み", "り", "ぎ", "じ", "ぢ", "び", "ぴ",
+//                                "う", "く", "す", "つ", "ぬ", "ふ", "む", "ゆ", "る", "ん", "ぐ", "ず", "づ", "ぶ", "ぷ",
+//                                "え", "け", "せ", "て", "ね", "へ", "め", "れ", "げ", "ぜ", "で", "べ", "ぺ",
+//                                "お", "こ", "そ", "と", "の", "ほ", "も", "よ", "ろ", "を", "ご", "ぞ", "ど", "ぼ", "ぽ"};
+//                String[] roma = {"a", "ka", "sa", "ta", "na", "ha", "ma", "ya", "ra", "wa", "ga", "za", "da", "ba", "pa",
+//                                "i", "ki", "shi", "chi", "ni", "hi", "mi", "ri", "gi", "ji", "dji", "bi", "pi",
+//                                "u", "ku", "su", "tsu", "nu", "fu", "mu", "yu", "ru", "n", "gu", "zu", "dzu", "bu", "pu",
+//                                "e", "ke", "se", "te", "ne", "he", "me", "re", "ge", "ze", "de", "be", "pe",
+//                                "o", "ko", "so", "to", "no", "ho", "mo", "yo", "ro", "wo", "go", "zo", "do", "bo", "po"};
                 List<String> kataChars = new ArrayList<>(Arrays.asList(kata));
                 List<String> hiraChars = new ArrayList<>(Arrays.asList(hira));
                 List<String> romaChars = new ArrayList<>(Arrays.asList(roma));
 
-                Global.kataChars = kataChars;
-                Global.hiraChars = hiraChars;
-                Global.romaChars = romaChars;
-                Global.attempts = romaChars.size();
-                Global.score = 0;
+                globalVar.kataChars = kataChars;
+                globalVar.hiraChars = hiraChars;
+                globalVar.romaChars = romaChars;
+                globalVar.attempts = romaChars.size();
+                globalVar.score = 0;
 
-                answerVal.getText().clear();
-                attemptsVal.setText("0");
+                attemptValue.setText("0");
                 optionsSpin.setSelection(0);
-                scoreVal.setText(Integer.toString(Global.score));
+                scoreValue.setText(Integer.toString(globalVar.score));
+
+                choice1Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+                choice2Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+                choice3Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
 
                 initialLaunch();
             }
         });
 
+        kataBtn = findViewById(R.id.showKata);
         kataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -323,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        hiraBtn = findViewById(R.id.showHira);
         hiraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -331,19 +207,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        toggleTheme = findViewById(R.id.toggle);
+        toggleTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+            }
+        });
+
+        Toasts toast = new Toasts();
+//        toast.welcomeToast();
+        welcomeToast();
+        initialLaunch();
+
     }
 
     public void initialLaunch() {
-        scoreVal.setText("0");
-        attemptsVal.setText("0");
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        scoreValue.setText("0");
+        attemptValue.setText("0");
         optionsSpin.setEnabled(true);
-        shownChar.setText("〇");
+        shownChar.setText(R.string.default_char);
         generateBtn.setEnabled(true);
         choice1Btn.setEnabled(false);
+        choice1Btn.setText("...");
+        choice1Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
         choice2Btn.setEnabled(false);
+        choice2Btn.setText("...");
+        choice2Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
         choice3Btn.setEnabled(false);
-        answerVal.setEnabled(false);
-        submitBtn.setEnabled(false);
+        choice3Btn.setText("...");
+        choice3Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
         resetBtn.setEnabled(false);
         kataBtn.setEnabled(true);
         hiraBtn.setEnabled(true);
@@ -351,101 +249,265 @@ public class MainActivity extends AppCompatActivity {
 
     public void startSession() {
         optionsSpin.setEnabled(false);
-        generateBtn.setEnabled(false);
+//        generateBtn.setEnabled(false);
         choice1Btn.setEnabled(true);
+        choice1Btn.setText("...");
+        choice1Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
         choice2Btn.setEnabled(true);
+        choice2Btn.setText("...");
+        choice2Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
         choice3Btn.setEnabled(true);
-        answerVal.getText().clear();
-        answerVal.setEnabled(true);
-        submitBtn.setEnabled(true);
+        choice3Btn.setText("...");
+        choice3Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
         resetBtn.setEnabled(true);
         kataBtn.setEnabled(false);
         hiraBtn.setEnabled(false);
+    }
+
+    public void generateAnswers(int random) {
+//        int rng = new Random().nextInt(((3 - 1) - 0) + 1) + 0;
+        int rng = new Random().nextInt(1); //3
+        if(rng == 0) {
+            String[] roma1 = {"a", "ka", "sa", "ta", "na"};
+            List<String> roma1Chars = new ArrayList<>(Arrays.asList(roma1));
+
+            choice1Btn.setText(globalVar.romaChars.get(random));
+            choice1Btn.setBackgroundColor(Color.GREEN);
+            roma1Chars.remove(random);
+
+            int mali1 = new Random().nextInt(roma1Chars.size());
+            choice2Btn.setText(roma1Chars.get(mali1));
+            roma1Chars.remove(mali1);
+
+            int mali2 = new Random().nextInt(roma1Chars.size());
+            choice3Btn.setText(roma1Chars.get(mali2));
+            roma1Chars.remove(mali2);
+
+            checkAnswer(random);
+            System.out.println("rng: " + rng + " kata: " + globalVar.kataChars + " roma: " + globalVar.romaChars  + " roma1: " + roma1Chars + " mali1: " + mali1 + " mali2:  " + mali2);
+        }
+        else if(rng == 1) {
+            String[] roma1 = {"a", "ka", "sa", "ta", "na"};
+            List<String> roma1Chars = new ArrayList<>(Arrays.asList(roma1));
+
+            choice2Btn.setText(globalVar.romaChars.get(random));
+            choice2Btn.setBackgroundColor(Color.GREEN);
+            roma1Chars.remove(random);
+
+            int mali1 = new Random().nextInt(roma1Chars.size());
+            choice1Btn.setText(roma1Chars.get(mali1));
+            roma1Chars.remove(mali1);
+
+            int mali2 = new Random().nextInt(roma1Chars.size());
+            choice3Btn.setText(roma1Chars.get(mali2));
+            roma1Chars.remove(mali2);
+
+            checkAnswer(random);
+            System.out.println("rng: " + rng + " kata: " + globalVar.kataChars + " roma: " + globalVar.romaChars  + " roma1: " + roma1Chars + " mali1: " + mali1 + " mali2:  " + mali2);
+        }
+        else if (rng == 2) {
+            String[] roma1 = {"a", "ka", "sa", "ta", "na"};
+            List<String> roma1Chars = new ArrayList<>(Arrays.asList(roma1));
+
+            choice3Btn.setText(globalVar.romaChars.get(random));
+            choice3Btn.setBackgroundColor(Color.GREEN);
+            roma1Chars.remove(random);
+
+            int mali1 = new Random().nextInt(roma1Chars.size());
+            choice1Btn.setText(roma1Chars.get(mali1));
+            roma1Chars.remove(mali1);
+
+            int mali2 = new Random().nextInt(roma1Chars.size());
+            choice2Btn.setText(roma1Chars.get(mali2));
+            roma1Chars.remove(mali2);
+
+            checkAnswer(random);
+            System.out.println("rng: " + rng + " kata: " + globalVar.kataChars + " roma: " + globalVar.romaChars  + " roma1: " + roma1Chars + " mali1: " + mali1 + " mali2:  " + mali2);
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void correctAnswer(int random) {
+        correctAnswerToast();
+
+        globalVar.attempts--;
+        attemptValue.setText(Integer.toString(globalVar.attempts));
+        globalVar.score++;
+        scoreValue.setText(Integer.toString(globalVar.score));
+
+        if(optionsSpin.getSelectedItemPosition() == 1){
+            globalVar.kataChars.remove(random);
+        } else {
+            globalVar.hiraChars.remove(random);
+        }
+        globalVar.romaChars.remove(random);
+
+        generateBtn.setEnabled(true);
+        choice1Btn.setEnabled(false);
+        choice2Btn.setEnabled(false);
+        choice3Btn.setEnabled(false);
+        kataBtn.setEnabled(true);
+        hiraBtn.setEnabled(true);
+
+        if(globalVar.attempts == 0) {
+            generateBtn.setEnabled(false);
+            zeroAttemptsToast();
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void wrongAnswer(int random) {
+        wrongAnswerToast(random);
+
+        globalVar.attempts--;
+        attemptValue.setText(Integer.toString(globalVar.attempts));
+
+        generateBtn.setEnabled(true);
+        choice1Btn.setEnabled(false);
+        choice2Btn.setEnabled(false);
+        choice3Btn.setEnabled(false);
+        kataBtn.setEnabled(true);
+        hiraBtn.setEnabled(true);
+
+        if(globalVar.attempts == 0) {
+            generateBtn.setEnabled(false);
+            zeroAttemptsToast();
+        }
+    }
+
+    public void checkAnswer(int random) {
+        choice1Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button btn = (Button)view;
+                String getTxt = btn.getText().toString();
+                if(getTxt.equals(globalVar.romaChars.get(random))){
+                    choice1Btn.setBackgroundColor(Color.GREEN);
+                    correctAnswer(random);
+                }
+                else {
+                    choice1Btn.setBackgroundColor(Color.RED);
+                    wrongAnswer(random);
+                }
+            }
+        });
+
+        choice2Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button btn = (Button)view;
+                String getTxt = btn.getText().toString();
+                if(getTxt.equals(globalVar.romaChars.get(random))){
+                    choice2Btn.setBackgroundColor(Color.GREEN);
+                    correctAnswer(random);
+                }
+                else {
+                    choice2Btn.setBackgroundColor(Color.RED);
+                    wrongAnswer(random);
+                }
+            }
+        });
+
+        choice3Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button btn = (Button)view;
+                String getTxt = btn.getText().toString();
+                if(getTxt.equals(globalVar.romaChars.get(random))){
+                    choice3Btn.setBackgroundColor(Color.GREEN);
+                    correctAnswer(random);
+                }
+                else {
+                    choice3Btn.setBackgroundColor(Color.RED);
+                    wrongAnswer(random);
+                }
+            }
+        });
     }
 
     public void welcomeToast() {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 65);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);
 
-        toastText.setText("Hello!");
+        toastText.setText(R.string.welcome_toast);
         toastImage.setImageResource(R.drawable.ic_baseline_emoji_emotions_24);
+    }
+
+    public void noOptionToast() {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 65);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+
+        TextView toastText = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+
+        toastText.setText(R.string.invalid_option_toast);
+        toastImage.setImageResource(R.drawable.ic_baseline_error_24);
+    }
+
+    public void correctAnswerToast() {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 65);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+
+        TextView toastText = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+
+        toastText.setText(R.string.correct_toast);
+        toastImage.setImageResource(R.drawable.ic_baseline_done_24);
+    }
+
+    public void wrongAnswerToast(int random) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
         Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.BOTTOM, 0, 65);
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
-    }
-
-    public void nooptionToast() {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);
 
-        toastText.setText("Please select an option.");
-        toastImage.setImageResource(R.drawable.ic_baseline_error_24);
-
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.BOTTOM, 0, 65);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
-    }
-
-    public void emptyAnsToast() {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
-
-        TextView toastText = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-
-        toastText.setText("Please input an answer.");
-        toastImage.setImageResource(R.drawable.ic_baseline_error_24);
-
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.BOTTOM, 0, 65);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
-    }
-
-    public void correctAnsToast() {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
-
-        TextView toastText = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-
-        toastText.setText("Correct! Generate again.");
-        toastImage.setImageResource(R.drawable.ic_baseline_done_24);
-
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.BOTTOM, 0, 65);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
+        toastText.setText(String.format(getString(R.string.wrong_toast), globalVar.romaChars.get(random)));
+        toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
     }
 
     public void zeroAttemptsToast() {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
 
-        TextView toastText = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-
-        toastText.setText("No Attempts left. Press Reset All to try again.");
-        toastImage.setImageResource(R.drawable.ic_baseline_error_24);
-
         Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.BOTTOM, 0, 65);
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
+
+        TextView toastText = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+
+        toastText.setText(R.string.zero_attempts_toast);
+        toastImage.setImageResource(R.drawable.ic_baseline_error_24);
     }
 
 }
