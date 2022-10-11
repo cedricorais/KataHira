@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    public void welcomeToast(View parent) { //move to toast class =============================================
+    public void welcomeToast(View parent) { //move to toast class ==================================
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, parent.findViewById(R.id.toast_root));
 
