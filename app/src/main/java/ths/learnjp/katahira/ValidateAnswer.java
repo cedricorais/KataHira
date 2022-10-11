@@ -1,22 +1,21 @@
 package ths.learnjp.katahira;
 
 import android.annotation.SuppressLint;
-import android.widget.Button;
 
-public class ValidateAnswer extends MainActivity {
+public class ValidateAnswer extends OldActivity {
     @SuppressLint("SetTextI18n")
     public void correctAnswer(int random) {
-        globalVar.attempts--;
-        attemptValue.setText(Integer.toString(globalVar.attempts));
-        globalVar.score++;
-        scoreValue.setText(Integer.toString(globalVar.score));
+        globalVars.attempts--;
+        attemptValue.setText(Integer.toString(globalVars.attempts));
+        globalVars.score++;
+        scoreValue.setText(Integer.toString(globalVars.score));
 
-        if(optionsSpin.getSelectedItemPosition() == 1){
-            globalVar.kataChars.remove(random);
+        if (optionsSpin.getSelectedItemPosition() == 1){
+            globalVars.kataChars.remove(random);
         } else {
-            globalVar.hiraChars.remove(random);
+            globalVars.hiraChars.remove(random);
         }
-        globalVar.romaChars.remove(random);
+        globalVars.romaChars.remove(random);
 
         generateBtn.setEnabled(true);
         choice1Btn.setEnabled(false);
@@ -25,7 +24,7 @@ public class ValidateAnswer extends MainActivity {
         kataBtn.setEnabled(true);
         hiraBtn.setEnabled(true);
 
-        if(globalVar.attempts == 0) {
+        if (globalVars.attempts == 0) {
             generateBtn.setEnabled(false);
             zeroAttemptsToast();
         }

@@ -1,134 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/score"
-        android:textSize="20sp" />
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:labelVisibilityMode="selected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
-    <TextView
-        android:id="@+id/scoreValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/score"
-        android:textSize="20sp" />
+    <fragment
+        android:id="@+id/nav_host_fragment_activity_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
 
-    <TextView
-        android:id="@+id/attempts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/score"
-        android:text="@string/attempts"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/attemptsValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/score"
-        android:layout_toEndOf="@id/attempts"
-        android:textSize="20sp" />
-
-    <Spinner
-        android:id="@+id/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/attempts"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/showChar"
-        android:layout_width="225dp"
-        android:layout_height="220dp"
-        android:layout_below="@+id/options"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border"
-        android:gravity="center"
-        android:textSize="150sp" />
-
-    <Button
-        android:id="@+id/generateChar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/showChar"
-        android:layout_centerHorizontal="true"
-        android:text="@string/generate_character" />
-
-    <TextView
-        android:id="@+id/choices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/generateChar"
-        android:layout_centerInParent="true"
-        android:text="@string/choices"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/choice1"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choices"
-        android:layout_toStartOf="@+id/choice2" />
-
-    <Button
-        android:id="@+id/choice2"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choices"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
-
-    <Button
-        android:id="@+id/choice3"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choices"
-        android:layout_toEndOf="@+id/choice2" />
-
-    <Button
-        android:id="@+id/reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choice1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
-        android:text="@string/reset" />
-
-    <Button
-        android:id="@+id/showKata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reset"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/red"
-        android:text="@string/view_katakana" />
-
-    <Button
-        android:id="@+id/showHira"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/showKata"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="#66FF33"
-        android:text="@string/view_hiragana" />
-
-    <Switch
-        android:id="@+id/toggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/showHira"
-        android:text="Light Mode"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

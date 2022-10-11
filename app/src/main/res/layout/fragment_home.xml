@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    tools:context=".ui.home.HomeFragment">
+
+    <Button
+        android:id="@+id/showKata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/red"
+        android:text="@string/view_katakana" />
+
+    <Button
+        android:id="@+id/showHira"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/showKata"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#66FF33"
+        android:text="@string/view_hiragana" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/showHira"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="3dp"
+        android:text="go to old" />
+
+    <Switch
+        android:id="@+id/toggleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/back"
+        android:text="Light Mode"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+</RelativeLayout>

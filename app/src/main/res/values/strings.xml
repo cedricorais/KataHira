@@ -16,4 +16,9 @@
     <string name="correct_toast">Correct! Generate again.</string>r
     <string name="zero_attempts_toast">No Attempts left. Press Reset to try again.</string>
     <string name="wrong_toast">Wrong. Answer should be \'%s\'</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_guess">Guess</string>
 </resources>

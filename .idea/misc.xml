@@ -21,8 +21,15 @@
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_hiragana_characters.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_katakana_characters.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_main_old.xml" value="0.2310185185185185" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_old.xml" value="0.26481481481481484" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_dashboard.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_guess.xml" value="0.25" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_home.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_notifications.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/spinner_item.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/toast_layout.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/menu/bottom_nav_menu.xml" value="0.32222222222222224" />
       </map>
     </option>
   </component>
