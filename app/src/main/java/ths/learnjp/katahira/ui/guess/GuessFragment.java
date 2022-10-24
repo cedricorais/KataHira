@@ -57,7 +57,7 @@ public class GuessFragment extends Fragment {
 
         public static int attempts = romaChars.size(), score = 0;
 
-        public static boolean charCheck; //debug ===================================================
+        public static boolean charCheck; // TODO debug
     }
 
     Button generateBtn, choice1Btn, choice2Btn, choice3Btn, resetBtn;
@@ -86,7 +86,7 @@ public class GuessFragment extends Fragment {
         String[] selected_option = new String[]{getString(R.string.option1), getString(R.string.option2), getString(R.string.option3)};
         optionsSpin = binding.options;
 //    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, selected_option) { //it worked??? this, R.layout.spinner_item, selected_option
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, selected_option) { // TODO it worked??? this, R.layout.spinner_item, selected_option
             @Override
             public boolean isEnabled(int position) {
 //                if(position == 0) {
@@ -108,12 +108,12 @@ public class GuessFragment extends Fragment {
                         case Configuration.UI_MODE_NIGHT_NO:
                             // Night mode is not active, we're in day time
 //                            System.out.println("light");
-                            txtView.setTextColor(Color.BLACK);  //debug ============================
+                            txtView.setTextColor(Color.BLACK); // TODO debug
                             break;
                         case Configuration.UI_MODE_NIGHT_YES:
                             // Night mode is active, we're at night!
 //                            System.out.println("dark");
-                            txtView.setTextColor(Color.WHITE);  //debug ============================
+                            txtView.setTextColor(Color.WHITE); // TODO debug
                             break;
                         case Configuration.UI_MODE_NIGHT_UNDEFINED:
                             // We don't know what mode we're in, assume notnight
@@ -208,14 +208,14 @@ public class GuessFragment extends Fragment {
                 choice2Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
                 choice3Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
 
-                toggleChars.setChecked(false); //debug =============================================
-                toggleChars.setEnabled(true); //debug ==============================================
+                toggleChars.setChecked(false); // TODO debug
+                toggleChars.setEnabled(true); // TODO debug
 
                 initialLaunch();
             }
         });
 
-        toggleChars = binding.test; //debug ========================================================
+        toggleChars = binding.test; // TODO debug
         toggleChars.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -294,7 +294,7 @@ public class GuessFragment extends Fragment {
 
     public void startSession() {
         optionsSpin.setEnabled(false);
-//        generateBtn.setEnabled(false); //debug ===================================================
+//        generateBtn.setEnabled(false); // TODO debug
         choice1Btn.setEnabled(true);
         choice1Btn.setText("...");
         choice1Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
@@ -305,14 +305,14 @@ public class GuessFragment extends Fragment {
         choice3Btn.setText("...");
         choice3Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
         resetBtn.setEnabled(true);
-        toggleChars.setEnabled(false); //debug =====================================================
+        toggleChars.setEnabled(false); // TODO debug
     }
 
     public void generateAnswers(View parent, int random) {
         int rng = new Random().nextInt(3); //3 or int rng = new Random().nextInt(((3 - 1) - 0) + 1) + 0;
         switch (rng) {
             case 0:
-                if (globalVars.charCheck) { //debug ================================================
+                if (globalVars.charCheck) { // TODO debug
                     String[] roma1 = {"a", "ka", "sa", "ta", "na"};
                     List<String> roma1Chars = new ArrayList<>(Arrays.asList(roma1));
                     choice1(parent, random, roma1Chars);
@@ -327,7 +327,7 @@ public class GuessFragment extends Fragment {
                 }
                 break;
             case 1:
-                if (globalVars.charCheck) { //debug ================================================
+                if (globalVars.charCheck) { // TODO debug
                     String[] roma1 = {"a", "ka", "sa", "ta", "na"};
                     List<String> roma1Chars = new ArrayList<>(Arrays.asList(roma1));
                     choice2(parent, random, roma1Chars);
@@ -342,7 +342,7 @@ public class GuessFragment extends Fragment {
                 }
                 break;
             case 2:
-                if (globalVars.charCheck) { //debug ================================================
+                if (globalVars.charCheck) { // TODO debug
                     String[] roma1 = {"a", "ka", "sa", "ta", "na"};
                     List<String> roma1Chars = new ArrayList<>(Arrays.asList(roma1));
                     choice3(parent, random, roma1Chars);
@@ -362,7 +362,7 @@ public class GuessFragment extends Fragment {
     }
     public void choice1(View parent, int random, @NonNull List<String> roma1Chars) {
         choice1Btn.setText(globalVars.romaChars.get(random));
-        choice1Btn.setBackgroundColor(Color.GREEN); //debug ========================================
+        choice1Btn.setBackgroundColor(Color.GREEN); // TODO debug
         roma1Chars.remove(random);
 
         int mali1 = new Random().nextInt(roma1Chars.size());
@@ -377,7 +377,7 @@ public class GuessFragment extends Fragment {
     }
     public void choice2(View parent, int random, @NonNull List<String> roma1Chars) {
         choice2Btn.setText(globalVars.romaChars.get(random));
-        choice2Btn.setBackgroundColor(Color.GREEN); //debug ========================================
+        choice2Btn.setBackgroundColor(Color.GREEN); // TODO debug
         roma1Chars.remove(random);
 
         int mali1 = new Random().nextInt(roma1Chars.size());
@@ -392,7 +392,7 @@ public class GuessFragment extends Fragment {
     }
     public void choice3(View parent, int random, @NonNull List<String> roma1Chars) {
         choice3Btn.setText(globalVars.romaChars.get(random));
-        choice3Btn.setBackgroundColor(Color.GREEN); //debug ========================================
+        choice3Btn.setBackgroundColor(Color.GREEN); // TODO debug
         roma1Chars.remove(random);
 
         int mali1 = new Random().nextInt(roma1Chars.size());
@@ -406,7 +406,7 @@ public class GuessFragment extends Fragment {
         checkAnswer(parent, random);
     }
 
-    public void checkAnswer(View parent, int random) { //move va class =============================
+    public void checkAnswer(View parent, int random) { // TODO move va class
         choice1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -450,7 +450,7 @@ public class GuessFragment extends Fragment {
             }
         });
     }
-    @SuppressLint("SetTextI18n") //move va class ===================================================
+    @SuppressLint("SetTextI18n") // TODO move va class
     public void correctAnswer(View parent, int random) {
         correctAnswerToast(parent);
 
@@ -476,7 +476,7 @@ public class GuessFragment extends Fragment {
             zeroAttemptsToast(parent);
         }
     }
-    @SuppressLint("SetTextI18n") //move va class ===================================================
+    @SuppressLint("SetTextI18n") // TODO move va class
     public void wrongAnswer(View parent, int random) {
         wrongAnswerToast(parent, random);
 
@@ -494,7 +494,7 @@ public class GuessFragment extends Fragment {
         }
     }
 
-    public void noOptionToast(View parent) { //move to toast class =================================
+    public void noOptionToast(View parent) { // TODO move to toast class
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, parent.findViewById(R.id.toast_root));
 
@@ -510,7 +510,7 @@ public class GuessFragment extends Fragment {
         toastText.setText(R.string.invalid_option_toast);
         toastImage.setImageResource(R.drawable.ic_baseline_error_24);
     }
-    public void correctAnswerToast(View parent) { //move to toast class ============================
+    public void correctAnswerToast(View parent) { // TODO move to toast class
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, parent.findViewById(R.id.toast_root));
 
@@ -526,7 +526,7 @@ public class GuessFragment extends Fragment {
         toastText.setText(R.string.correct_toast);
         toastImage.setImageResource(R.drawable.ic_baseline_done_24);
     }
-    public void wrongAnswerToast(View parent, int random) { //move to toast class ==================
+    public void wrongAnswerToast(View parent, int random) { // TODO move to toast class
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, parent.findViewById(R.id.toast_root));
 
@@ -542,7 +542,7 @@ public class GuessFragment extends Fragment {
         toastText.setText(String.format(getString(R.string.wrong_toast), OldActivity.globalVars.romaChars.get(random)));
         toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
     }
-    public void zeroAttemptsToast(View parent) { //move to toast class =============================
+    public void zeroAttemptsToast(View parent) { // TODO move to toast class
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, parent.findViewById(R.id.toast_root));
 

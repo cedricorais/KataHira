@@ -25,7 +25,7 @@
         android:text="@string/view_hiragana" />
 
     <Button
-        android:id="@+id/back"
+        android:id="@+id/old"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/showHira"
@@ -37,7 +37,7 @@
         android:id="@+id/toggleTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/back"
+        android:layout_below="@id/old"
         android:text="Light Mode"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 </RelativeLayout>

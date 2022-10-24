@@ -3,16 +3,12 @@ package ths.learnjp.katahira.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,14 +18,13 @@ import androidx.lifecycle.ViewModelProvider;
 import ths.learnjp.katahira.KatakanaCharacters;
 import ths.learnjp.katahira.HiraganaCharacters;
 import ths.learnjp.katahira.OldActivity;
-import ths.learnjp.katahira.R;
 import ths.learnjp.katahira.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
-    Button kataBtn, hiraBtn, back;
+    Button kataBtn, hiraBtn, old;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch toggleTheme;
 
@@ -41,7 +36,6 @@ public class HomeFragment extends Fragment {
 
 //        final TextView textView = binding.textHome;
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
 
         kataBtn = binding.showKata;
         kataBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +53,8 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        back = binding.back;
-        back.setOnClickListener(new View.OnClickListener() {
+        old = binding.old;
+        old.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), OldActivity.class);
@@ -81,9 +75,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        View parent = inflater.inflate(R.layout.fragment_home, container, false);
-        welcomeToast(parent);
-
         return root;
     }
 
@@ -91,22 +82,5 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    public void welcomeToast(View parent) { //move to toast class ==================================
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, parent.findViewById(R.id.toast_root));
-
-        Toast toast = new Toast(getContext());
-        toast.setGravity(Gravity.BOTTOM, 0, 65);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
-
-        TextView toastText = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-
-        toastText.setText(R.string.welcome_toast);
-        toastImage.setImageResource(R.drawable.ic_baseline_emoji_emotions_24);
     }
 }
