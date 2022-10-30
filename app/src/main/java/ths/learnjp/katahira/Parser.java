@@ -1,22 +1,47 @@
 package ths.learnjp.katahira;
 
-import android.content.res.AssetManager;
+import android.content.Context;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 public class Parser {
-    String in;
-    JSONObject reader = new JSONObject(in);
+    static String getJsonFromAssets(Context context, String fileName) {
+        String jsonString;
 
-    public String LoadFile() {
-        File file = new File("./","JapaneseCharacters.json");
+        try {
+            InputStream is = context.getAssets().open(fileName);
 
-        FileReader fileReader
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            jsonString = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return jsonString;
+    }
+
+    public Map LoadFile(Context context, String fileName) {
+        Map<?, ?> chara_set;
+        Gson gson = new Gson();
+
+        String jsonFileString = getJsonFromAssets(context, fileName);
+
+        try {
+            chara_set = gson.fromJson(jsonFileString, Map.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        return chara_set;
     }
 }
-
-
