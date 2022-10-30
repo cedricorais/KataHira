@@ -29,7 +29,7 @@ public class Parser {
         return jsonString;
     }
 
-    public Map LoadFile(Context context, String fileName) {
+    public static Map LoadFile(Context context, String fileName) {
         Map<?, ?> chara_set;
         Gson gson = new Gson();
 
