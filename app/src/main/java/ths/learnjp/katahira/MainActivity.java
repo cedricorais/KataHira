@@ -16,6 +16,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+// DELETE
+import java.util.Map;
+
 import ths.learnjp.katahira.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
