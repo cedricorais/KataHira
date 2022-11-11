@@ -1,27 +1,55 @@
 package ths.learnjp.katahira;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import ths.learnjp.katahira.ui.guess.GuessFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Toasts extends AppCompatActivity {
-    public void welcomeToast() {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
+
+    public void showToast(Context context, String tag, int random) {
+        LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, ((Activity)context).findViewById(R.id.toast_root));
 
         TextView toastText = layout.findViewById(R.id.toast_text);
         ImageView toastImage = layout.findViewById(R.id.toast_image);
 
-        toastText.setText("Hello!");
-        toastImage.setImageResource(R.drawable.ic_baseline_emoji_emotions_24);
+        switch (tag) {
+            case "Welcome!":
+                toastText.setText(tag);
+                toastImage.setImageResource(R.drawable.ic_baseline_emoji_emotions_24);
+                break;
+            case "noOption":
+                toastText.setText(R.string.invalid_option_toast);
+                toastImage.setImageResource(R.drawable.ic_baseline_error_24);
+                break;
+            case "correctAnswer":
+                toastText.setText(R.string.correct_toast);
+                toastImage.setImageResource(R.drawable.ic_baseline_done_24);
+                break;
+            case "wrongAnswer":
+                toastText.setText(String.format(context.getString(R.string.wrong_toast), GuessFragment.globalVars.romaChars.get(random)));
+                toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
+                break;
+            case "zeroAttempts":
+                toastText.setText(R.string.zero_attempts_toast);
+                toastImage.setImageResource(R.drawable.ic_baseline_error_24);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + tag);
+        }
 
-        android.widget.Toast toast = new android.widget.Toast(getApplicationContext());
+        Toast toast = new Toast(context);
         toast.setGravity(Gravity.BOTTOM, 0, 65);
-        toast.setDuration(android.widget.Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
     }

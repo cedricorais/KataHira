@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    tools:context=".OldActivity">
+    tools:context=".old.OldActivity">
 
     <TextView
         android:id="@+id/score"

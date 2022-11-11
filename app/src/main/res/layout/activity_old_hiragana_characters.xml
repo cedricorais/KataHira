@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="6dp"
-    tools:context=".ui.home.HiraganaCharactersActivity">
+    tools:context=".old.HiraganaCharactersActivity">
 
     <TextView
         android:gravity="center"
-        android:text="@string/basic_characters"
+        android:text="Hiragana Basic Characters"
         android:textSize="24dp"
         android:textStyle="bold"/>
 
@@ -709,7 +709,7 @@
 
     <TextView
         android:gravity="center"
-        android:text="@string/diacritic_characters"
+        android:text="Hiragana Diacritic Characters"
         android:textSize="24dp"
         android:textStyle="bold"/>
 

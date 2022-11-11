@@ -1,12 +1,9 @@
 package ths.learnjp.katahira;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+//    public String[] language_names = CharaManager.getLanguages(getApplicationContext()); // ILIPAT SA DROP DOWN
+
+    Map current_language;
+    Map current_chara_set;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,24 +42,34 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        welcomeToast();
+        Toasts toast = new Toasts();
+        toast.showToast(this, "Welcome!", 0);
     }
 
-    public void welcomeToast() { // TODO move to toast class
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
-
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.BOTTOM, 0, 65);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
-
-        TextView toastText = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-
-        toastText.setText(R.string.welcome_toast);
-        toastImage.setImageResource(R.drawable.ic_baseline_emoji_emotions_24);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menus, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return (super.onOptionsItemSelected(item));
     }
 
+    public Map setLanguageDropDown() {
+    //    String[] language_names = CharaManager.getLanguages(getApplicationContext());
+        String selected_language = "Japanese"; // SELECTED LANGUAGE FROM DROPDOWN
+        Map language = CharacterManager.loadLanguage(getApplicationContext(), selected_language);
+
+        return language;
+    }
+
+    public void setCharaSetDropDown() {
+//        for ()
+
+    }
 }

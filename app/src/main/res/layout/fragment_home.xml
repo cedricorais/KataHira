@@ -4,40 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
+    android:padding="15dp"
     tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/kata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rec"
+        android:elevation="2dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="50dp"
+        android:text="@string/info_kata"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/showKata"
-        android:layout_width="wrap_content"
+        android:layout_width="335dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/kata"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="-50dp"
         android:backgroundTint="@color/red"
         android:text="@string/view_katakana" />
 
+    <TextView
+        android:id="@+id/hira"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kata"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rec"
+        android:elevation="2dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="50dp"
+        android:text="@string/info_hira"
+        android:textSize="18sp" />
+
     <Button
         android:id="@+id/showHira"
-        android:layout_width="wrap_content"
+        android:layout_width="335dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/showKata"
+        android:layout_below="@+id/hira"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="#66FF33"
+        android:layout_marginTop="-50dp"
+        android:backgroundTint="#36D800"
         android:text="@string/view_hiragana" />
 
-    <Button
-        android:id="@+id/old"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/phrase"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/showHira"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="3dp"
-        android:text="go to old" />
+        android:layout_below="@id/hira"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rec"
+        android:elevation="2dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="100dp"
+        android:text="@string/info_phrases"
+        android:textSize="18sp" />
 
-    <Switch
-        android:id="@+id/toggleTheme"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/greetings"
+        android:layout_width="335dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/old"
-        android:text="Light Mode"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        android:layout_below="@+id/phrase"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-98dp"
+        android:text="@string/basic_greetings" />
+
+    <Button
+        android:id="@+id/phrases"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/greetings"
+        android:layout_centerHorizontal="true"
+        android:text="@string/basic_phrases" />
 </RelativeLayout>

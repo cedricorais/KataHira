@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="3dp"
-    tools:context=".KatakanaCharacters">
+    tools:context=".ui.home.KatakanaCharactersActivity">
 
     <TextView
         android:gravity="center"
-        android:text="Katakana Basic Characters"
+        android:text="@string/basic_characters"
         android:textSize="24dp"
         android:textStyle="bold" />
 
@@ -709,7 +709,7 @@
 
     <TextView
         android:gravity="center"
-        android:text="Katakana Diacritic Characters"
+        android:text="@string/diacritic_characters"
         android:textSize="24dp"
         android:textStyle="bold"/>
 

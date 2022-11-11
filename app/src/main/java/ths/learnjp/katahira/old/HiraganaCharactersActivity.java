@@ -1,10 +1,12 @@
-package ths.learnjp.katahira;
-
-import androidx.appcompat.app.AppCompatActivity;
+package ths.learnjp.katahira.old;
 
 import android.os.Bundle;
 
-public class HiraganaCharacters extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import ths.learnjp.katahira.R;
+
+public class HiraganaCharactersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

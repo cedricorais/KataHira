@@ -1,4 +1,4 @@
-package ths.learnjp.katahira;
+package ths.learnjp.katahira.old;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import ths.learnjp.katahira.R;
 
 public class OldActivity extends AppCompatActivity {
 
@@ -207,7 +209,7 @@ public class OldActivity extends AppCompatActivity {
         kataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OldActivity.this, KatakanaCharacters.class);
+                Intent intent = new Intent(OldActivity.this, KatakanaCharactersActivity.class);
                 startActivity(intent);
             }
         });
@@ -215,7 +217,7 @@ public class OldActivity extends AppCompatActivity {
         hiraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OldActivity.this, HiraganaCharacters.class);
+                Intent intent = new Intent(OldActivity.this, HiraganaCharactersActivity.class);
                 startActivity(intent);
             }
         });
@@ -279,8 +281,8 @@ public class OldActivity extends AppCompatActivity {
             }
         });
 
-        Toasts toast = new Toasts(); //debug =======================================================
-//        toast.welcomeToast();
+//        Toasts toast = new Toasts(); //debug =======================================================
+////        toast.welcomeToast();
         welcomeToast();
         initialLaunch();
     }
@@ -290,7 +292,7 @@ public class OldActivity extends AppCompatActivity {
         scoreValue.setText("0");
         attemptValue.setText("0");
         optionsSpin.setEnabled(true);
-        shownChar.setText(R.string.default_char);
+        shownChar.setText(R.string.default_character);
         generateBtn.setEnabled(true);
         choice1Btn.setEnabled(false);
         choice1Btn.setText("...");

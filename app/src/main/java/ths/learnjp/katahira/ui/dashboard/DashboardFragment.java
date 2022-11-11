@@ -10,6 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.List;
+import java.util.Map;
+
+import ths.learnjp.katahira.CharacterManager;
 import ths.learnjp.katahira.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
