@@ -2,6 +2,7 @@ package ths.learnjp.katahira;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,9 @@ public class CharacterManager {
         // Return list of languages in Languages.json
         Map languageMap = Parser.LoadFile(context, "Languages.json");
 
-        String[] languageList = (String[]) languageMap.get("Languages");
+        List<String> list = (List<String>) languageMap.get("list");
+
+        String[] languageList = list.toArray(new String[0]);
 
         return languageList;
     }
@@ -21,7 +24,7 @@ public class CharacterManager {
         return language;
     }
 
-    public static Map getCharacters(String language, String _chara_set, Context context) {
+/*    public static Map getCharacters(String language, String _chara_set, Context context) {
         // get character set in a syllabary/alphabet
 
         String language_filename = language + ".json";
@@ -31,5 +34,5 @@ public class CharacterManager {
         Map chara_set = (Map) ((Map) charaFile.get("chara_sets")).get(_chara_set);
 
         return chara_set;
-    }
+    }*/
 }
