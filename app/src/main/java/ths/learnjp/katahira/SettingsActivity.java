@@ -23,7 +23,7 @@ import ths.learnjp.katahira.old.OldActivity;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    String[] selected_option = {"Select Language", "Japanese"};
+    String[] selected_option;
 
     Spinner langSpin;
     @SuppressLint("UseSwitchCompatOrMaterialCode") // TODO remove switch
@@ -34,6 +34,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        selected_option = CharacterManager.getLanguages(getApplicationContext());
 
         langSpin = findViewById(R.id.lang);
         langSpin.setOnItemSelectedListener(this);

@@ -1,5 +1,7 @@
 {
   "list": [
     "Japanese"
-  ]
+  ],
+  "current_language": "Japanese",
+  "current_chara_set": "Katakana"
 }
