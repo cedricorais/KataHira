@@ -42,8 +42,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        // TODO Update
+        // Set Japanese/Katakana as default language.
+        CharacterManager.setLanguage(getApplicationContext(), "Japanese");
+        CharacterManager.setCharaSet("Katakana");
+        // TODO DELETE
+        Score.resetScore();
+
         Toasts toast = new Toasts();
-        toast.showToast(this, "Welcome!", 0);
+        toast.showToast(this, "Welcome!", null);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         return (super.onOptionsItemSelected(item));
     }
 
-    public Map setLanguageDropDown() {
+/*    public Map setLanguageDropDown() {
     //    String[] language_names = CharaManager.getLanguages(getApplicationContext());
         String selected_language = "Japanese"; // SELECTED LANGUAGE FROM DROPDOWN
         Map language = CharacterManager.loadLanguage(getApplicationContext(), selected_language);
@@ -71,5 +78,5 @@ public class MainActivity extends AppCompatActivity {
     public void setCharaSetDropDown() {
 //        for ()
 
-    }
+    }*/
 }

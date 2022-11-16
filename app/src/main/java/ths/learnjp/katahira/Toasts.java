@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Toasts extends AppCompatActivity {
 
-    public void showToast(Context context, String tag, int random) {
+    public void showToast(Context context, String tag, String correct_answer_key) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, ((Activity)context).findViewById(R.id.toast_root));
 
@@ -36,7 +36,7 @@ public class Toasts extends AppCompatActivity {
                 toastImage.setImageResource(R.drawable.ic_baseline_done_24);
                 break;
             case "wrongAnswer":
-                toastText.setText(String.format(context.getString(R.string.wrong_toast), GuessFragment.globalVars.romaChars.get(random)));
+                toastText.setText(String.format(context.getString(R.string.wrong_toast), CharacterManager.getAnswer(correct_answer_key)));
                 toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
                 break;
             case "zeroAttempts":
