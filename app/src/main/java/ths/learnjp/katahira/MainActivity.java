@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 import java.util.Map;
 
 import ths.learnjp.katahira.databinding.ActivityMainBinding;
+import ths.learnjp.katahira.ui.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,15 +48,16 @@ public class MainActivity extends AppCompatActivity {
         // TODO Update
         // Set Japanese/Katakana as default language.
         CharacterManager.setLanguage(getApplicationContext(), "Japanese");
-        CharacterManager.setCharaSet("Katakana");
+        CharacterManager.setCharaSet("test");
         // TODO DELETE
-        Score.resetScore();
+        Score.initializeScore();
 
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // TODO ============
         Toasts toast = new Toasts();
         toast.showToast(this, "Welcome!", null);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { // TODO ======================================
         getMenuInflater().inflate(R.menu.menus, menu);
         return true;
     }

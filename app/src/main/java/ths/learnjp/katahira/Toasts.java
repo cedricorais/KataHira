@@ -27,6 +27,10 @@ public class Toasts extends AppCompatActivity {
                 toastText.setText(tag);
                 toastImage.setImageResource(R.drawable.ic_baseline_emoji_emotions_24);
                 break;
+            case "start":
+                toastText.setText(R.string.start_session);
+                toastImage.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                break;
             case "noOption":
                 toastText.setText(R.string.invalid_option_toast);
                 toastImage.setImageResource(R.drawable.ic_baseline_error_24);
@@ -38,6 +42,10 @@ public class Toasts extends AppCompatActivity {
             case "wrongAnswer":
                 toastText.setText(String.format(context.getString(R.string.wrong_toast), CharacterManager.getAnswer(correct_answer_key)));
                 toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
+                break;
+            case "reset":
+                toastText.setText(String.format("%s%s", context.getString(R.string.reset), "!"));
+                toastImage.setImageResource(R.drawable.ic_baseline_error_24);
                 break;
             case "zeroAttempts":
                 toastText.setText(R.string.zero_attempts_toast);

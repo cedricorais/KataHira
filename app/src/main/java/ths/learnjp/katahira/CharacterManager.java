@@ -35,6 +35,9 @@ public class CharacterManager {
 //        String[] chara_set = chara_set_list.toArray(new String[0]);
         Global.chara_set = chara_set;
         Global.chara_set_name = _chara_set;
+
+        Global.session_set = new HashMap<>(chara_set);
+        Global.score_session_set = new HashMap();
     }
 
     public static String[] getCharaSetNames() {
@@ -45,16 +48,19 @@ public class CharacterManager {
 
     public static void resetSession() {
         Global.session_set = new HashMap<>(Global.chara_set);
+        Global.score_session_set = new HashMap();
         Global.session_attempts_left = Global.session_set.size();
         Global.session_score = 0;
     }
 
     public static void removeCharFromSession(String key) {
         Global.session_set.remove(key);
+        Global.score_session_set.remove(key);
+
     }
 
-    public static Map tempRemoveCharFromSession(String char_to_remove) {
-        Map temp_map = new HashMap<>(Global.session_set);
+    public static Map tempRemoveCharFromCharaSet(String char_to_remove) {
+        Map temp_map = new HashMap<>(Global.chara_set);
         temp_map.remove(char_to_remove);
 
         return temp_map;

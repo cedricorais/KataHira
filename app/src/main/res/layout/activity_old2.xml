@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".ui.guess.GuessFragment">
+    android:padding="5dp"
+    tools:context=".old.OldActivity2">
 
     <LinearLayout
         android:id="@+id/ll"
@@ -91,20 +90,11 @@
         android:gravity="center"
         android:textSize="150sp" />
 
-    <TextView
-        android:id="@+id/selectOpt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/showChar"
-        android:layout_centerInParent="true"
-        android:text="@string/option1"
-        android:textSize="20sp" />
-
     <Spinner
         android:id="@+id/options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/selectOpt"
+        android:layout_below="@+id/showChar"
         android:layout_centerHorizontal="true"
         android:textSize="24sp" />
 
@@ -156,5 +146,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/reset" />
+
+    <Switch
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reset"
+        android:text="5 Characters Only (Debug)"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </RelativeLayout>

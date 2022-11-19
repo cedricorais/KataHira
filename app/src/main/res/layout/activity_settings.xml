@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
+    android:padding="10dp"
     tools:context=".SettingsActivity">
 
     <Spinner
@@ -30,6 +30,15 @@
         android:layout_below="@+id/toggleTheme"
         android:layout_centerInParent="true"
         android:layout_marginTop="3dp"
-        android:text="go to old activity" />
+        android:text="go to old activity1" />
+
+    <Button
+        android:id="@+id/old2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/old"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="3dp"
+        android:text="go to old activity2" />
 
 </RelativeLayout>

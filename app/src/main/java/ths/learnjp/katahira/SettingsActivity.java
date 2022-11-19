@@ -1,25 +1,21 @@
 package ths.learnjp.katahira;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import ths.learnjp.katahira.old.OldActivity;
+import ths.learnjp.katahira.old.OldActivity2;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -28,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     Spinner langSpin;
     @SuppressLint("UseSwitchCompatOrMaterialCode") // TODO remove switch
     Switch toggleTheme;
-    Button old;
+    Button old, old2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +51,13 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         old = findViewById(R.id.old); // TODO remove old
         old.setOnClickListener(view -> {
             Intent intent = new Intent(this, OldActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        });
+
+        old2 = findViewById(R.id.old2); // TODO remove old
+        old2.setOnClickListener(view -> {
+            Intent intent = new Intent(this, OldActivity2.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });

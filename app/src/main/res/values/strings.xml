@@ -4,13 +4,19 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_guess">Guess</string>
+    <string name="settings">Settings</string>
 
     <string name="view_katakana">View Katakana Characters</string>
-    <string name="view_hiragana">View Hiragana Characters</string>
+    <string name="katakana">Katakana Characters</string>
     <string name="info_kata"><b>Katakana Characters</b>\nKatakana is most often used for transcription of words from foreign languages, loanwords, or onomatopoeia to represent sounds.</string>
+    <string name="view_hiragana">View Hiragana Characters</string>
+    <string name="hiragana">Hiragana Characters</string>
     <string name="info_hira"><b>Hiragana Characters</b>\nHiragana is used mainly for grammatical purposes. It is used on its own or in conjunction with kanji to form words.</string>
+    <string name="diacritic_characters">Diacritic Characters</string>
+    <string name="basic_characters">Basic Characters</string>
+
     <string name="info_phrases"><b>Basic Greetings &amp; Phrases</b>\nSome basic Japanese greetings and phrases.</string>
-    <string name="basic_greetings">View Basic Greetings</string>
+    <string name="view_greetings">View Basic Greetings</string>
     <string name="greetings">Basic Greetings</string>
     <string name="greeting1">Japanese:\t <b>はい</b>\nRomaji:\t\t\t Hai\nEnglish:\t\t Yes</string>
     <string name="greeting2">Japanese:\t <b>いいえ</b>\nRomaji:\t\t\t Iie\nEnglish:\t\t No</string>
@@ -22,7 +28,7 @@
     <string name="greeting8">Japanese:\t <b>わかりません</b>\nRomaji:\t\t\t Wakarimasen\nEnglish:\t\t I don\'t understand</string>
     <string name="greeting9">Japanese:\t <b>しりません </b>\nRomaji:\t\t\t Shirimasen\nEnglish:\t\t I don\’t know</string>
     <string name="greeting10">Japanese:\t <b>ただいま</b>\nRomaji:\t\t\t Tadaima\nEnglish:\t\t I have come back</string>
-    <string name="basic_phrases">View Basic Phrases</string>
+    <string name="view_phrases">View Basic Phrases</string>
     <string name="phrases">Basic Phrases</string>
     <string name="phrase1">Japanese:\t <b>おはようございます</b>\nRomaji:\t\t\t Ohayō gozaimasu\nEnglish:\t\t Good morning</string>
     <string name="phrase2">Japanese:\t <b>こんばんは</b>\nRomaji:\t\t\t Konbanwa\nEnglish:\t\t Good evening</string>
@@ -35,25 +41,26 @@
     <string name="phrase9">Japanese:\t <b>こんにちは</b>\nRomaji:\t\t\t Konnichiwa\nEnglish:\t\t Hello</string>
     <string name="phrase10">Japanese:\t <b>さようなら</b>\nRomaji:\t\t\t Sayōnara\nEnglish:\t\t Goodbye</string>
 
-    <string name="score">"Score: "</string>
-    <string name="attempts">"Attempts: "</string>
-    <string name="option1">Select Option</string>
+    <string name="zero">0</string>
+    <string name="score"><b>Score</b></string>
+    <string name="attempts"><b>Attempts</b></string>
+    <string name="time"><b>Time</b></string>
+    <string name="initTime">00m : 00s</string>
+    <string name="option1"><u>Select Option</u></string>
     <string name="option2">Katakana to Romaji</string>
     <string name="option3">Hiragana to Romaji</string>
     <string name="default_character">〇</string>
     <string name="generate_character">Generate Character</string>
     <string name="choices"><u>Choices</u></string>
     <string name="reset">Reset</string>
+    <string name="cancel">Cancel</string>
+    <string name="result">Result</string>
 
     <string name="welcome_toast">Welcome!</string>
     <string name="invalid_option_toast">Please select an option.</string>
+    <string name="start_session">Session Start!</string>
     <string name="correct_toast">Correct! Generate again.</string>r
     <string name="zero_attempts_toast">No Attempts left. Press Reset to try again.</string>
     <string name="wrong_toast">Wrong. Answer should be \'%s\'</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="settings">Settings</string>
-    <string name="diacritic_characters">Diacritic Characters</string>
-    <string name="basic_characters">Basic Characters</string>
+    <string name="close">Close</string>
 </resources>

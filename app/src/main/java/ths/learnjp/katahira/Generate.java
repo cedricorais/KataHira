@@ -8,7 +8,7 @@ public class Generate {
     public static String getCharacter() {
         int weight_sum = 0;
 
-        Map chara_set_score = Score.getCharaSetScore();
+        Map chara_set_score = Score.getCharaSetSessionScore();
 
         Iterator<Integer> score_iterator = chara_set_score.values().iterator();
 
@@ -18,7 +18,7 @@ public class Generate {
 
         Iterator<String> chara_iterator = chara_set_score.keySet().iterator();
 
-        int random = (new Random().nextInt(weight_sum)) * -1;
+        int random = (int) Math.floor(Math.random()*(weight_sum+1));
 
         while(chara_iterator.hasNext()) {
             String character = chara_iterator.next();
@@ -36,8 +36,10 @@ public class Generate {
     }
 
     public static String getCharacterNoWeight(Map chara_set) {
-        int random = new Random().nextInt(chara_set.size());
+        int random = (int) Math.floor(Math.random()*chara_set.size());
+
         String[] key_set = (String[]) chara_set.keySet().toArray(new String[0]);
+
 
         return key_set[random];
     }

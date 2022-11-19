@@ -16,9 +16,24 @@ public class Score {
         Map chara_set_score = (HashMap) language_score.get(Global.chara_set_name);
 
         chara_set_score.put(character, new_score);
+        Global.score_session_set.put(character, new_score);
     }
 
-    public static void resetScore() {
+    public static void addCharaScore(String character_key, int value){
+        score.putIfAbsent(Global.language_name, new HashMap());
+        Map language_score = (HashMap) score.get(Global.language_name);
+
+        language_score.putIfAbsent(Global.chara_set_name, new HashMap());
+        Map chara_set_score = (HashMap) language_score.get(Global.chara_set_name);
+
+        int new_score = ((int) chara_set_score.get(character_key)) + value;
+
+        chara_set_score.put(character_key, new_score);
+        Global.score_session_set.put(character_key, new_score);
+
+    }
+
+    public static void initializeScore() {
         Map chara_set = Global.chara_set;
         Iterator<String> it = chara_set.keySet().iterator();
 
@@ -28,18 +43,12 @@ public class Score {
         }
     }
 
-    public static Map getCharaSetScore() {
-        if (score.containsKey(Global.language_name)) {
-            Map language_score = (HashMap) score.get(Global.language_name);
-            if (language_score.containsKey(Global.chara_set_name)) {
-                return (Map) language_score.get(Global.chara_set_name);
-            }
-            throw new RuntimeException("Chara set not found by scorer.");
-        }
-        throw new RuntimeException("Language not found by scorer.");
+    public static Map getCharaSetSessionScore() {
+        return Global.score_session_set;
     }
 
-    public static void loadScoreFromFile(int userID) {
 
+    public static void loadScoreFromFile(int userID) {
+        initializeScore();
     }
 }
