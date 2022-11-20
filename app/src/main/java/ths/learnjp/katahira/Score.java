@@ -34,6 +34,11 @@ public class Score {
         int new_score = ((int) chara_set_score.get(character_key)) + value;
 
         chara_set_score.put(character_key, new_score);
+
+        if (Global.score_session_set.isEmpty()) {
+            resetScoreSessionSet();
+        }
+
         Global.score_session_set.put(character_key, new_score);
 
     }

@@ -18,7 +18,8 @@ public class Generate {
 
         Iterator<String> chara_iterator = chara_set_score.keySet().iterator();
 
-        int random = (int) Math.floor(Math.random()*(weight_sum+1));
+        int random = ((int) Math.floor(Math.random()*(weight_sum))) * -1;
+        int randomDEBUG = random;
 
         while(chara_iterator.hasNext()) {
             String character = chara_iterator.next();

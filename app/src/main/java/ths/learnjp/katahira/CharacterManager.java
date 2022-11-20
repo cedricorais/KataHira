@@ -54,7 +54,7 @@ public class CharacterManager {
         Global.session_set = new HashMap<>(Global.chara_set);
 
         // TODO REPLACE WITH SCORE LOADING
-        Score.initializeScore();
+//        Score.initializeScore();
 
         Score.resetScoreSessionSet();
         Global.session_attempts_left = Global.session_set.size();
