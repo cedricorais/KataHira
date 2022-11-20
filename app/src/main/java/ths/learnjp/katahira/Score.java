@@ -16,6 +16,11 @@ public class Score {
         Map chara_set_score = (HashMap) language_score.get(Global.chara_set_name);
 
         chara_set_score.put(character, new_score);
+
+        if (Global.score_session_set.isEmpty()) {
+            resetScoreSessionSet();
+        }
+
         Global.score_session_set.put(character, new_score);
     }
 
@@ -45,6 +50,10 @@ public class Score {
 
     public static Map getCharaSetSessionScore() {
         return Global.score_session_set;
+    }
+
+    public static void resetScoreSessionSet() {
+        Global.score_session_set = new HashMap<>((Map) ((Map) score.get(Global.language_name)).get(Global.chara_set_name));
     }
 
 

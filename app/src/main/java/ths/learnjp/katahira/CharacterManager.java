@@ -37,7 +37,11 @@ public class CharacterManager {
         Global.chara_set_name = _chara_set;
 
         Global.session_set = new HashMap<>(chara_set);
-        Global.score_session_set = new HashMap();
+
+        // TODO REPLACE WITH SCORE LOADING
+        Score.initializeScore();
+
+        Score.resetScoreSessionSet();
     }
 
     public static String[] getCharaSetNames() {
@@ -48,7 +52,11 @@ public class CharacterManager {
 
     public static void resetSession() {
         Global.session_set = new HashMap<>(Global.chara_set);
-        Global.score_session_set = new HashMap();
+
+        // TODO REPLACE WITH SCORE LOADING
+        Score.initializeScore();
+
+        Score.resetScoreSessionSet();
         Global.session_attempts_left = Global.session_set.size();
         Global.session_score = 0;
     }
