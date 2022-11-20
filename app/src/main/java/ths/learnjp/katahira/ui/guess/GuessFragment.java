@@ -45,9 +45,6 @@ public class GuessFragment extends Fragment {
     Button generateBtn, choice1Btn, choice2Btn, choice3Btn, resetBtn;
     Spinner optionsSpin;
     TextView scoreValue, attemptValue, timeValue, shownChar;
-    Timer timer;
-    TimerTask timerTask;
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        GuessViewModel guessViewModel = new ViewModelProvider(this).get(GuessViewModel.class);
@@ -121,7 +118,6 @@ public class GuessFragment extends Fragment {
 //                } else {
 //                    CharacterManager.setCharaSet("Hiragana");
 //                }
-                stopFlash(optionsSpin);
                 startFlash(generateBtn);
             }
             @Override
@@ -133,7 +129,7 @@ public class GuessFragment extends Fragment {
         generateBtn = binding.generateChar;
         generateBtn.setOnClickListener(view -> {
             stopFlash(generateBtn);
-            startSession();
+            startSession(toast);
 
             String character = Generate.getCharacter();
             shownChar.setText(character);
@@ -154,8 +150,10 @@ public class GuessFragment extends Fragment {
             resetAlert.setCancelable(false);
             resetAlert.setPositiveButton(R.string.reset, (dialogInterface, i) -> {
                 init();
+                Global.wrongChars.removeAll(Global.wrongChars);
             });
             resetAlert.setNeutralButton(R.string.cancel, (dialogInterface, i) -> {
+                Global.startTimer = true;
                 Time.startTime(timeValue);
             });
             resetAlert.show();
@@ -173,7 +171,7 @@ public class GuessFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     public void init() {
-        if (timerTask != null) {
+        if (Time.timerTask != null) {
             Time.pauseTime();
             Global.time = 0.0;
             timeValue.setText(Time.formatTime(0, 0));
@@ -183,6 +181,7 @@ public class GuessFragment extends Fragment {
 
         scoreValue.setText(Integer.toString(Global.session_score));
         attemptValue.setText("0");
+        timeValue.setText(R.string.initTime);
 
         optionsSpin.setEnabled(true);
         optionsSpin.setSelection(0);
@@ -204,10 +203,10 @@ public class GuessFragment extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    public void startSession() {
-        timer = new Timer();
+    public void startSession(Toasts toast) {
+        Time.timer = new Timer();
         if (!Global.startTimer) {
-//            toast.showToast(this.getActivity(), "start", 0);
+            toast.showToast(this.getActivity(), "start", null);
             Time.startTime(timeValue);
         }
 
@@ -229,34 +228,6 @@ public class GuessFragment extends Fragment {
         resetBtn.setEnabled(true);
     }
 
-    private void startTime(TextView textView) {
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mHandler.post(() -> {
-                    Global.startTimer = true;
-                    textView.setText(getTimerText());
-                    Global.time++;
-                });
-            }
-        };
-        timer.scheduleAtFixedRate(timerTask, 0 ,1000);
-    }
-    private void pauseTime() {
-        Global.startTimer = false;
-        timerTask.cancel();
-    }
-    private String getTimerText() {
-        int rounded = (int) Math.round(Global.time);
-        int seconds = ((rounded % 86400) % 3600) % 60;
-        int minutes = ((rounded % 86400) % 3600) / 60;
-//        int hours = ((rounded % 86400) / 3600);
-        return formatTime(seconds, minutes);
-    }
-    @SuppressLint("DefaultLocale")
-    private String formatTime(int seconds, int minutes) {
-        return String.format("%02dm", minutes) + " : " + String.format("%02ds", seconds);
-    }
     public void startFlash(View view) {
         final Animation flash = new AlphaAnimation(1, 0);
         flash.setDuration(750);
@@ -307,11 +278,12 @@ public class GuessFragment extends Fragment {
 
     @SuppressLint("SetTextI18n") // TODO move process class
     public void correctAnswer(Toasts toast, String answer) {
+        toast.showToast(this.getActivity(), "correctAnswer", answer);
+
         Global.session_attempts_left--;
         attemptValue.setText(Integer.toString(Global.session_attempts_left));
         Global.session_score++;
         scoreValue.setText(Integer.toString(Global.session_score));
-
         Score.addCharaScore(answer, 1);
 
         CharacterManager.removeCharFromSession(answer); // TODO duplicate char
@@ -345,17 +317,15 @@ public class GuessFragment extends Fragment {
             generateBtn.setEnabled(false);
             stopFlash(generateBtn);
             startFlash(resetBtn);
-            toast.showToast(this.getActivity(), "zeroAttempts", null);
 
             AlertDialog.Builder resultAlert = new AlertDialog.Builder(getActivity());
             resultAlert.setTitle(R.string.result);
             resultAlert.setMessage(String.format("%s: %s\n%s: %s\nWrong Characters: %s", this.getString(R.string.score), Global.session_score, this.getString(R.string.time), timeValue.getText(), Global.wrongChars));
             resultAlert.setCancelable(false);
             resultAlert.setPositiveButton(R.string.close, (dialogInterface, i) -> {
-                //
+                toast.showToast(this.getActivity(), "zeroAttempts", null);
             });
             resultAlert.show();
         }
     }
-
 }

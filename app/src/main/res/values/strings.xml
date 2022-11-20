@@ -22,24 +22,24 @@
     <string name="greeting2">Japanese:\t <b>いいえ</b>\nRomaji:\t\t\t Iie\nEnglish:\t\t No</string>
     <string name="greeting3">Japanese:\t <b>おねがいします</b>\nRomaji:\t\t\t Onegai shimasu\nEnglish:\t\t Please</string>
     <string name="greeting4">Japanese:\t <b>ありがとう</b>\nRomaji:\t\t\t Arigatō\nEnglish:\t\tThank you</string>
-    <string name="greeting5">Japanese:\t <b>どういたしまして</b>\nRomaji:\t\t\t Dōitashimashite\nEnglish:\t\t You\'re welcome</string>
+    <string name="greeting5">Japanese:\t <b>どういたしまして</b>\nRomaji:\t\t\t Douitashimashite\nEnglish:\t\t You\'re welcome</string>
     <string name="greeting6">Japanese:\t <b>すみません</b>\nRomaji:\t\t\t Sumimasen\nEnglish:\t\t Excuse me</string>
     <string name="greeting7">Japanese:\t <b>ごめんなさい</b>\nRomaji:\t\t\t Gomennasai\nEnglish:\t\t I am sorry</string>
     <string name="greeting8">Japanese:\t <b>わかりません</b>\nRomaji:\t\t\t Wakarimasen\nEnglish:\t\t I don\'t understand</string>
-    <string name="greeting9">Japanese:\t <b>しりません </b>\nRomaji:\t\t\t Shirimasen\nEnglish:\t\t I don\’t know</string>
+    <string name="greeting9">Japanese:\t <b>しりません</b>\nRomaji:\t\t\t Shirimasen\nEnglish:\t\t I don\’t know</string>
     <string name="greeting10">Japanese:\t <b>ただいま</b>\nRomaji:\t\t\t Tadaima\nEnglish:\t\t I have come back</string>
     <string name="view_phrases">View Basic Phrases</string>
     <string name="phrases">Basic Phrases</string>
-    <string name="phrase1">Japanese:\t <b>おはようございます</b>\nRomaji:\t\t\t Ohayō gozaimasu\nEnglish:\t\t Good morning</string>
+    <string name="phrase1">Japanese:\t <b>おはようございます</b>\nRomaji:\t\t\t Ohayou gozaimasu\nEnglish:\t\t Good morning</string>
     <string name="phrase2">Japanese:\t <b>こんばんは</b>\nRomaji:\t\t\t Konbanwa\nEnglish:\t\t Good evening</string>
     <string name="phrase3">Japanese:\t <b>おやすみなさい</b>\nRomaji:\t\t\t Oyasumi nasai\nEnglish:\t\t Good night</string>
     <string name="phrase4">Japanese:\t <b>おなまえはなんですか？</b>\nRomaji:\t\t\t O-namae wa nan desu ka?\nEnglish:\t\t What is your name?</string>
     <string name="phrase5">Japanese:\t <b>おげんきですか？</b>\nRomaji:\t\t\t O-genki desu ka?\nEnglish:\t\t How are you?</string>
     <string name="phrase6">Japanese:\t <b>げんきです</b>\nRomaji:\t\t\t Genki desu\nEnglish:\t\t I\'m fine. Thank you.</string>
     <string name="phrase7">Japanese:\t <b>はじめまして</b>\nRomaji:\t\t\t Hajimemashite\nEnglish:\t\t Nice to meet you</string>
-    <string name="phrase8">Japanese:\t <b>ようこそ</b>\nRomaji:\t\t\t Yōkoso\nEnglish:\t\t Welcome</string>
+    <string name="phrase8">Japanese:\t <b>ようこそ</b>\nRomaji:\t\t\t Youkoso\nEnglish:\t\t Welcome</string>
     <string name="phrase9">Japanese:\t <b>こんにちは</b>\nRomaji:\t\t\t Konnichiwa\nEnglish:\t\t Hello</string>
-    <string name="phrase10">Japanese:\t <b>さようなら</b>\nRomaji:\t\t\t Sayōnara\nEnglish:\t\t Goodbye</string>
+    <string name="phrase10">Japanese:\t <b>さようなら</b>\nRomaji:\t\t\t Sayounara\nEnglish:\t\t Goodbye</string>
 
     <string name="zero">0</string>
     <string name="score"><b>Score</b></string>
@@ -60,7 +60,7 @@
     <string name="invalid_option_toast">Please select an option.</string>
     <string name="start_session">Session Start!</string>
     <string name="correct_toast">Correct! Generate again.</string>r
-    <string name="zero_attempts_toast">No Attempts left. Press Reset to try again.</string>
+    <string name="zero_attempts_toast">Press Reset to try again.</string>
     <string name="wrong_toast">Wrong. Answer should be \'%s\'</string>
     <string name="close">Close</string>
 </resources>

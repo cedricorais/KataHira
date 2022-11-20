@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO Update
         // Set Japanese/Katakana as default language.
         CharacterManager.setLanguage(getApplicationContext(), "Japanese");
-        CharacterManager.setCharaSet("test");
+        CharacterManager.setCharaSet("5 chars kata");
         // TODO DELETE
         Score.initializeScore();
 
