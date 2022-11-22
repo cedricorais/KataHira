@@ -1,7 +1,7 @@
 {
     "language": "Japanese",
     "chara_sets": {
-      "test": {
+      "5 chars kata": {
         "ア": "a", "力": "ka", "サ": "sa", "タ": "ta", "ナ": "na"
       },
       "Katakana": {
@@ -18,5 +18,31 @@
         "え": "e", "け": "ke", "せ": "se", "て": "te", "ね": "ne", "へ": "he", "め": "me", "れ": "re", "げ": "ge", "ぜ": "ze", "で": "de", "べ": "be", "ぺ": "pe",
         "お": "o", "こ": "ko", "そ": "so", "と": "to", "の": "no", "ほ": "ho", "も": "mo", "よ": "yo", "ろ": "ro", "を": "wo", "ご": "go", "ぞ": "zo", "ど": "do", "ぼ": "bo", "ぽ": "po"
       }
+    },
+  "phrases": {
+    "basic_greetings": {
+      "はい": "Hai",
+      "いいえ": "Iie",
+      "おねがいします": "Onegai shimasu",
+      "ありがとう": "Arigatō",
+      "どういたしまして": "Douitashimashite",
+      "すみません": "Sumimasen",
+      "ごめんなさい": "Gomennasai",
+      "わかりません": "Wakarimasen",
+      "しりません": "Shirimasen",
+      "ただいま": "Tadaima"
+    },
+    "basic_phrases": {
+      "おはようございます": "Ohayou gozaimasu",
+      "こんばんは": "Konbanwa",
+      "おやすみなさい": "Oyasumi nasai",
+      "おなまえはなんですか？": "O-namae wa nan desu ka?",
+      "おげんきですか？": "O-genki desu ka?",
+      "げんきです": "Genki desu",
+      "はじめまして": "Hajimemashite",
+      "ようこそ": "Youkoso",
+      "こんにちは": "Konnichiwa",
+      "さようなら": "Sayounara"
     }
+  }
 }
