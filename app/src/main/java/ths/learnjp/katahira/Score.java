@@ -40,7 +40,6 @@ public class Score {
         }
 
         Global.score_session_set.put(character_key, new_score);
-
     }
 
     public static void initializeScore() {
