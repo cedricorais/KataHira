@@ -284,7 +284,7 @@ public class GuessFragment extends Fragment {
         attemptValue.setText(Integer.toString(Global.session_attempts_left));
         Global.session_score++;
         scoreValue.setText(Integer.toString(Global.session_score));
-        Score.addCharaScore(answer, 1);
+        Score.addCharaScore(answer, 10);
 
         CharacterManager.removeCharFromSession(answer); // TODO duplicate char
         afterAnswer(toast);
