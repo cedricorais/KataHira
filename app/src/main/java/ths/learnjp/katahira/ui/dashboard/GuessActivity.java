@@ -1,12 +1,13 @@
-package ths.learnjp.katahira.ui.guess;
+package ths.learnjp.katahira.ui.dashboard;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -18,59 +19,44 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import ths.learnjp.katahira.CharacterManager;
 import ths.learnjp.katahira.Generate;
 import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
 import ths.learnjp.katahira.Score;
-import ths.learnjp.katahira.Speech;
 import ths.learnjp.katahira.Time;
 import ths.learnjp.katahira.Toasts;
-import ths.learnjp.katahira.databinding.FragmentGuessBinding;
 
-public class GuessFragment extends Fragment {
-
-    private FragmentGuessBinding binding;
+public class GuessActivity extends AppCompatActivity {
 
     Button generateBtn, choice1Btn, choice2Btn, choice3Btn, resetBtn;
     Spinner optionsSpin;
     TextView attemptValue, mistakesValue, scoreValue, timeValue, shownChar;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        GuessViewModel guessViewModel = new ViewModelProvider(this).get(GuessViewModel.class);
-
-        binding = FragmentGuessBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-//        final TextView textView = binding.textGuess;
-//        guessViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_guess);
 
         Toasts toast = new Toasts();
 
-        attemptValue = binding.attemptsValue;
-        mistakesValue = binding.mistakesValue;
-        scoreValue = binding.scoreValue;
-        timeValue = binding.timeValue;
-        shownChar = binding.showChar;
+        attemptValue = findViewById(R.id.attemptsValue);
+        mistakesValue = findViewById(R.id.mistakesValue);
+        scoreValue = findViewById(R.id.scoreValue);
+        timeValue = findViewById(R.id.timeValue);
+        shownChar = findViewById(R.id.showChar);
 
         String[] selected_option = CharacterManager.getCharaSetNames();
-        optionsSpin = binding.options;
+        optionsSpin = findViewById(R.id.options);
 //    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
-
-        Speech.setupSpeechRecognizer(getContext());
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, selected_option) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, selected_option) {
             /*@Override
             public boolean isEnabled(int position) {
 //                if (position == 0) {
@@ -131,7 +117,7 @@ public class GuessFragment extends Fragment {
             }
         });
 
-        generateBtn = binding.generateChar;
+        generateBtn = findViewById(R.id.generateChar);
         generateBtn.setOnClickListener(view -> {
             stopFlash(generateBtn);
             startSession(toast);
@@ -139,29 +125,32 @@ public class GuessFragment extends Fragment {
             String character = Generate.getCharacter();
             shownChar.setText(character);
             generateAnswer(toast, character);
-
-            // TODO DELETE: SPEECH TESTING
-            Speech.startListening();
         });
 
-        choice1Btn = binding.choice1;
-        choice2Btn = binding.choice2;
-        choice3Btn = binding.choice3;
+        choice1Btn = findViewById(R.id.choice1);
+        choice2Btn = findViewById(R.id.choice2);
+        choice3Btn = findViewById(R.id.choice3);
 
-        resetBtn = binding.reset;
+        resetBtn = findViewById(R.id.reset);
         resetBtn.setOnClickListener(view -> {
             Time.pauseTime();
             showAlertDialog("reset", null);
         });
 
         init();
-        return root;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void onBackPressed() {
+        showAlertDialog("back", null);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressLint("SetTextI18n")
@@ -197,7 +186,7 @@ public class GuessFragment extends Fragment {
     public void startSession(Toasts toast) {
         Time.timer = new Timer();
         if (!Global.startTimer) {
-            toast.showToast(this.getActivity(), "start", null);
+            toast.showToast(this, "start", null);
             Time.startTime(timeValue);
         }
 
@@ -232,8 +221,24 @@ public class GuessFragment extends Fragment {
     }
     public void showAlertDialog(String tag, Toasts toast) {
 //        Time.pauseTime(); // TODO java.lang.NullPointerException: Attempt to invoke virtual method 'boolean java.util.TimerTask.cancel()' on a null object reference
-        AlertDialog.Builder alert = new AlertDialog.Builder(this.getActivity());
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
         switch (tag) {
+            case "back":
+                alert.setMessage("Are you sure you want to exit?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", (dialogInterface, i) -> {
+//                            finish();
+                            if (getFragmentManager().getBackStackEntryCount() > 0) {
+                                getFragmentManager().popBackStack();
+                                return;
+                            }
+                            super.onBackPressed();
+                        })
+                        .setNegativeButton("No", (dialogInterface, i) -> {
+                            /*Global.startTimer = true; // TODO resume timer
+                            Time.startTime(timeValue);*/
+                        });
+                break;
             case "reset":
                 alert.setTitle(R.string.reset)
                         .setMessage("Are you sure you want to reset?")
@@ -253,7 +258,7 @@ public class GuessFragment extends Fragment {
                         .setCancelable(false)
                         .setPositiveButton(R.string.close, (dialogInterface, i) -> {
                             startFlash(resetBtn);
-                            toast.showToast(this.getActivity(), "zeroAttempts", null);
+                            toast.showToast(this, "zeroAttempts", null);
                         });
                 break;
         }
@@ -298,7 +303,7 @@ public class GuessFragment extends Fragment {
 
     @SuppressLint("SetTextI18n") // TODO move process class
     public void correctAnswer(Toasts toast, String answer) {
-        toast.showToast(this.getActivity(), "correctAnswer", answer);
+        toast.showToast(this, "correctAnswer", answer);
 
         Global.session_attempts_left--;
         attemptValue.setText(Integer.toString(Global.session_attempts_left));
@@ -312,7 +317,7 @@ public class GuessFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     public void wrongAnswer(Toasts toast, String correct_answer) {
-        toast.showToast(this.getActivity(), "wrongAnswer", correct_answer);
+        toast.showToast(this, "wrongAnswer", correct_answer);
 
         Global.session_attempts_left--;
         attemptValue.setText(Integer.toString(Global.session_attempts_left));

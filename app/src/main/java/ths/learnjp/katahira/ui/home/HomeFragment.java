@@ -37,12 +37,12 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), HiraganaCharactersActivity.class);
             startActivity(intent);
         });
-        greetingsBtn = binding.greetings;
+        greetingsBtn = binding.showGreetings;
         greetingsBtn.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), GreetingsActivity.class);
             startActivity(intent);
         });
-        phrasesBtn = binding.phrases;
+        phrasesBtn = binding.showPhrases;
         phrasesBtn.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), PhrasesActivity.class);
             startActivity(intent);

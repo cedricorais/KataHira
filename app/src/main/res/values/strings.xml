@@ -8,14 +8,15 @@
 
     <string name="view_katakana">View Katakana Characters</string>
     <string name="katakana">Katakana Characters</string>
-    <string name="info_kata"><b>Katakana Characters</b>\nKatakana is most often used for transcription of words from foreign languages, loanwords, or onomatopoeia to represent sounds.</string>
+    <string name="info_kata">The word katakana means \"fragmentary kana\", as the katakana characters are derived from components or fragments of more complex kanji.\nKatakana is most often used for transcription of words from foreign languages, loanwords, or onomatopoeia to represent sounds.</string>
     <string name="view_hiragana">View Hiragana Characters</string>
     <string name="hiragana">Hiragana Characters</string>
-    <string name="info_hira"><b>Hiragana Characters</b>\nHiragana is used mainly for grammatical purposes. It is used on its own or in conjunction with kanji to form words.</string>
+    <string name="info_hira">The word hiragana literally means "flowing" or "simple" kana (\"simple\" originally as contrasted with kanji).\nHiragana is used mainly for grammatical purposes. It is used on its own or in conjunction with kanji to form words.</string>
     <string name="diacritic_characters">Diacritic Characters</string>
     <string name="basic_characters">Basic Characters</string>
 
-    <string name="info_phrases"><b>Basic Greetings &amp; Phrases</b>\nSome basic Japanese greetings and phrases.</string>
+    <string name="phrase">Basic Greetings &amp; Phrases</string>
+    <string name="info_phrases">Some basic Japanese greetings and phrases.</string>
     <string name="view_greetings">View Basic Greetings</string>
     <string name="greetings">Basic Greetings</string>
     <string name="greeting1">Japanese:\t <b>はい</b>\nRomaji:\t\t\t Hai\nEnglish:\t\t Yes</string>
@@ -42,10 +43,10 @@
     <string name="phrase10">Japanese:\t <b>さようなら</b>\nRomaji:\t\t\t Sayounara\nEnglish:\t\t Goodbye</string>
 
     <string name="zero">0</string>
-    <string name="score"><b>Score</b></string>
-    <string name="attempts"><b>Attempts</b></string>
-    <string name="time"><b>Time</b></string>
-    <string name="initTime">00m : 00s</string>
+    <string name="score">Score</string>
+    <string name="attempts">Attempts</string>
+    <string name="time">Time</string>
+    <string name="initTime">00m:00s</string>
     <string name="option1"><u>Select Option</u></string>
     <string name="option2">Katakana to Romaji</string>
     <string name="option3">Hiragana to Romaji</string>
@@ -63,4 +64,12 @@
     <string name="zero_attempts_toast">Press Reset to try again.</string>
     <string name="wrong_toast">Wrong. Answer should be \'%s\'</string>
     <string name="close">Close</string>
+    <string name="view_history">View History</string>
+    <string name="date">Date &amp; Time:</string>
+    <string name="mistakes">Mistakes</string>
+    <string name="syllabary">Syllabary:</string>
+    <string name="profile">Profile:</string>
+    <string name="current_rank">Current Rank:</string>
+    <string name="total_session">Total Session:</string>
+    <string name="history">History</string>
 </resources>

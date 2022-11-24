@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ths.learnjp.katahira.ui.guess.GuessFragment;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Toasts extends AppCompatActivity {

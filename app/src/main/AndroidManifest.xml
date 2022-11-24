@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="ths.learnjp.katahira" >
+    package="ths.learnjp.katahira">
 
     <queries>
         <package android:name="com.google.android.googlequicksearchbox"/>
@@ -13,37 +13,51 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.KataHira" >
+        android:theme="@style/Theme.KataHira">
         <activity
             android:name=".old.KatakanaCharactersActivity"
             android:exported="false"
             android:label="@string/view_katakana"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName=".ui.SettingsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".old.HiraganaCharactersActivity"
             android:exported="false"
             android:label="@string/view_hiragana"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName=".ui.SettingsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".old.OldActivity"
             android:exported="false"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName=".ui.SettingsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".old.OldActivity2"
             android:exported="false"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName=".ui.SettingsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.SettingsActivity"
             android:exported="false"
             android:label="@string/settings"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.dashboard.GuessActivity"
+            android:exported="false"
+            android:label="@string/title_guess"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.dashboard.HistoryActivity"
+            android:exported="false"
+            android:label="@string/history"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -77,7 +91,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" >
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

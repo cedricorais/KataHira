@@ -20,135 +20,484 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase1"
-            android:textSize="18sp" />
+            android:layout_below="@id/title"
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic1"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio1"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase1"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase1"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase1"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase2"
-            android:textSize="18sp" />
-        <TextView
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic2"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio2"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase2"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase2"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase2"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase3"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic3"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio3"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase3"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase3"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase3"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase4"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic4"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio4"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase4"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase4"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase4"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase5"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic5"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio5"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase5"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase5"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase5"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase6"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic6"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio6"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase6"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase6"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase6"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase7"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic7"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio7"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase7"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase7"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase7"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase8"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic8"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio8"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase8"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase8"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase8"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase9"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic9"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio9"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase9"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/phrase10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phrase9"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/phrase9"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rec"
-            android:elevation="2dp"
-            android:padding="15dp"
-            android:text="@string/phrase10"
-            android:textSize="18sp" />
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/mic10"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:icon="@drawable/ic_baseline_mic_24" />
+
+                    <Button
+                        android:id="@+id/audio10"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/phrase10"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </RelativeLayout>
 
 </ScrollView>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,86 +7,171 @@
     android:padding="10dp"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/kata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rec"
-        android:elevation="2dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="50dp"
-        android:text="@string/info_kata"
-        android:textSize="18sp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="810dp"> <!--TODO fix scroll-->
 
-    <Button
-        android:id="@+id/showKata"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/kata"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-50dp"
-        android:backgroundTint="@color/red"
-        android:text="@string/view_katakana" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/kata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/hira"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/kata"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rec"
-        android:elevation="2dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="50dp"
-        android:text="@string/info_hira"
-        android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-    <Button
-        android:id="@+id/showHira"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hira"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-50dp"
-        android:backgroundTint="#36D800"
-        android:text="@string/view_hiragana" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/phrase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/hira"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rec"
-        android:elevation="2dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="100dp"
-        android:text="@string/info_phrases"
-        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/katakana"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
 
-    <Button
-        android:id="@+id/greetings"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phrase"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-98dp"
-        android:text="@string/view_greetings" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info_kata"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-    <Button
-        android:id="@+id/phrases"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/greetings"
-        android:layout_centerHorizontal="true"
-        android:text="@string/view_phrases" />
-</RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/showKata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:text="@string/view_katakana" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/hira"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kata"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hiragana"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info_hira"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/showHira"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#36D800"
+                        android:text="@string/view_hiragana" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/phrase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hira"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="?attr/colorTertiary"
+            app:cardElevation="5dp"
+            app:strokeColor="@drawable/border_card"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phrase"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info_phrases"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/showGreetings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_greetings" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/showPhrases"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_phrases" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+</ScrollView>

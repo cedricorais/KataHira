@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorTertiary">@color/white</item>
+        <item name="colorOnTertiary">@color/dark_gray</item>
     </style>
 
     <style name="Theme.KataHira.NoActionBar">

@@ -205,7 +205,7 @@ public class OldActivity extends AppCompatActivity {
             }
         });
 
-        kataBtn = findViewById(R.id.showKata);
+        kataBtn = findViewById(R.id.showKata1);
         kataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,7 +213,7 @@ public class OldActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        hiraBtn = findViewById(R.id.showHira);
+        hiraBtn = findViewById(R.id.showHira1);
         hiraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

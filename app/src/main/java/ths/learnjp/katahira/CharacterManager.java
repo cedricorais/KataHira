@@ -59,7 +59,14 @@ public class CharacterManager {
 
         Score.resetScoreSessionSet();
         Global.session_attempts_left = Global.session_set.size();
+        Global.session_mistake = 0;
         Global.session_score = 0;
+        Global.wrongChars.removeAll(Global.wrongChars);
+
+        if (Time.timerTask != null) {
+            Time.pauseTime();
+            Global.time = 0.0;
+        }
     }
 
     public static void removeCharFromSession(String key) {

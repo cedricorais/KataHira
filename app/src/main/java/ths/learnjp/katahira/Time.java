@@ -43,6 +43,6 @@ public class Time {
 
     @SuppressLint("DefaultLocale")
     public static String formatTime(int seconds, int minutes) {
-        return String.format("%02dm", minutes) + " : " + String.format("%02ds", seconds);
+        return String.format("%02dm", minutes) + ":" + String.format("%02ds", seconds);
     }
 }

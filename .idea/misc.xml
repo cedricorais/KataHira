@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../../../../layout/custom_preview.xml" value="0.29270833333333335" />
         <entry key="..\:/Users/Zed/AndroidStudioProjects/KataHira1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.222" />
         <entry key="..\:/Users/Zed/AndroidStudioProjects/KataHira1/app/src/main/res/drawable/border.xml" value="0.233" />
         <entry key="..\:/Users/Zed/AndroidStudioProjects/KataHira1/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.233" />
@@ -20,10 +19,14 @@
         <entry key="..\:/Users/Zed/AndroidStudioProjects/KataHira1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.222" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/drawable/border.xml" value="0.233" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/drawable/rec.xml" value="0.21" />
-        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_greetings.xml" value="0.32222222222222224" />
-        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_hiragana_characters.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/drawable/stroke_color.xml" value="0.2055" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/drawable/table.xml" value="0.2055" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_greetings.xml" value="0.22" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_guess.xml" value="0.25" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_hiragana_characters.xml" value="0.33" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_history.xml" value="0.1847972972972973" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_katakana_characters.xml" value="0.32222222222222224" />
-        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_main_old.xml" value="0.2310185185185185" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_old.xml" value="0.26481481481481484" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_old2.xml" value="0.25324074074074077" />
@@ -32,10 +35,11 @@
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_oldbruh.xml" value="0.25324074074074077" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_phrases.xml" value="0.33" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/activity_settings.xml" value="0.25324074074074077" />
-        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_dashboard.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_guess.xml" value="0.33" />
-        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_home.xml" value="0.34823091247672255" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/fragment_notifications.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/linearlayout1.xml" value="0.18412162162162163" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/spinner_item.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/layout/toast_layout.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Zed/Documents/GitHub/KataHira/app/src/main/res/menu/bottom_nav_menu.xml" value="0.32222222222222224" />

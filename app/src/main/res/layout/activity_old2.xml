@@ -7,7 +7,7 @@
     tools:context=".old.OldActivity2">
 
     <LinearLayout
-        android:id="@+id/ll"
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -43,7 +43,6 @@
                 android:layout_marginEnd="40dp"
                 android:text="@string/time"
                 android:textSize="20sp" />
-
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.appcompat.widget.Toolbar
@@ -75,7 +74,6 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/initTime"
                 android:textSize="20sp" />
-
         </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
 
@@ -83,10 +81,10 @@
         android:id="@+id/showChar"
         android:layout_width="225dp"
         android:layout_height="220dp"
-        android:layout_below="@+id/ll"
+        android:layout_below="@+id/card"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20sp"
-        android:background="@drawable/border"
+        android:background="@drawable/border_transparent"
         android:gravity="center"
         android:textSize="150sp" />
 
