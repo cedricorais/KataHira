@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO DELETE
         Score.initializeScore();
 
+
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // TODO ============
         Toasts toast = new Toasts();
         toast.showToast(this, "Welcome!", null);

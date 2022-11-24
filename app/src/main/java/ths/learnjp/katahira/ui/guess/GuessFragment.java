@@ -34,6 +34,7 @@ import ths.learnjp.katahira.Generate;
 import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
 import ths.learnjp.katahira.Score;
+import ths.learnjp.katahira.Speech;
 import ths.learnjp.katahira.Time;
 import ths.learnjp.katahira.Toasts;
 import ths.learnjp.katahira.databinding.FragmentGuessBinding;
@@ -65,6 +66,9 @@ public class GuessFragment extends Fragment {
         String[] selected_option = CharacterManager.getCharaSetNames();
         optionsSpin = binding.options;
 //    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
+
+        Speech.setupSpeechRecognizer(getContext());
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, selected_option) {
             /*@Override
             public boolean isEnabled(int position) {
@@ -134,6 +138,9 @@ public class GuessFragment extends Fragment {
             String character = Generate.getCharacter();
             shownChar.setText(character);
             generateAnswer(toast, character);
+
+            // TODO DELETE: SPEECH TESTING
+            Speech.startListening();
         });
 
         choice1Btn = binding.choice1;
