@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ths.learnjp.katahira" >
 
+    <queries>
+        <package android:name="com.google.android.googlequicksearchbox"/>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

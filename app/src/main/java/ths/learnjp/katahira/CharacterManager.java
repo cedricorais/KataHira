@@ -37,6 +37,7 @@ public class CharacterManager {
         Global.chara_set_name = _chara_set;
 
         Global.session_set = new HashMap<>(chara_set);
+        Global.session_attempts_left = Global.session_set.size();
 
         // TODO REPLACE WITH SCORE LOADING
         Score.initializeScore();
