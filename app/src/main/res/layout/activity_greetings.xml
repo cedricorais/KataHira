@@ -20,6 +20,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <!--TODO mic & audio-->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/greeting1"
             android:layout_width="match_parent"

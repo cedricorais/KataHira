@@ -7,6 +7,7 @@
     android:padding="10dp"
     tools:context=".ui.dashboard.DashboardFragment">
 
+    <!--TODO profile-->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/user"
         android:layout_width="match_parent"
@@ -53,7 +54,7 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/date1"
+                    android:id="@+id/rank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -62,7 +63,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/dateValue1"
+                    android:id="@+id/rankValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -106,8 +107,6 @@
                     android:id="@+id/guess"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/recent"
-                    android:layout_centerHorizontal="true"
                     android:text="@string/title_guess"
                     app:icon="@drawable/ic_baseline_play_arrow_24" />
             </LinearLayout>
@@ -124,6 +123,7 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <!--TODO session-->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/recent"
         android:layout_width="match_parent"
