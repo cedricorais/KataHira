@@ -4,6 +4,9 @@
     package="ths.learnjp.katahira">
 
     <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
         <package android:name="com.google.android.googlequicksearchbox"/>
     </queries>
 

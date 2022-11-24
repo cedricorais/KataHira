@@ -22,7 +22,7 @@
     <string name="greeting1">Japanese:\t <b>はい</b>\nRomaji:\t\t\t Hai\nEnglish:\t\t Yes</string>
     <string name="greeting2">Japanese:\t <b>いいえ</b>\nRomaji:\t\t\t Iie\nEnglish:\t\t No</string>
     <string name="greeting3">Japanese:\t <b>おねがいします</b>\nRomaji:\t\t\t Onegai shimasu\nEnglish:\t\t Please</string>
-    <string name="greeting4">Japanese:\t <b>ありがとう</b>\nRomaji:\t\t\t Arigatō\nEnglish:\t\tThank you</string>
+    <string name="greeting4">Japanese:\t <b>ありがとう</b>\nRomaji:\t\t\t Arigatou\nEnglish:\t\tThank you</string>
     <string name="greeting5">Japanese:\t <b>どういたしまして</b>\nRomaji:\t\t\t Douitashimashite\nEnglish:\t\t You\'re welcome</string>
     <string name="greeting6">Japanese:\t <b>すみません</b>\nRomaji:\t\t\t Sumimasen\nEnglish:\t\t Excuse me</string>
     <string name="greeting7">Japanese:\t <b>ごめんなさい</b>\nRomaji:\t\t\t Gomennasai\nEnglish:\t\t I am sorry</string>

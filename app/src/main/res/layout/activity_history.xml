@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="History (WIP))"
+        android:text="History (WIP)"
         android:textSize="20sp"/>
 
 </RelativeLayout>
