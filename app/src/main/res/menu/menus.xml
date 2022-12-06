@@ -5,7 +5,13 @@
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        app:showAsAction="always"
-        android:title="@string/settings" />
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/tutorial"
+        android:icon="@drawable/ic_baseline_help_outline_24"
+        android:title="@string/tutorial"
+        app:showAsAction="ifRoom" />
 
 </menu>

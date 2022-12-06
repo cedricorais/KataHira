@@ -1,11 +1,16 @@
 package ths.learnjp.katahira.ui.home;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -15,6 +20,7 @@ public class PhrasesActivity extends AppCompatActivity {
 
     Button audio1, audio2, audio3, audio4, audio5, audio6, audio7, audio8, audio9, audio10, mic1, mic2, mic3, mic4, mic5, mic6, mic7, mic8, mic9, mic10;
     TextToSpeech tts;
+    TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,7 @@ public class PhrasesActivity extends AppCompatActivity {
                 tts.setLanguage(Locale.JAPANESE);
             }
         });
+        test = findViewById(R.id.title1);
 
         audio1 = findViewById(R.id.audio1);
         audio1.setOnClickListener(view -> {
@@ -70,43 +77,43 @@ public class PhrasesActivity extends AppCompatActivity {
 
         mic1 = findViewById(R.id.mic1);
         mic1.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic2 = findViewById(R.id.mic2);
         mic2.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic3 = findViewById(R.id.mic3);
         mic3.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic4 = findViewById(R.id.mic4);
         mic4.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic5 = findViewById(R.id.mic5);
         mic5.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic6 = findViewById(R.id.mic6);
         mic6.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic7 = findViewById(R.id.mic7);
         mic7.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic8 = findViewById(R.id.mic8);
         mic8.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic9 = findViewById(R.id.mic9);
         mic9.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
         mic10 = findViewById(R.id.mic10);
         mic10.setOnClickListener(view -> {
-            //
+            startSpeak();
         });
     }
 
@@ -125,5 +132,24 @@ public class PhrasesActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void startSpeak() {
+        try {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speaking");
+            startActivityForResult(intent, 100);
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Something went wrong..", Toast.LENGTH_LONG).show();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100 || requestCode == RESULT_OK) {
+            test.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
+        }
     }
 }

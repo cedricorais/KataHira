@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +50,18 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         langSpin.setAdapter(adapter);
 
         toggleTheme = findViewById(R.id.toggleTheme); // TODO remove switch
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                toggleTheme.setChecked(true);
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                toggleTheme.setChecked(false);
+                break;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                System.out.println("idk");
+                break;
+        }
         toggleTheme.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); //light
@@ -114,7 +127,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        Toast.makeText(getApplicationContext(), selected_option[position], Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), selected_option[position], Toast.LENGTH_LONG).show();
 //        Snackbar.make(view, selected_option[position], Snackbar.LENGTH_LONG).show();
     }
 

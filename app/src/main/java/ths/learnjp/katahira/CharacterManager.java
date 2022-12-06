@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class CharacterManager {
     public static String[] getLanguages(Context context) {
@@ -58,15 +57,18 @@ public class CharacterManager {
 //        Score.initializeScore();
 
         Score.resetScoreSessionSet();
+        Global.dateTimeNow = "N/A";
+        Global.syllabary = "N/A";
         Global.session_attempts_left = Global.session_set.size();
         Global.session_mistake = 0;
         Global.session_score = 0;
-        Global.wrongChars.removeAll(Global.wrongChars);
 
         if (Time.timerTask != null) {
             Time.pauseTime();
             Global.time = 0.0;
         }
+        Global.latestTime = "00m:00s";
+        Global.wrongChars.removeAll(Global.wrongChars);
     }
 
     public static void removeCharFromSession(String key) {

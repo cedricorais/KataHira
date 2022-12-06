@@ -582,7 +582,7 @@ public class OldActivity extends AppCompatActivity {
         ImageView toastImage = layout.findViewById(R.id.toast_image);
 
         toastText.setText(String.format(getString(R.string.wrong_toast), globalVars.romaChars.get(random)));
-        toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
+        toastImage.setImageResource(R.drawable.ic_baseline_close_24);
     }
     public void zeroAttemptsToast() { //move to toast class ========================================
         LayoutInflater inflater = getLayoutInflater();

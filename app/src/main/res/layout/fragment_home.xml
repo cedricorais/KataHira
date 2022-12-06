@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="810dp"> <!--TODO fix scroll-->
+        android:layout_height="810dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/kata"

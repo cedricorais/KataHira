@@ -39,7 +39,7 @@ public class Toasts extends AppCompatActivity {
                 break;
             case "wrongAnswer":
                 toastText.setText(String.format(context.getString(R.string.wrong_toast), CharacterManager.getAnswer(correct_answer_key)));
-                toastImage.setImageResource(R.drawable.ic_baseline_clear_24);
+                toastImage.setImageResource(R.drawable.ic_baseline_close_24);
                 break;
             case "reset":
                 toastText.setText(String.format("%s%s", context.getString(R.string.reset), "!"));

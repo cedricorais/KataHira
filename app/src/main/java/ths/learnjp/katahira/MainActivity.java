@@ -1,13 +1,16 @@
 package ths.learnjp.katahira;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -50,15 +53,19 @@ public class MainActivity extends AppCompatActivity {
         // TODO DELETE
         Score.initializeScore();
 
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // TODO ============
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // TODO start light mode
         Toasts toast = new Toasts();
         toast.showToast(this, "Welcome!", null);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) { // TODO ======================================
+    @SuppressLint("ResourceType")
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menus, menu);
+//        menu.removeItem(R.id.settings); // TODO remove comment
+        menu.removeItem(R.id.tutorial);
         return true;
     }
+    @SuppressLint("NonConstantResourceId")
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
