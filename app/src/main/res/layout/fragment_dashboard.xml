@@ -11,7 +11,7 @@
         android:id="@+id/overview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Overview"
+        android:text="@string/overview"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -101,9 +101,35 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/dsaa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Correct Pronunciations"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dsa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="0/10 G |  0/10 P"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:paddingBottom="3dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -122,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/userCard"
         android:layout_marginTop="10dp"
-        android:text="Recent Session"
+        android:text="@string/recent_session"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -329,7 +355,7 @@
         android:background="@android:color/darker_gray"
         android:elevation="5dp"
         android:padding="5dp"
-        android:text="Edit a profile"
+        android:text="Rename a profile"
         android:textColor="?attr/colorOnTertiary"
         android:textSize="15sp" />
 
@@ -358,11 +384,19 @@
         android:textColor="?attr/colorOnTertiary"
         android:textSize="15sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+    <ListView
+        android:id="@+id/lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/recentCard"
         android:layout_marginTop="10dp"/>
+
+    <!--<TableLayout
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lv">
+
+    </TableLayout>-->
 
 </RelativeLayout>

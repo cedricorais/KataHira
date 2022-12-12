@@ -2,31 +2,27 @@ package ths.learnjp.katahira;
 
 public class UserModel {
 
-    private int id;
+    private int user_id;
     private String name;
-    private int total_session;
+    private String rank;
 
-    public UserModel(int id, String name, int total_session) {
-        this.id = id;
+    public UserModel(int id, String name, String rank) {
+        this.user_id = id;
         this.name = name;
-        this.total_session = total_session;
+        this.rank = rank;
     }
 
     @Override
     public String toString() {
-        return "UserModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", total_session=" + total_session +
-                '}';
+        return "UserModel{" + "id=" + user_id + ", name='" + name + '\'' + ", rank='" + rank + '\'' + '}';
     }
 
-    public int getId() {
-        return id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -37,11 +33,11 @@ public class UserModel {
         this.name = name;
     }
 
-    public int getTotal_session() {
-        return total_session;
+    public String getRank() {
+        return rank;
     }
 
-    public void setTotal_session(int total_session) {
-        this.total_session = total_session;
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 }

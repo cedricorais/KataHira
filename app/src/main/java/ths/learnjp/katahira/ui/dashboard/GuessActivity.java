@@ -30,12 +30,14 @@ import java.util.Random;
 import java.util.Timer;
 
 import ths.learnjp.katahira.CharacterManager;
+import ths.learnjp.katahira.DBHelper;
 import ths.learnjp.katahira.FlashView;
 import ths.learnjp.katahira.Generate;
 import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
 import ths.learnjp.katahira.Rng;
 import ths.learnjp.katahira.Score;
+import ths.learnjp.katahira.SessionModel;
 import ths.learnjp.katahira.Time;
 import ths.learnjp.katahira.Toasts;
 
@@ -45,7 +47,8 @@ public class GuessActivity extends AppCompatActivity {
     Spinner optionsSpin;
     TextView attemptValue, mistakesValue, scoreValue, timeValue, shownChar;
     TextToSpeech tts;
-    boolean start = false;
+
+    boolean sessionStart = false, sessionSaved = false;
 
     FlashView flashView  = new FlashView();
     Toasts toasts = new Toasts();
@@ -107,9 +110,9 @@ public class GuessActivity extends AppCompatActivity {
         generateBtn.setOnClickListener(view -> {
             flashView.stopFlash(generateBtn);
             startSession();
-            if (!start) {
+            if (!sessionStart) {
                 toasts.showToast(this, "start", null);
-                start = true;
+                sessionStart = true;
             }
 
             String character = Generate.getCharacter();
@@ -122,8 +125,10 @@ public class GuessActivity extends AppCompatActivity {
         });
 
         resetBtn.setOnClickListener(view -> {
-            Time.pauseTime();
-            flashView.startFlash(timeValue);
+            if (sessionStart) {
+                Time.pauseTime();
+                flashView.startFlash(timeValue);
+            }
             showAlertDialog("reset");
         });
 
@@ -165,7 +170,7 @@ public class GuessActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void init() {
-        start = false;
+        sessionStart = false;
         CharacterManager.resetSession();
 
         attemptValue.setText(R.string.zero);
@@ -307,7 +312,7 @@ public class GuessActivity extends AppCompatActivity {
         choice3Btn.setEnabled(false);
 
         if (Global.session_attempts_left == 0) {
-            start = false;
+            sessionStart = false;
             Global.total_session++;
             Time.pauseTime();
             generateBtn.setEnabled(false);
@@ -318,6 +323,7 @@ public class GuessActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     public void showAlertDialog(String tag) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         switch (tag) {
@@ -329,10 +335,11 @@ public class GuessActivity extends AppCompatActivity {
                                 getFragmentManager().popBackStack();
                                 return;
                             }
+//                            Global.syllabary = getResources().getString(R.string.n_a); // TODO bug sets in recent
                             super.onBackPressed();
                         })
                         .setNegativeButton("No", (dialogInterface, i) -> {
-                            if (start) {
+                            if (sessionStart) {
                                 Global.startTimer = true;
                                 Time.startTime(timeValue);
                             }
@@ -345,29 +352,42 @@ public class GuessActivity extends AppCompatActivity {
                         .setMessage("Are you sure you want to reset?")
                         .setCancelable(false)
                         .setPositiveButton(R.string.reset, (dialogInterface, i) -> {
+                            sessionSaved = false;
                             toasts.showToast(this, "reset", null);
                             flashView.stopFlash(timeValue);
                             init();
                         })
                         .setNeutralButton(R.string.cancel, (dialogInterface, i) -> {
-                            Global.startTimer = true;
-                            Time.startTime(timeValue);
+                            if (sessionStart) {
+                                Global.startTimer = true;
+                                Time.startTime(timeValue);
+                            }
                             flashView.stopFlash(timeValue);
                             dialogInterface.cancel();
                         });
                 break;
             case "result":
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
                 Date date = new Date();
-                Global.dateTimeNow= formatter.format(date);
+                Global.dateTimeNow = formatter.format(date);
                 Global.latestTime = (String) timeValue.getText();
                 alert.setTitle(R.string.result)
                         .setMessage(String.format("Syllabary: %s\n%s: %s\n%s: %s\n%s: %s\nWrong Characters: %s", Global.syllabary, this.getString(R.string.mistakes), Global.session_mistake, this.getString(R.string.score), Global.session_score, this.getString(R.string.time), Global.latestTime, Global.wrongChars))
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.close, (dialogInterface, i) -> {
-                            flashView.startFlash(resetBtn);
-                            toasts.showToast(this, "zeroAttempts", null);
-                        });
+                        .setCancelable(false);
+                if (!sessionSaved) {
+                    alert.setPositiveButton(R.string.save_close, (dialogInterface, i) -> {
+                        flashView.startFlash(resetBtn);
+                        toasts.showToast(this, "zeroAttempts", null);
+
+                        DBHelper dbHelper = new DBHelper(this);
+                        List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
+                        SessionModel sessionModel = new SessionModel(-1, Global.syllabary, Global.session_mistake, Global.session_score, Global.latestTime, Global.wrongChars.toString(), Global.dateTimeNow, Integer.parseInt(userData.get(0)));
+                        dbHelper.addOne("addSession", null, sessionModel);
+                    });
+                    sessionSaved = true;
+                } else {
+                    alert.setPositiveButton(R.string.close, null);
+                }
                 break;
         }
         alert.show();

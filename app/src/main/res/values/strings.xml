@@ -63,14 +63,15 @@
     <string name="correct_toast">Correct! Generate again.</string>r
     <string name="zero_attempts_toast">Press Reset to try again.</string>
     <string name="wrong_toast">Wrong. Answer should be \'%s\'</string>
-    <string name="close">Save &amp; Close</string>
+    <string name="save_close">Save &amp; Close</string>
+    <string name="close">Close</string>
     <string name="view_history">View History</string>
     <string name="date">Date &amp; Time:</string>
     <string name="mistakes">Mistakes</string>
     <string name="syllabary">Syllabary:</string>
     <string name="profile">Profile:</string>
-    <string name="current_rank">Current Rank:</string>
-    <string name="total_session">Total Guessing Session:</string>
+    <string name="current_rank">Guessing Rank:</string>
+    <string name="total_session">Guessing Sessions:</string>
     <string name="history">History</string>
     <string name="tutorial">Tutorial</string>
     <string name="refresh">Refresh</string>
@@ -96,4 +97,8 @@
     <string name="show_result">Show Result</string>
     <string name="tts_playing">Playing…</string>
     <string name="require_select">Select a Profile</string>
+    <string name="n_a">N/A</string>
+    <string name="overview">Overview</string>
+    <string name="recent_session">Recent Session</string>
+    <string name="session_history">Session History</string>
 </resources>
