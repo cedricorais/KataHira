@@ -3,7 +3,6 @@ package ths.learnjp.katahira;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Random;
 
 public class Generate {
     public static String getCharacter() {
@@ -27,8 +26,7 @@ public class Generate {
 
         Iterator<String> chara_iterator = chara_set_score.keySet().iterator();
 
-//        int random = (int) Math.floor(Math.random() * weight_sum) - 1;
-        double random = new Random().nextDouble() * weight_sum;
+        double random = getRandomNumber() * weight_sum;
 
         while(chara_iterator.hasNext()) {
             String character = chara_iterator.next();
@@ -50,4 +48,11 @@ public class Generate {
 
         return key_set[random];
     }
+
+    public static double getRandomNumber() {
+        double trandom = (double)(System.currentTimeMillis()%100);
+        double random = trandom/100 ;
+        return random;
+    }
 }
+
