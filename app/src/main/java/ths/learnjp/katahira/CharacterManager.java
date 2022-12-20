@@ -58,7 +58,7 @@ public class CharacterManager {
 
         Score.resetScoreSessionSet();
         Global.dateTimeNow = "N/A";
-        Global.syllabary = "N/A";
+        Global.syllabary = "Katakana";
         Global.session_attempts_left = Global.session_set.size();
         Global.session_mistake = 0;
         Global.session_score = 0;

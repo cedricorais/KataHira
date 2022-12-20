@@ -74,16 +74,16 @@
     <string name="total_session">Guessing Sessions:</string>
     <string name="history">History</string>
     <string name="tutorial">Tutorial</string>
-    <string name="refresh">Refresh</string>
+
     <string name="empty_name">Profile Name cannot be empty.</string>
     <string name="profile_name">Profile Name</string>
     <string name="add_new_profile">Add New Profile</string>
     <string name="add">Add</string>
     <string name="profile_exist">Profile name already exist.</string>
     <string name="profile_added">Profile added.</string>
-    <string name="edit_profile">Edit Profile</string>
+    <string name="rename_profile">Rename Profile (ID to set score)</string>
     <string name="set">Set</string>
-    <string name="profile_edited">Profile name edited.</string>
+    <string name="profile_renamed">Profile renamed.</string>
     <string name="profile_unique">Profile name must be unique.</string>
     <string name="select_profile">Select profile</string>
     <string name="yes">Yes</string>
@@ -91,14 +91,33 @@
     <string name="profile_deleted">Profile deleted.</string>
     <string name="confirm_delete">Are you sure you want to delete \'%s\'?</string>
     <string name="select_delete">Select a Profile to Delete</string>
-    <string name="select_edit">Select a Profile to Edit</string>
+    <string name="select_rename">Select a Profile to Rename</string>
     <string name="select">Select</string>
     <string name="require_add">Add a profile first.</string>
-    <string name="show_result">Show Result</string>
+
     <string name="tts_playing">Playing…</string>
     <string name="require_select">Select a Profile</string>
     <string name="n_a">N/A</string>
     <string name="overview">Overview</string>
     <string name="recent_session">Recent Session</string>
     <string name="session_history">Session History</string>
+
+    <string name="tutorial_title">Tutorial: How to Play?</string>
+    <string name="page1">You can pick a syllabary whether Katakana or Hiragana to guess the characters. After selecting, press the Generate Character button to get a random character.</string>
+    <string name="page2">You will be given three random choices in Romaji (Roman alphabet of Japanese characters) to the random Japanese character. Only one choice will contain the correct answer.</string>
+    <string name="page3">Note: The correct answer will be highlighted in Lime green while the wrong choice will be highlighted in Red. A toast will show of what is the correct answer to the Japanese character.</string>
+    <string name="page4">After selecting a choice, you can play the audio of how the character is pronounced by pressing the Speaker button.</string>
+    <string name="page5"><![CDATA[Results will show after all of your attempts have been used up. Pressing the Save & Close will record the session and display on the history.]]></string>
+    <string name="page6">Note: You can try again by pressing the Reset button to start another guessing session.</string>
+    <string name="page7">Note: If you pressed the Back button and exited while the guessing session has already started, the session will not be saved.</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+
+    <string name="exit_not_saved">Are you sure you want to exit? Your session will not be saved.</string>
+    <string name="exit">Are you sure you want to exit?</string>
+    <string name="reset_dialog">Are you sure you want to reset?</string>
+
+    <string name="profile_add">Add a profile</string>
+    <string name="profile_rename">Rename a profile</string>
+    <string name="profile_delete">Delete a profile</string>
 </resources>

@@ -13,18 +13,27 @@
         tools:ignore="ScrollViewSize">
 
         <TextView
-            android:id="@+id/recent"
+            android:id="@+id/currentProfile"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/phrases"
+            android:layout_height="wrap_content"
+            android:text="Current Profile: "
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <TextView
+            android:id="@+id/currentProfileValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/currentProfile"
+            android:text="@string/n_a"
+            android:textSize="24sp"
+            android:textColor="?android:attr/textColorSecondary" />
 
         <TextView
             android:id="@+id/title1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/recent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/currentProfileValue"
             android:layout_marginStart="25dp"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -34,7 +43,7 @@
             android:id="@+id/phrase1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recent"
+            android:layout_below="@id/currentProfile"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
             app:strokeColor="@drawable/border_card"
@@ -56,6 +65,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -64,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -104,6 +115,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -112,6 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -152,6 +165,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -160,6 +174,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -200,6 +215,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -208,6 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -248,6 +265,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -256,6 +274,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -296,6 +315,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -304,6 +324,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -344,6 +365,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -352,6 +374,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -392,6 +415,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -400,6 +424,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -440,6 +465,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -448,6 +474,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView
@@ -488,6 +515,7 @@
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_mic_24" />
 
                     <Button
@@ -496,6 +524,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/teal_700"
                         app:icon="@drawable/ic_baseline_volume_up_24" />
 
                     <TextView

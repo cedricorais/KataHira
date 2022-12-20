@@ -82,12 +82,14 @@
         <activity
             android:name=".ui.home.GreetingsActivity"
             android:exported="false"
+            android:label="@string/greetings"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.home.PhrasesActivity"
             android:exported="false"
+            android:label="@string/phrases"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

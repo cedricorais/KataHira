@@ -51,8 +51,7 @@ public class Generate {
 
     public static double getRandomNumber() {
         double trandom = (double)(System.currentTimeMillis()%100);
-        double random = trandom/100 ;
-        return random;
+        return trandom/100;
     }
 }
 

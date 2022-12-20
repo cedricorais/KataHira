@@ -5,16 +5,20 @@ public class UserModel {
     private int user_id;
     private String name;
     private String rank;
+    private int greetings;
+    private int phrases;
 
-    public UserModel(int id, String name, String rank) {
-        this.user_id = id;
+    public UserModel(int user_id, String name, String rank, int greetings, int phrases) {
+        this.user_id = user_id;
         this.name = name;
         this.rank = rank;
+        this.greetings = greetings;
+        this.phrases = phrases;
     }
 
     @Override
     public String toString() {
-        return "UserModel{" + "id=" + user_id + ", name='" + name + '\'' + ", rank='" + rank + '\'' + '}';
+        return "UserModel{" + "user_id=" + user_id + ", name='" + name + '\'' + ", rank='" + rank + '\'' + ", greetings=" + greetings + ", phrases=" + phrases + '}';
     }
 
     public int getUser_id() {
@@ -39,5 +43,21 @@ public class UserModel {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public int getGreetings() {
+        return greetings;
+    }
+
+    public void setGreetings(int greetings) {
+        this.greetings = greetings;
+    }
+
+    public int getPhrases() {
+        return phrases;
+    }
+
+    public void setPhrases(int phrases) {
+        this.phrases = phrases;
     }
 }

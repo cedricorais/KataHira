@@ -12,7 +12,7 @@ public class Global {
     public static Map session_set;
     public static Map score_session_set = new HashMap();
     public static String selectedProfile, rank, dateTimeNow, syllabary, latestTime;
-    public static int selectedProfileId, total_session, session_attempts_left, session_mistake, session_score;
+    public static int selectedProfileId, total_session, session_attempts_left, session_mistake, session_score, greetings_progress, phrases_progress;
     public static boolean startTimer = false;
     public static double time = 0.0;
     public static ArrayList<String> wrongChars = new ArrayList<>();

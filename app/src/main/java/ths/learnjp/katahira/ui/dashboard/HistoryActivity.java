@@ -50,7 +50,7 @@ public class HistoryActivity extends AppCompatActivity {
             columns.setBackground(getDrawable(R.drawable.border_table));
             columns.setGravity(Gravity.CENTER);
 //            columns.setTextColor(Color.RED); // TODO change
-            columns.setTextSize(10); // TODO change
+            columns.setTextSize(18); // TODO change
             columns.setPadding(5, 5, 5, 5);
             columns.setText(tableHeader[rowCount]);
 
@@ -75,7 +75,7 @@ public class HistoryActivity extends AppCompatActivity {
                 columns.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 columns.setGravity(Gravity.CENTER);
                 columns.setTextColor(Color.GRAY); // TODO change
-                columns.setTextSize(10); // TODO change
+                columns.setTextSize(18); // TODO change
                 columns.setPadding(5, 5, 5, 5);
                 columns.setText(sessionList.get(columnCount)); // TODO fix text dupes
 

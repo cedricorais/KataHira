@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.tutorial:
+                Toast.makeText(this, "tutorial", Toast.LENGTH_SHORT).show();
+                return true;
         }
         return (super.onOptionsItemSelected(item));
     }

@@ -19,6 +19,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String USER_ID = "USER_ID";
     public static final String USER_NAME = "USER_NAME";
     public static final String USER_RANK = "RANK";
+    public static final String USER_GREETINGS = "USER_GREETINGS";
+    public static final String USER_PHRASES = "USER_PHRASES";
 
     public static final String SESSION_TABLE = "SESSION_TABLE";
     public static final String SESSION_ID = "SESSION_ID";
@@ -35,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_RANK + " TEXT)";
+        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_RANK + " TEXT, " + USER_GREETINGS + " INTEGER, " + USER_PHRASES + " INTEGER)";
         sqLiteDatabase.execSQL(createUserTable);
         String createSessionTable = "CREATE TABLE " + SESSION_TABLE + " (" + SESSION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SYLLABARY + " TEXT, " + MISTAKES + " INTEGER, " + SCORE + " INTEGER, " + TIME + " TEXT, " + WRONG_CHARS + " TEXT, " + DATE_TIME + " TEXT, " + USER_ID + " INTEGER, " + " FOREIGN KEY(USER_ID) REFERENCES USER_TABLE (USER_ID)  ON DELETE CASCADE)";
         sqLiteDatabase.execSQL(createSessionTable);
@@ -46,12 +48,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean checkTableData() {
+    public boolean checkTableData(String table) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String countQuery = "SELECT COUNT(*) FROM USER_TABLE";
+
+        String countQuery = "SELECT COUNT(*) FROM " + table;
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.moveToFirst();
         int getCount = cursor.getInt(0);
+
         return getCount > 0;
     }
 
@@ -63,6 +67,8 @@ public class DBHelper extends SQLiteOpenHelper {
             case "newUser":
                 cv.put(USER_NAME, userModel.getName());
                 cv.put(USER_RANK, userModel.getRank());
+                cv.put(USER_GREETINGS, userModel.getGreetings());
+                cv.put(USER_PHRASES, userModel.getPhrases());
                 db.insert(USER_TABLE, null, cv);
                 cv.clear();
                 break;
@@ -79,12 +85,39 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void editProfile(String name2Edit, String newtxt) {
+//    public void editProfile(String profile, String newData) {
+    public void updateData(String tag, String profile, String newData) { // TODO
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(USER_NAME, newtxt);
-        db.update(USER_TABLE, cv, USER_NAME + " = ?", new String[]{name2Edit});
+        String table = null;
+        String where = null;
+        switch (tag) {
+            case "name":
+//                cv.put(USER_NAME, newData);
+//                table = USER_TABLE;
+//                where = USER_NAME;
+                cv.put(SCORE, 71); // TODO remove
+                table = SESSION_TABLE; // TODO remove
+                where = SESSION_ID; // TODO remove
+                break;
+            case "rank": // TODO
+                cv.put(USER_RANK, newData);
+                table = SESSION_TABLE;
+                where = SESSION_ID;
+                break;
+            case"greetings":
+                cv.put(USER_GREETINGS, newData);
+                table = USER_TABLE;
+                where = USER_NAME;
+                break;
+            case"phrases":
+                table = USER_TABLE;
+                where = USER_NAME;
+                cv.put(USER_PHRASES, newData);
+                break;
+        }
+        db.update(table, cv, where + " = ?", new String[]{profile});
     }
 
     public List<String> getProfiles() {
@@ -116,8 +149,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 int userId = cursor.getInt(0);
                 String userName = cursor.getString(1);
                 String userRank = cursor.getString(2);
+                int greetings = cursor.getInt(3);
+                int phrases = cursor.getInt(4);
 
-                String[] data = {String.valueOf(userId), userName, userRank};
+                String[] data = {String.valueOf(userId), userName, userRank, String.valueOf(greetings), String.valueOf(phrases)};
                 stringList.addAll(Arrays.asList(data));
             } while(cursor.moveToNext());
         }
@@ -194,27 +229,5 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
-    }
-
-    public List<UserModel> getAllProfiles() { // TODO
-        SQLiteDatabase db = this.getReadableDatabase();
-        List<UserModel> returnList = new ArrayList<>();
-
-        String getAllQuery = "SELECT * FROM " + USER_TABLE;
-        Cursor cursor = db.rawQuery(getAllQuery, null);
-        if (cursor.moveToFirst()) {
-            do {
-                int userID = cursor.getInt(0);
-                String userName = cursor.getString(1);
-                String userRank = cursor.getString(2);
-
-                UserModel userModel = new UserModel(userID, userName, userRank);
-                returnList.add(userModel);
-            } while(cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return returnList;
     }
 }

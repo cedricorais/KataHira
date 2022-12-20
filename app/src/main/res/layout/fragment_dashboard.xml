@@ -7,396 +7,442 @@
     android:padding="10dp"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <TextView
-        android:id="@+id/overview"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/overview"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/userCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/overview"
-        app:cardBackgroundColor="?attr/colorTertiary"
-        app:cardElevation="5dp"
-        app:strokeColor="@drawable/border_card"
-        app:strokeWidth="1dp">
+        <RelativeLayout
+            android:id="@+id/main"
+            android:layout_width="wrap_content"
+            android:layout_height="810dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/profile"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/profiles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/current_rank"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/rankValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/totalSession"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/total_session"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/totalSessionValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/zero"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/dsaa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="Correct Pronunciations"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/dsa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="0/10 G |  0/10 P"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingBottom="3dp"
-                android:orientation="horizontal">
+                android:text="@string/overview"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/guess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title_guess"
-                    app:icon="@drawable/ic_baseline_play_arrow_24" />
-            </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:id="@+id/recent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userCard"
-        android:layout_marginTop="10dp"
-        android:text="@string/recent_session"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/recentCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recent"
-        app:cardBackgroundColor="?attr/colorTertiary"
-        app:cardElevation="5dp"
-        app:strokeColor="@drawable/border_card"
-        app:strokeWidth="1dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/userCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                android:layout_below="@id/overview"
+                app:cardBackgroundColor="?attr/colorTertiary"
+                app:cardElevation="5dp"
+                app:strokeColor="@drawable/border_card"
+                app:strokeWidth="1dp">
 
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/date"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/dateValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/syllabary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/syllabary"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/syllabaryValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/mistakes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="25dp"
-                    android:text="@string/mistakes"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/score"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="35dp"
-                    android:text="@string/time"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
-            </androidx.appcompat.widget.Toolbar>
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/mistakesValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:text="@string/zero"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/scoreValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/zero"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/timeValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="15dp"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="20sp" />
-            </androidx.appcompat.widget.Toolbar>
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/showHistory"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:text="@string/view_history" />
-            </androidx.appcompat.widget.Toolbar>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                    android:orientation="vertical">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/profileFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/profile"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/profiles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/current_rank"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/rankValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/n_a"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/totalSession"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/total_session"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/totalSessionValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/zero"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/guess"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/teal_700"
+                            android:text="@string/title_guess"
+                            app:icon="@drawable/ic_baseline_play_arrow_24" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/progress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="Pronunciation Progress"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/greetings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Greetings: "
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/greetingValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:gravity="center"
+                            android:text="0/10"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/phrases"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:text="Phrases: "
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/phraseValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="0/10"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/recent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userCard"
+                android:layout_marginTop="10dp"
+                android:text="@string/recent_session"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/recentCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recent"
+                app:cardBackgroundColor="?attr/colorTertiary"
+                app:cardElevation="5dp"
+                app:strokeColor="@drawable/border_card"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/date"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/dateValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/n_a"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/syllabary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/syllabary"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/syllabaryValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/n_a"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/tb1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/mistakes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/mistakes"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/score"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="35dp"
+                            android:text="@string/time"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textStyle="bold" />
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/tb2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/mistakesValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:text="@string/zero"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/scoreValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/zero"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/timeValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="15dp"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="20sp" />
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/showHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:backgroundTint="@color/teal_700"
+                            android:text="@string/view_history" />
+                    </androidx.appcompat.widget.Toolbar>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="300dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="61dp"
-        android:contentDescription="profile"
-        app:srcCompat="@drawable/ic_baseline_person_24" />
+        android:layout_alignParentBottom="true">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/deleteFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/profileFab"
-        android:layout_alignEnd="@+id/profileFab"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="14dp"
-        android:contentDescription="delete"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
-    <TextView
-        android:id="@+id/deleteTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/deleteFab"
-        android:layout_alignBottom="@+id/deleteFab"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/darker_gray"
-        android:elevation="5dp"
-        android:padding="5dp"
-        android:text="Delete a profile"
-        android:textColor="?attr/colorOnTertiary"
-        android:textSize="15sp" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/profileFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="61dp"
+            android:contentDescription="profile"
+            app:srcCompat="@drawable/ic_baseline_person_24" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/deleteFab"
-        android:layout_alignEnd="@+id/deleteFab"
-        android:layout_marginBottom="14dp"
-        android:contentDescription="edit"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_baseline_edit_24" />
-    <TextView
-        android:id="@+id/editTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editFab"
-        android:layout_alignBottom="@+id/editFab"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/darker_gray"
-        android:elevation="5dp"
-        android:padding="5dp"
-        android:text="Rename a profile"
-        android:textColor="?attr/colorOnTertiary"
-        android:textSize="15sp" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/deleteFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/profileFab"
+            android:layout_alignEnd="@+id/profileFab"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="delete"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
+        <TextView
+            android:id="@+id/deleteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/deleteFab"
+            android:layout_alignBottom="@+id/deleteFab"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray"
+            android:elevation="5dp"
+            android:padding="5dp"
+            android:text="@string/profile_delete"
+            android:textColor="?attr/colorOnTertiary"
+            android:textSize="15sp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editFab"
-        android:layout_alignEnd="@+id/editFab"
-        android:layout_marginBottom="14dp"
-        android:contentDescription="add"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_baseline_person_add_24" />
-    <TextView
-        android:id="@+id/addTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/addFab"
-        android:layout_alignBottom="@+id/addFab"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/darker_gray"
-        android:elevation="5dp"
-        android:padding="5dp"
-        android:text="Add a profile"
-        android:textColor="?attr/colorOnTertiary"
-        android:textSize="15sp" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/deleteFab"
+            android:layout_alignEnd="@+id/deleteFab"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="edit"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_baseline_edit_24" />
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editFab"
+            android:layout_alignBottom="@+id/editFab"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray"
+            android:elevation="5dp"
+            android:padding="5dp"
+            android:text="@string/profile_rename"
+            android:textColor="?attr/colorOnTertiary"
+            android:textSize="15sp" />
 
-    <ListView
-        android:id="@+id/lv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recentCard"
-        android:layout_marginTop="10dp"/>
-
-    <!--<TableLayout
-        android:id="@+id/table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lv">
-
-    </TableLayout>-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editFab"
+            android:layout_alignEnd="@+id/editFab"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="add"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_baseline_person_add_24" />
+        <TextView
+            android:id="@+id/addText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/addFab"
+            android:layout_alignBottom="@+id/addFab"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray"
+            android:elevation="5dp"
+            android:padding="5dp"
+            android:text="@string/profile_add"
+            android:textColor="?attr/colorOnTertiary"
+            android:textSize="15sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

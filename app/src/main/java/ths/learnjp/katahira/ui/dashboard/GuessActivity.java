@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +40,6 @@ import ths.learnjp.katahira.FlashView;
 import ths.learnjp.katahira.Generate;
 import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
-import ths.learnjp.katahira.Rng;
 import ths.learnjp.katahira.Score;
 import ths.learnjp.katahira.SessionModel;
 import ths.learnjp.katahira.Time;
@@ -76,6 +80,13 @@ public class GuessActivity extends AppCompatActivity {
 
         resetBtn = findViewById(R.id.reset);
         resultBtn = findViewById(R.id.result);
+
+        DBHelper dbHelper = new DBHelper(this);
+        List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
+        List<SessionModel> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0))));
+        if (allSession.isEmpty()) {
+            showAlertDialog("tutorial", this);
+        }
 
         String[] selected_option = CharacterManager.getCharaSetNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, selected_option) {
@@ -129,12 +140,9 @@ public class GuessActivity extends AppCompatActivity {
                 Time.pauseTime();
                 flashView.startFlash(timeValue);
             }
-            showAlertDialog("reset");
+            showAlertDialog("reset", null);
         });
-
-        resultBtn.setOnClickListener(view -> {
-            showAlertDialog("result");
-        });
+        resultBtn.setOnClickListener(view -> showAlertDialog("result", null));
 
         init();
     }
@@ -145,7 +153,7 @@ public class GuessActivity extends AppCompatActivity {
             Time.pauseTime();
             flashView.startFlash(timeValue);
         }
-        showAlertDialog("back");
+        showAlertDialog("back", null);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,14 +170,18 @@ public class GuessActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.tutorial:
-                Toast.makeText(this, "tutorial", Toast.LENGTH_SHORT).show(); // TODO show tutorial menu
+                if (Global.startTimer) {
+                    Time.pauseTime();
+                    flashView.startFlash(timeValue);
+                }
+                showAlertDialog("tutorial", this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressLint("SetTextI18n")
-    public void init() {
+    private void init() {
         sessionStart = false;
         CharacterManager.resetSession();
 
@@ -186,13 +198,16 @@ public class GuessActivity extends AppCompatActivity {
 
         choice1Btn.setEnabled(false);
         choice1Btn.setText("...");
-        choice1Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+        choice1Btn.setBackgroundColor(Color.parseColor("#FF018786"));
+        choice1Btn.setTextColor(Color.WHITE);
         choice2Btn.setEnabled(false);
         choice2Btn.setText("...");
-        choice2Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+        choice2Btn.setBackgroundColor(Color.parseColor("#FF018786"));
+        choice2Btn.setTextColor(Color.WHITE);
         choice3Btn.setEnabled(false);
         choice3Btn.setText("...");
-        choice3Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+        choice3Btn.setBackgroundColor(Color.parseColor("#FF018786"));
+        choice3Btn.setTextColor(Color.WHITE);
 
         flashView.startFlash(generateBtn);
         flashView.stopFlash(resetBtn);
@@ -201,7 +216,7 @@ public class GuessActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void startSession() {
+    private void startSession() {
         Time.timer = new Timer();
         if (!Global.startTimer) {
             Time.startTime(timeValue);
@@ -216,22 +231,22 @@ public class GuessActivity extends AppCompatActivity {
 
         choice1Btn.setEnabled(true);
         choice1Btn.setText("...");
-        choice1Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+        choice1Btn.setBackgroundColor(Color.parseColor("#FF018786"));
+        choice1Btn.setTextColor(Color.WHITE);
         choice2Btn.setEnabled(true);
         choice2Btn.setText("...");
-        choice2Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+        choice2Btn.setBackgroundColor(Color.parseColor("#FF018786"));
+        choice2Btn.setTextColor(Color.WHITE);
         choice3Btn.setEnabled(true);
         choice3Btn.setText("...");
-        choice3Btn.setBackgroundColor(Color.parseColor("#FF6200EE"));
+        choice3Btn.setBackgroundColor(Color.parseColor("#FF018786"));
+        choice3Btn.setTextColor(Color.WHITE);
 
         resetBtn.setEnabled(true);
     }
 
-    public void generateAnswer(String character_answer) {
-        int rng = new Random().nextInt(3);
-
-        Rng rand = new Rng(3); // TODO rng class
-        System.out.println(rand.nextInt()); // TODO rng class test: only 0-1 displays not 2
+    private void generateAnswer(String character_answer) {
+        int rng = new Random().nextInt(3); // TODO
 
         List<Button> choices = new ArrayList<>(Arrays.asList(choice1Btn, choice2Btn, choice3Btn));
         Button correct_choice = choices.get(rng);
@@ -251,21 +266,25 @@ public class GuessActivity extends AppCompatActivity {
         }
     }
 
-    public void checkAnswer(Button choiceButton, String answer_key) {
+    private void checkAnswer(Button choiceButton, String answer_key) {
         choiceButton.setOnClickListener(view -> {
             Button btn = (Button) view;
-            String getTxt = btn.getText().toString();
+            String getText = btn.getText().toString();
             String answer_value = CharacterManager.getAnswer(answer_key);
-            if (getTxt.equals(answer_value)) {
+            if (getText.equals(answer_value)) {
                 choiceButton.setBackgroundColor(Color.GREEN);
+                choiceButton.setTextColor(Color.BLACK);
                 correctAnswer(answer_key);
             } else {
                 if (choice1Btn.getText().equals(answer_value)) {
                     choice1Btn.setBackgroundColor(Color.GREEN);
+                    choice1Btn.setTextColor(Color.BLACK);
                 } else if (choice2Btn.getText().equals(answer_value)) {
                     choice2Btn.setBackgroundColor(Color.GREEN);
+                    choice2Btn.setTextColor(Color.BLACK);
                 } else if (choice3Btn.getText().equals(answer_value)) {
                     choice3Btn.setBackgroundColor(Color.GREEN);
+                    choice3Btn.setTextColor(Color.BLACK);
                 }
                 choiceButton.setBackgroundColor(Color.RED);
                 wrongAnswer(answer_key);
@@ -274,7 +293,7 @@ public class GuessActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void correctAnswer(String answer) {
+    private void correctAnswer(String answer) {
         toasts.showToast(this, "correctAnswer", answer);
 
         Global.session_attempts_left--;
@@ -288,7 +307,7 @@ public class GuessActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void wrongAnswer(String correct_answer) {
+    private void wrongAnswer(String correct_answer) {
         toasts.showToast(this, "wrongAnswer", correct_answer);
 
         Global.session_attempts_left--;
@@ -302,7 +321,7 @@ public class GuessActivity extends AppCompatActivity {
         afterAnswer();
     }
 
-    public void afterAnswer() {
+    private void afterAnswer() {
         playBtn.setEnabled(true);
         generateBtn.setEnabled(true);
         flashView.startFlash(generateBtn);
@@ -319,61 +338,120 @@ public class GuessActivity extends AppCompatActivity {
             flashView.stopFlash(timeValue);
             flashView.stopFlash(generateBtn);
             resultBtn.setVisibility(View.VISIBLE);
-            showAlertDialog("result");
+            showAlertDialog("result", null);
         }
     }
 
     @SuppressLint("SimpleDateFormat")
-    public void showAlertDialog(String tag) {
+    private void showAlertDialog(String tag, Context context) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         switch (tag) {
             case "back":
-                alert.setMessage("Are you sure you want to exit?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", (dialogInterface, i) -> {
-                            if (getFragmentManager().getBackStackEntryCount() > 0) {
-                                getFragmentManager().popBackStack();
-                                return;
-                            }
-//                            Global.syllabary = getResources().getString(R.string.n_a); // TODO bug sets in recent
-                            super.onBackPressed();
-                        })
-                        .setNegativeButton("No", (dialogInterface, i) -> {
-                            if (sessionStart) {
-                                Global.startTimer = true;
-                                Time.startTime(timeValue);
-                            }
-                            flashView.stopFlash(timeValue);
-                            dialogInterface.cancel();
-                        });
+                alert.setCancelable(false);
+                if (sessionStart) {
+                    alert.setMessage(R.string.exit_not_saved);
+                } else {
+                    alert.setMessage(R.string.exit);
+                }
+                alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    if (getFragmentManager().getBackStackEntryCount() > 0) {
+                        getFragmentManager().popBackStack();
+                        return;
+                    }
+                    super.onBackPressed();
+                });
+                alert.setNegativeButton(R.string.no, (dialogInterface, i) -> {
+                    if (sessionStart) {
+                        Global.startTimer = true;
+                        Time.startTime(timeValue);
+                    }
+                    flashView.stopFlash(timeValue);
+                    dialogInterface.cancel();
+                });
+                alert.show();
+                break;
+            case "tutorial":
+                alert.setTitle(R.string.tutorial_title);
+                alert.setCancelable(false);
+
+                LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
+                View view = layoutInflater.inflate(R.layout.tutorial_layout, ((Activity)context).findViewById(R.id.main));
+
+                ImageView img = view.findViewById(R.id.image);
+                Integer[] pics = new Integer[]{R.drawable.page1, R.drawable.page2, R.drawable.page3, R.drawable.page4, R.drawable.page5, R.drawable.page6, R.drawable.page7};
+                List<Integer> tutorialPics = new ArrayList<>(Arrays.asList(pics));
+                img.setImageResource(tutorialPics.get(0));
+
+                TextView text = view.findViewById(R.id.text);
+                String[] texts = new String[]{getString(R.string.page1), getString(R.string.page2), getString(R.string.page3), getString(R.string.page4), getString(R.string.page5), getString(R.string.page6), getString(R.string.page7)};
+                List<String> tutorialText = new ArrayList<>(Arrays.asList(texts));
+                text.setText(tutorialText.get(0));
+
+                alert.setView(view);
+                alert.setPositiveButton(R.string.next, null);
+                alert.setNegativeButton(R.string.previous, null);
+                alert.setNeutralButton(R.string.close, ((dialogInterface, i) -> {
+                    if (sessionStart) {
+                        Global.startTimer = true;
+                        Time.startTime(timeValue);
+                    }
+                    flashView.stopFlash(timeValue);
+                    dialogInterface.cancel();
+                }));
+
+                final int[] index = {0};
+                final AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+                ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+                    index[0]++;
+                    img.setImageResource(tutorialPics.get(index[0]));
+                    text.setText(tutorialText.get(index[0]));
+                    ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.VISIBLE);
+                    if (index[0] == tutorialPics.size() - 1) {
+                        ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.GONE);
+                    }
+                });
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
+                    index[0]--;
+                    img.setImageResource(tutorialPics.get(index[0]));
+                    text.setText(tutorialText.get(index[0]));
+                    ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.VISIBLE);
+                    if (index[0] == 0) {
+                        ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                    }
+                });
                 break;
             case "reset":
-                alert.setTitle(R.string.reset)
-                        .setMessage("Are you sure you want to reset?")
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.reset, (dialogInterface, i) -> {
-                            sessionSaved = false;
-                            toasts.showToast(this, "reset", null);
-                            flashView.stopFlash(timeValue);
-                            init();
-                        })
-                        .setNeutralButton(R.string.cancel, (dialogInterface, i) -> {
-                            if (sessionStart) {
-                                Global.startTimer = true;
-                                Time.startTime(timeValue);
-                            }
-                            flashView.stopFlash(timeValue);
-                            dialogInterface.cancel();
-                        });
+                alert.setTitle(R.string.reset);
+                alert.setCancelable(false);
+
+                alert.setMessage(R.string.reset_dialog);
+                alert.setPositiveButton(R.string.reset, (dialogInterface, i) -> {
+                    sessionSaved = false;
+                    toasts.showToast(this, "reset", null);
+                    flashView.stopFlash(timeValue);
+                    init();
+                });
+                alert.setNeutralButton(R.string.cancel, (dialogInterface, i) -> {
+                    if (sessionStart) {
+                        Global.startTimer = true;
+                        Time.startTime(timeValue);
+                    }
+                    flashView.stopFlash(timeValue);
+                    dialogInterface.cancel();
+                });
+                alert.show();
                 break;
             case "result":
+                alert.setTitle(R.string.result);
+                alert.setCancelable(false);
+
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
                 Date date = new Date();
                 Global.dateTimeNow = formatter.format(date);
                 Global.latestTime = (String) timeValue.getText();
-                alert.setTitle(R.string.result)
-                        .setMessage(String.format("Syllabary: %s\n%s: %s\n%s: %s\n%s: %s\nWrong Characters: %s", Global.syllabary, this.getString(R.string.mistakes), Global.session_mistake, this.getString(R.string.score), Global.session_score, this.getString(R.string.time), Global.latestTime, Global.wrongChars))
-                        .setCancelable(false);
+                alert.setMessage(String.format("Syllabary: %s\n%s: %s\n%s: %s\n%s: %s\nWrong Characters: %s", Global.syllabary, this.getString(R.string.mistakes), Global.session_mistake, this.getString(R.string.score), Global.session_score, this.getString(R.string.time), Global.latestTime, Global.wrongChars));
                 if (!sessionSaved) {
                     alert.setPositiveButton(R.string.save_close, (dialogInterface, i) -> {
                         flashView.startFlash(resetBtn);
@@ -388,8 +466,8 @@ public class GuessActivity extends AppCompatActivity {
                 } else {
                     alert.setPositiveButton(R.string.close, null);
                 }
+                alert.show();
                 break;
         }
-        alert.show();
     }
 }

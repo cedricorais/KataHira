@@ -130,6 +130,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="95dp"
         android:layout_toEndOf="@+id/showChar"
+        android:backgroundTint="@color/teal_700"
         app:icon="@drawable/ic_baseline_volume_up_24" />
 
     <TextView
@@ -155,6 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/options"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/teal_700"
         android:text="@string/generate_character" />
 
     <TextView
@@ -199,6 +201,7 @@
         android:layout_below="@+id/choice1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:backgroundTint="@color/teal_700"
         android:text="@string/reset" />
 
     <Button
@@ -207,6 +210,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/reset"
         android:layout_centerHorizontal="true"
-        android:text="@string/show_result"/>
+        android:backgroundTint="@color/teal_700"
+        android:text="@string/result"/>
 
 </RelativeLayout>
