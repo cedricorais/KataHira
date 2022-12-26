@@ -68,7 +68,7 @@ public class GuessFragment extends Fragment {
         optionsSpin = binding.options;
 //    final List<String> select = new ArrayList<>(Arrays.asList(selected_option));
 
-        Speech.setupSpeechRecognizer(getContext());
+//        Speech.setupSpeechRecognizer(getContext());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, selected_option) {
             /*@Override
@@ -141,7 +141,7 @@ public class GuessFragment extends Fragment {
             generateAnswer(toast, character);
 
             // TODO DELETE: SPEECH TESTING
-            Speech.startListening();
+//            Speech.startListening();
         });
 
         choice1Btn = binding.choice1;

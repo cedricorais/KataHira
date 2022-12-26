@@ -1,39 +1,49 @@
 package ths.learnjp.katahira.ui.home;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
 
 import ths.learnjp.katahira.DBHelper;
 import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
+import ths.learnjp.katahira.Speech;
 
 public class PhrasesActivity extends AppCompatActivity {
 
     Button audio1, audio2, audio3, audio4, audio5, audio6, audio7, audio8, audio9, audio10, mic1, mic2, mic3, mic4, mic5, mic6, mic7, mic8, mic9, mic10;
+    ImageView done1, done2, done3, done4, done5, done6, done7, done8, done9, done10;
     TextToSpeech tts;
-    TextView profileText, test;
+    TextView profileText, progressText;
+    View layout;
 
-    DBHelper dbHelper;
+    String[] phrases = {"おはようございます", "こんばんは", "おやすみなさい", "お名前は何ですか", "お元気ですか", "元気です", "初めまして", "ようこそ", "こんにちは", "さようなら"}; // TODO
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phrases);
 
-        dbHelper = new DBHelper(this);
+        layout = findViewById(android.R.id.content);
 
         mic1 = findViewById(R.id.mic1);
         mic2 = findViewById(R.id.mic2);
@@ -58,7 +68,18 @@ public class PhrasesActivity extends AppCompatActivity {
         audio10 = findViewById(R.id.audio10);
 
         profileText = findViewById(R.id.currentProfileValue);
-        test = findViewById(R.id.title1);
+        progressText = findViewById(R.id.progressValue);
+
+        done1 = findViewById(R.id.done1);
+        done2 = findViewById(R.id.done2);
+        done3 = findViewById(R.id.done3);
+        done4 = findViewById(R.id.done4);
+        done5 = findViewById(R.id.done5);
+        done6 = findViewById(R.id.done6);
+        done7 = findViewById(R.id.done7);
+        done8 = findViewById(R.id.done8);
+        done9 = findViewById(R.id.done9);
+        done10 = findViewById(R.id.done10);
 
         tts = new TextToSpeech(getApplicationContext(), i -> {
             if (i != TextToSpeech.ERROR) {
@@ -68,7 +89,13 @@ public class PhrasesActivity extends AppCompatActivity {
 
         if (Global.selectedProfile == null) {
             profileText.setText(R.string.n_a);
-            Toast.makeText(this, "Select a profile first in dashboard menu.", Toast.LENGTH_LONG).show();
+            progressText.setText("0/10"); // TODO
+//            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Select a profile first in dashboard menu.", Snackbar.LENGTH_INDEFINITE);
+//            snackbar.setAction("Dismiss", view -> snackbar.dismiss()).show();
+            Snackbar.make(layout, "Select a profile first in dashboard menu.", Snackbar.LENGTH_INDEFINITE).setAction("Dashboard", view -> { // TODO
+                HomeFragment.fromDB = true; // TODO
+                finish();
+            }).show();
             mic1.setEnabled(false);
             mic2.setEnabled(false);
             mic3.setEnabled(false);
@@ -79,8 +106,11 @@ public class PhrasesActivity extends AppCompatActivity {
             mic8.setEnabled(false);
             mic9.setEnabled(false);
             mic10.setEnabled(false);
+
+            showCheck(false, null);
         } else {
             profileText.setText(Global.selectedProfile);
+            progressText.setText(Global.phrases_progress + "/10"); // TODO
             mic1.setEnabled(true);
             mic2.setEnabled(true);
             mic3.setEnabled(true);
@@ -91,90 +121,119 @@ public class PhrasesActivity extends AppCompatActivity {
             mic8.setEnabled(true);
             mic9.setEnabled(true);
             mic10.setEnabled(true);
+
+            showCheck(false, null); // TODO
         }
 
+        Speech speech = new Speech();
+        speech.setupSpeechRecognizer(this, layout);
         mic1.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[0], done1, progressText);
         });
         mic2.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[1], done2, progressText);
         });
         mic3.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[2], done3, progressText);
         });
         mic4.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[3], done4, progressText);
         });
         mic5.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[4], done5, progressText);
         });
         mic6.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[5], done6, progressText);
         });
         mic7.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[6], done7, progressText);
         });
         mic8.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[7], done8, progressText);
         });
         mic9.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[8], done9, progressText);
         });
         mic10.setOnClickListener(view -> {
-            startSpeak();
+            checkPermission();
+            speech.stopListening();
+            speech.startListening("phrases", phrases[9], done10, progressText);
         });
 
         audio1.setOnClickListener(view -> {
-            Global.phrases_progress++; // TODO
-            dbHelper.updateData("phrases", Global.selectedProfile, String.valueOf(Global.phrases_progress)); // TODO
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("おはようございます", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[0], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio2.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("こんばんは", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[1], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio3.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("おやすみなさい", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[2], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio4.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("おなまえはなんですか？", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[3], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio5.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("おげんきですか？", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[4], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio6.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("げんきです", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[5], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio7.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("はじめまして", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[6], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio8.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("ようこそ", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[7], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio9.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("こんにちは", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[8], TextToSpeech.QUEUE_FLUSH, null, null);
         });
         audio10.setOnClickListener(view -> {
+            speech.stopListening();
             Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak("さようなら", TextToSpeech.QUEUE_ADD, null, null);
+            tts.speak(phrases[9], TextToSpeech.QUEUE_FLUSH, null, null);
         });
     }
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-            return;
-        }
         super.onBackPressed();
+        finish();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -197,22 +256,36 @@ public class PhrasesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void startSpeak() {
-        try {
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speaking");
-            startActivityForResult(intent, 100);
-        } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong..", Toast.LENGTH_LONG).show();
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Snackbar.make(layout, "Permission Granted.", Snackbar.LENGTH_LONG).show();
+        } else {
+            Snackbar.make(layout, "Please grant permission to use this feature.", Snackbar.LENGTH_LONG).setAction("Grant", view -> checkPermission()).show();
         }
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 100 || requestCode == RESULT_OK) {
-            test.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
+    public void checkPermission() {
+        if (ContextCompat.checkSelfPermission(PhrasesActivity.this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(PhrasesActivity.this, new String[]{ Manifest.permission.RECORD_AUDIO }, 0);
+        }
+    }
+
+    public void showCheck(boolean show, View view) {
+        if (!show) {
+            done1.setVisibility(View.GONE);
+            done2.setVisibility(View.GONE);
+            done3.setVisibility(View.GONE);
+            done4.setVisibility(View.GONE);
+            done5.setVisibility(View.GONE);
+            done6.setVisibility(View.GONE);
+            done7.setVisibility(View.GONE);
+            done8.setVisibility(View.GONE);
+            done9.setVisibility(View.GONE);
+            done10.setVisibility(View.GONE);
+        } else {
+            view.setVisibility(View.VISIBLE);
         }
     }
 }

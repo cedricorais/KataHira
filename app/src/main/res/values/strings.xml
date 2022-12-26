@@ -81,7 +81,7 @@
     <string name="add">Add</string>
     <string name="profile_exist">Profile name already exist.</string>
     <string name="profile_added">Profile added.</string>
-    <string name="rename_profile">Rename Profile (ID to set score)</string>
+    <string name="rename_profile">Rename Profile</string>
     <string name="set">Set</string>
     <string name="profile_renamed">Profile renamed.</string>
     <string name="profile_unique">Profile name must be unique.</string>
@@ -103,13 +103,13 @@
     <string name="session_history">Session History</string>
 
     <string name="tutorial_title">Tutorial: How to Play?</string>
-    <string name="page1">You can pick a syllabary whether Katakana or Hiragana to guess the characters. After selecting, press the Generate Character button to get a random character.</string>
-    <string name="page2">You will be given three random choices in Romaji (Roman alphabet of Japanese characters) to the random Japanese character. Only one choice will contain the correct answer.</string>
-    <string name="page3">Note: The correct answer will be highlighted in Lime green while the wrong choice will be highlighted in Red. A toast will show of what is the correct answer to the Japanese character.</string>
-    <string name="page4">After selecting a choice, you can play the audio of how the character is pronounced by pressing the Speaker button.</string>
-    <string name="page5"><![CDATA[Results will show after all of your attempts have been used up. Pressing the Save & Close will record the session and display on the history.]]></string>
-    <string name="page6">Note: You can try again by pressing the Reset button to start another guessing session.</string>
-    <string name="page7">Note: If you pressed the Back button and exited while the guessing session has already started, the session will not be saved.</string>
+    <string name="guess1">You can pick a syllabary whether Katakana or Hiragana to guess the characters. After selecting, press the Generate Character button to get a random character.</string>
+    <string name="guess2">You will be given three random choices in Romaji (Roman alphabet of Japanese characters) to the random Japanese character. Only one choice will contain the correct answer.</string>
+    <string name="guess3">Note: The correct answer will be highlighted in Lime green while the wrong choice will be highlighted in Red. A toast will show of what is the correct answer to the Japanese character.</string>
+    <string name="guess4">After selecting a choice, you can play the audio of how the character is pronounced by pressing the Speaker button.</string>
+    <string name="guess5"><![CDATA[Results will show after all of your attempts have been used up. Pressing the Save & Close will record the session and display on the history.]]></string>
+    <string name="guess6">Note: You can try again by pressing the Reset button to start another guessing session.</string>
+    <string name="guess7">Note: If you pressed the Back button and exited while the guessing session has already started, the session will not be saved.</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
 
@@ -120,4 +120,7 @@
     <string name="profile_add">Add a profile</string>
     <string name="profile_rename">Rename a profile</string>
     <string name="profile_delete">Delete a profile</string>
+    <string name="rank_prerequisite">Rank Prerequisites</string>
+    <string name="ranks">text\n– Master: 5 perfects in Katakana and Hiragana\n– Expert: 3 to 4 perfects in Katakana and Hiragana\n– Intermediate: 1 to 2 perfects in Katakana and Hiragana\n– Beginner: 0 perfects</string>
+    <string name="progress">Pronunciation Progress</string>
 </resources>

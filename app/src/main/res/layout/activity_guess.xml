@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorTertiaryContainer"
     android:padding="10dp"
     tools:context=".ui.dashboard.GuessActivity">
 
@@ -111,106 +112,127 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/showChar"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_below="@+id/card"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20sp"
-        android:background="@drawable/border_transparent"
-        android:gravity="center"
-        android:textSize="150sp" />
-
-    <Button
-        android:id="@+id/play"
-        android:layout_width="55dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/card"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="95dp"
-        android:layout_toEndOf="@+id/showChar"
-        android:backgroundTint="@color/teal_700"
-        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-    <TextView
-        android:id="@+id/selectOpt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/showChar"
-        android:layout_centerInParent="true"
-        android:text="@string/option1"
-        android:textSize="20sp" />
-
-    <Spinner
-        android:id="@+id/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/selectOpt"
-        android:layout_centerHorizontal="true"
-        android:textSize="24sp" />
-
-    <Button
-        android:id="@+id/generateChar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/options"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/teal_700"
-        android:text="@string/generate_character" />
-
-    <TextView
-        android:id="@+id/choices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/generateChar"
-        android:layout_centerInParent="true"
-        android:text="@string/choices"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/choice1"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choices"
-        android:layout_toStartOf="@+id/choice2"
-        android:textColor="?attr/colorOnPrimary" />
-
-    <Button
-        android:id="@+id/choice2"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choices"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:textColor="?attr/colorOnPrimary" />
-
-    <Button
-        android:id="@+id/choice3"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choices"
-        android:layout_toEndOf="@+id/choice2"
-        android:textColor="?attr/colorOnPrimary" />
-
-    <Button
-        android:id="@+id/reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choice1"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/teal_700"
-        android:text="@string/reset" />
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="?attr/colorTertiary"
+        app:strokeColor="@drawable/border_card"
+        app:strokeWidth="1dp">
 
-    <Button
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reset"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/teal_700"
-        android:text="@string/result"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="325dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/showChar"
+                    android:layout_width="195dp"
+                    android:layout_height="195dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/border_transparent"
+                    android:gravity="center_horizontal"
+                    android:textSize="150sp" />
+
+                <Button
+                    android:id="@+id/play"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="75dp"
+                    android:layout_toEndOf="@+id/showChar"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/selectOpt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/option1"
+                    android:textSize="20sp" />
+
+                <Spinner
+                    android:id="@+id/options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/generateChar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/teal_700"
+                    android:text="@string/generate_character"
+                    app:icon="@drawable/ic_baseline_play_arrow_24" />
+
+                <TextView
+                    android:id="@+id/choices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choices"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/choice1"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorOnPrimary" />
+
+                    <Button
+                        android:id="@+id/choice2"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="?attr/colorOnPrimary" />
+
+                    <Button
+                        android:id="@+id/choice3"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorOnPrimary" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/teal_700"
+                    android:text="@string/reset"
+                    app:icon="@drawable/ic_baseline_refresh_24" />
+
+                <Button
+                    android:id="@+id/result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/teal_700"
+                    android:text="@string/result"
+                    app:icon="@drawable/ic_baseline_assignment_24" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

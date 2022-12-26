@@ -10,6 +10,8 @@
         <package android:name="com.google.android.googlequicksearchbox"/>
     </queries>
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -61,7 +63,7 @@
         <activity
             android:name=".ui.dashboard.HistoryActivity"
             android:exported="false"
-            android:label="@string/history"
+            android:label="@string/session_history"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

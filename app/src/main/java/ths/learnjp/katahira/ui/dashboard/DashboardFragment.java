@@ -1,8 +1,11 @@
 package ths.learnjp.katahira.ui.dashboard;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -11,13 +14,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -41,10 +48,13 @@ public class DashboardFragment extends Fragment {
 
     Button guessBtn, historyBtn;
     FloatingActionButton fab, addFab, editFab, deleteFab;
+    ImageView profileHelp, rankHelp;
+    NavController navController;
     Spinner profileSpin;
     TextView rankText, totalSessionText, dateTimeText, syllabaryText, mistakesText, scoreText, timeText, greetingText, phraseText, addFabText, editFabText, deleteFabText;
     RelativeLayout main; // TODO hide fab when touched outside
     androidx.appcompat.widget.Toolbar tb1, tb2; // TODO hide fab when touched outside
+    View root;
 
     boolean isAllFabVisible;
     String[] options = new String[]{"Select"};
@@ -53,12 +63,13 @@ public class DashboardFragment extends Fragment {
     DBHelper dbHelper;
     FlashView flashView  = new FlashView();
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        DashboardViewModel dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
 
 //        final TextView textView = binding.textDashboard;
 //        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
@@ -66,6 +77,9 @@ public class DashboardFragment extends Fragment {
         dbHelper = new DBHelper(getContext());
 
         profileSpin = binding.profiles;
+
+        profileHelp = binding.profileHelp;
+        rankHelp = binding.rankHelp;
 
         rankText = binding.rankValue;
         totalSessionText = binding.totalSessionValue;
@@ -158,6 +172,15 @@ public class DashboardFragment extends Fragment {
             chooseProfile("delete");
         });
 
+        profileHelp.setOnClickListener(view -> {
+            hideFabMenus();
+            showHelp("profile", getActivity()); // TODO
+        });
+        rankHelp.setOnClickListener(view -> {
+            hideFabMenus();
+            showHelp("rank", null);
+        });
+
         main = binding.main; // TODO hide fab when touched outside
         tb1 = binding.tb1;
         tb2 = binding.tb2;
@@ -172,27 +195,15 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onResume(){
-        // TODO refresh fragment inside this
-        /*rankText.setText(Global.rank); // TODO evaluate rank by scores
-        totalSessionText.setText(Integer.toString(Global.total_session));
-
-        syllabaryText.setText(Global.syllabary);
-        mistakesText.setText(Integer.toString(Global.session_mistake));
-        scoreText.setText(Integer.toString(Global.session_score));
-        timeText.setText(Global.latestTime);
-        dateTimeText.setText(Global.dateTimeNow);*/
-
-        hideFabMenus();
-        super.onResume();
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void refreshFragment() {
+        navController = Navigation.findNavController(root);
+        navController.navigate(R.id.navigation_dashboard);
     }
 
     private void selectedUser(String selectedText) {
@@ -215,20 +226,24 @@ public class DashboardFragment extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    private void setGlobalValues(String tag, List<String> data) {;
+    private void setGlobalValues(String tag, List<String> data) {
         switch (tag) {
             case "noData":
                 if (data == null) {
                     Global.selectedProfile = null;
                     Global.rank = getResources().getString(R.string.n_a);
+                    Global.session_perfect_kata = 0;
+                    Global.session_perfect_hira = 0;
                     Global.greetings_progress = 0;
                     Global.phrases_progress = 0;
                     guessBtn.setEnabled(false);
                 }
                 else {
-                    Global.rank = data.get(2); // TODO evaluate rank by scores
-                    Global.greetings_progress = Integer.parseInt(data.get(3));
-                    Global.phrases_progress = Integer.parseInt(data.get(4));
+                    Global.rank = data.get(2);
+                    Global.session_perfect_kata = Integer.parseInt(data.get(3));
+                    Global.session_perfect_hira = Integer.parseInt(data.get(4));
+                    Global.greetings_progress = Integer.parseInt(data.get(5));
+                    Global.phrases_progress = Integer.parseInt(data.get(6));
                     guessBtn.setEnabled(true);
                 }
                 Global.total_session = 0;
@@ -242,20 +257,22 @@ public class DashboardFragment extends Fragment {
                 historyBtn.setEnabled(false);
                 break;
             case "hasData":
-                Global.rank = data.get(2); // TODO evaluate rank by scores
-                Global.total_session = Integer.parseInt(data.get(13));
-                Global.greetings_progress = Integer.parseInt(data.get(3));
-                Global.phrases_progress = Integer.parseInt(data.get(4));
+                Global.rank = data.get(2);
+                Global.session_perfect_kata = Integer.parseInt(data.get(3));
+                Global.session_perfect_hira = Integer.parseInt(data.get(4));
+                Global.total_session = Integer.parseInt(data.get(15));
+                Global.greetings_progress = Integer.parseInt(data.get(5));
+                Global.phrases_progress = Integer.parseInt(data.get(6));
 
-                Global.syllabary = data.get(6);
-                Global.session_mistake = Integer.parseInt(data.get(7));
-                Global.session_score = Integer.parseInt(data.get(8));
-                Global.latestTime = data.get(9);
-                Global.dateTimeNow = data.get(11);
+                Global.syllabary = data.get(8);
+                Global.session_mistake = Integer.parseInt(data.get(9));
+                Global.session_score = Integer.parseInt(data.get(10));
+                Global.latestTime = data.get(11);
+                Global.dateTimeNow = data.get(13);
                 break;
         }
 
-        rankText.setText(Global.rank); // TODO evaluate rank by scores
+        rankText.setText(Global.rank);
         totalSessionText.setText(Integer.toString(Global.total_session));
         greetingText.setText(Global.greetings_progress + "/10");
         phraseText.setText(Global.phrases_progress + "/10");
@@ -298,6 +315,7 @@ public class DashboardFragment extends Fragment {
         final TextInputEditText inputText = new TextInputEditText(getContext());
         inputText.setHint(R.string.profile_name);
         inputText.setInputType(InputType.TYPE_CLASS_TEXT);
+        addBuilder.setCancelable(false);
 
         String toastDone = null, toastOngoing = null;
         switch (mode) {
@@ -316,7 +334,6 @@ public class DashboardFragment extends Fragment {
                 break;
         }
         addBuilder.setView(inputText);
-        addBuilder.setCancelable(false);
         addBuilder.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
 
         invalidDialog(addBuilder, inputText, mode, profileText, toastDone, toastOngoing, "addEdit", null, null);
@@ -329,9 +346,9 @@ public class DashboardFragment extends Fragment {
         final int[] checkedItem = {-1};
         final String[] profileList = selectProfile.toArray(new String[0]);
         final String[] selectedItem = new String[1];
+        chooseBuilder.setCancelable(false);
 
         if (profileList.length > 0){
-            chooseBuilder.setCancelable(false);
             chooseBuilder.setSingleChoiceItems(profileList, checkedItem[0], (dialog, which) -> {
                 checkedItem[0] = which;
                 selectedItem[0] = profileList[which];
@@ -394,13 +411,13 @@ public class DashboardFragment extends Fragment {
 
     private void alertDelete(String selected, AlertDialog alertDialog) {
         AlertDialog.Builder confirmBuilder = new AlertDialog.Builder(getActivity());
-        confirmBuilder.setTitle(String.format(getString(R.string.confirm_delete), selected));
         confirmBuilder.setCancelable(false);
+        confirmBuilder.setTitle(String.format(getString(R.string.confirm_delete), selected));
         confirmBuilder.setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
             dbHelper.deleteProfile(selected);
             Toast.makeText(getContext(), R.string.profile_deleted, Toast.LENGTH_SHORT).show();
-            profileSpin.setSelection(0);
             alertDialog.dismiss();
+            refreshFragment();
         });
         confirmBuilder.setNegativeButton(getString(R.string.no), (dialogInterface, i) -> dialogInterface.cancel()).show();
         alertDialog.dismiss();
@@ -413,15 +430,74 @@ public class DashboardFragment extends Fragment {
         } else {
             switch (mode) {
                 case "new":
-                    UserModel userModel = new UserModel(-1, textInputEditText.getText().toString(), "Beginner", 0, 0);
+                    UserModel userModel = new UserModel(-1, textInputEditText.getText().toString(), "Beginner", 0, 0, 0, 0);
                     dbHelper.addOne("newUser", userModel, null);
+                    refreshFragment();
                     break;
                 case "edit":
                     dbHelper.updateData("name", chosenProfile, textInputEditText.getText().toString());
+                    refreshFragment();
                     break;
             }
             Toast.makeText(getContext(), finalToastDone, Toast.LENGTH_SHORT).show();
             alertDialog.dismiss();
+        }
+    }
+
+    private void showHelp(String tag, Activity activity) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setCancelable(false);
+
+        switch (tag) {
+            case "profile":
+                LayoutInflater layoutInflater = activity.getLayoutInflater();
+                View view = layoutInflater.inflate(R.layout.tutorial_layout, activity.findViewById(R.id.main), false);
+
+                ImageView img = view.findViewById(R.id.image); // TODO
+                Integer[] pics = new Integer[]{R.drawable.guess1, R.drawable.guess2, R.drawable.guess3, R.drawable.guess4, R.drawable.guess5, R.drawable.guess6, R.drawable.guess7};
+                List<Integer> tutorialPics = new ArrayList<>(Arrays.asList(pics));
+                img.setImageResource(tutorialPics.get(0));
+
+                TextView text = view.findViewById(R.id.text); // TODO
+                String[] texts = new String[]{getString(R.string.guess1), getString(R.string.guess2), getString(R.string.guess3), getString(R.string.guess4), getString(R.string.guess5), getString(R.string.guess6), getString(R.string.guess7)};
+                List<String> tutorialText = new ArrayList<>(Arrays.asList(texts));
+                text.setText(tutorialText.get(0));
+                
+                alert.setTitle("Profiles");
+                alert.setView(view);
+                alert.setPositiveButton(R.string.next, null);
+                alert.setNegativeButton(R.string.previous, null);
+                alert.setNeutralButton(R.string.close, ((dialogInterface, i) -> dialogInterface.dismiss()));
+
+                final int[] index = {0};
+                final AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+                    index[0]++;
+                    img.setImageResource(tutorialPics.get(index[0]));
+                    text.setText(tutorialText.get(index[0]));
+                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.VISIBLE);
+                    if (index[0] == tutorialPics.size() - 1) {
+                        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.GONE);
+                    }
+                });
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
+                    index[0]--;
+                    img.setImageResource(tutorialPics.get(index[0]));
+                    text.setText(tutorialText.get(index[0]));
+                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.VISIBLE);
+                    if (index[0] == 0) {
+                        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                    }
+                });
+                break;
+            case "rank":
+                alert.setTitle(R.string.rank_prerequisite);
+                alert.setMessage(R.string.ranks);
+                alert.setNeutralButton(R.string.close, (dialogInterface, i) -> dialogInterface.dismiss());
+                alert.show();
+                break;
         }
     }
 }

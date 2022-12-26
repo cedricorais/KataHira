@@ -54,6 +54,7 @@ public class GuessActivity extends AppCompatActivity {
 
     boolean sessionStart = false, sessionSaved = false;
 
+    DBHelper dbHelper;
     FlashView flashView  = new FlashView();
     Toasts toasts = new Toasts();
 
@@ -81,7 +82,8 @@ public class GuessActivity extends AppCompatActivity {
         resetBtn = findViewById(R.id.reset);
         resultBtn = findViewById(R.id.result);
 
-        DBHelper dbHelper = new DBHelper(this);
+        dbHelper = new DBHelper(this);
+
         List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
         List<SessionModel> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0))));
         if (allSession.isEmpty()) {
@@ -345,9 +347,9 @@ public class GuessActivity extends AppCompatActivity {
     @SuppressLint("SimpleDateFormat")
     private void showAlertDialog(String tag, Context context) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
         switch (tag) {
             case "back":
-                alert.setCancelable(false);
                 if (sessionStart) {
                     alert.setMessage(R.string.exit_not_saved);
                 } else {
@@ -371,22 +373,20 @@ public class GuessActivity extends AppCompatActivity {
                 alert.show();
                 break;
             case "tutorial":
-                alert.setTitle(R.string.tutorial_title);
-                alert.setCancelable(false);
-
                 LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
                 View view = layoutInflater.inflate(R.layout.tutorial_layout, ((Activity)context).findViewById(R.id.main));
 
                 ImageView img = view.findViewById(R.id.image);
-                Integer[] pics = new Integer[]{R.drawable.page1, R.drawable.page2, R.drawable.page3, R.drawable.page4, R.drawable.page5, R.drawable.page6, R.drawable.page7};
+                Integer[] pics = new Integer[]{R.drawable.guess1, R.drawable.guess2, R.drawable.guess3, R.drawable.guess4, R.drawable.guess5, R.drawable.guess6, R.drawable.guess7};
                 List<Integer> tutorialPics = new ArrayList<>(Arrays.asList(pics));
                 img.setImageResource(tutorialPics.get(0));
 
                 TextView text = view.findViewById(R.id.text);
-                String[] texts = new String[]{getString(R.string.page1), getString(R.string.page2), getString(R.string.page3), getString(R.string.page4), getString(R.string.page5), getString(R.string.page6), getString(R.string.page7)};
+                String[] texts = new String[]{getString(R.string.guess1), getString(R.string.guess2), getString(R.string.guess3), getString(R.string.guess4), getString(R.string.guess5), getString(R.string.guess6), getString(R.string.guess7)};
                 List<String> tutorialText = new ArrayList<>(Arrays.asList(texts));
                 text.setText(tutorialText.get(0));
 
+                alert.setTitle(R.string.tutorial_title);
                 alert.setView(view);
                 alert.setPositiveButton(R.string.next, null);
                 alert.setNegativeButton(R.string.previous, null);
@@ -402,30 +402,28 @@ public class GuessActivity extends AppCompatActivity {
                 final int[] index = {0};
                 final AlertDialog alertDialog = alert.create();
                 alertDialog.show();
-                ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                     index[0]++;
                     img.setImageResource(tutorialPics.get(index[0]));
                     text.setText(tutorialText.get(index[0]));
-                    ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.VISIBLE);
+                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.VISIBLE);
                     if (index[0] == tutorialPics.size() - 1) {
-                        ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.GONE);
+                        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.GONE);
                     }
                 });
                 alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
                     index[0]--;
                     img.setImageResource(tutorialPics.get(index[0]));
                     text.setText(tutorialText.get(index[0]));
-                    ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.VISIBLE);
+                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.VISIBLE);
                     if (index[0] == 0) {
-                        ((AlertDialog)alertDialog).getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
                     }
                 });
                 break;
             case "reset":
                 alert.setTitle(R.string.reset);
-                alert.setCancelable(false);
-
                 alert.setMessage(R.string.reset_dialog);
                 alert.setPositiveButton(R.string.reset, (dialogInterface, i) -> {
                     sessionSaved = false;
@@ -444,21 +442,38 @@ public class GuessActivity extends AppCompatActivity {
                 alert.show();
                 break;
             case "result":
-                alert.setTitle(R.string.result);
-                alert.setCancelable(false);
-
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
                 Date date = new Date();
                 Global.dateTimeNow = formatter.format(date);
                 Global.latestTime = (String) timeValue.getText();
+
+                alert.setTitle(R.string.result);
                 alert.setMessage(String.format("Syllabary: %s\n%s: %s\n%s: %s\n%s: %s\nWrong Characters: %s", Global.syllabary, this.getString(R.string.mistakes), Global.session_mistake, this.getString(R.string.score), Global.session_score, this.getString(R.string.time), Global.latestTime, Global.wrongChars));
                 if (!sessionSaved) {
                     alert.setPositiveButton(R.string.save_close, (dialogInterface, i) -> {
                         flashView.startFlash(resetBtn);
                         toasts.showToast(this, "zeroAttempts", null);
 
-                        DBHelper dbHelper = new DBHelper(this);
                         List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
+                        int perfect_k = Integer.parseInt(userData.get(3));
+                        int perfect_h = Integer.parseInt(userData.get(4));
+                        if (Global.session_mistake == 0 && (Global.syllabary.equals("Katakana") || Global.syllabary.equals("10 chars kata"))) {
+                            perfect_k++;
+                            dbHelper.updateData("perfect_kata", Global.selectedProfile, String.valueOf(perfect_k));
+                        } else if (Global.session_mistake == 0 && (Global.syllabary.equals("Hiragana") || Global.syllabary.equals("10 chars hira"))) {
+                            perfect_h++;
+                            dbHelper.updateData("perfect_hira", Global.selectedProfile, String.valueOf(perfect_h));
+                        }
+
+                        if (perfect_k >= 5 && perfect_h >= 5) {
+                            dbHelper.updateData("rank", Global.selectedProfile, "Master");
+                        } else if (perfect_k >= 3 && perfect_h >= 3) {
+                            dbHelper.updateData("rank", Global.selectedProfile, "Expert");
+                        } else if (perfect_k >= 1 && perfect_h >= 1) {
+                            dbHelper.updateData("rank", Global.selectedProfile, "Intermediate");
+                        } else {
+                            dbHelper.updateData("rank", Global.selectedProfile, "Beginner");
+                        }
                         SessionModel sessionModel = new SessionModel(-1, Global.syllabary, Global.session_mistake, Global.session_score, Global.latestTime, Global.wrongChars.toString(), Global.dateTimeNow, Integer.parseInt(userData.get(0)));
                         dbHelper.addOne("addSession", null, sessionModel);
                     });

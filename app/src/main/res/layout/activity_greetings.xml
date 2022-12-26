@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorTertiaryContainer"
     tools:context=".ui.home.GreetingsActivity">
 
     <RelativeLayout
@@ -17,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Current Profile: "
-            android:textSize="24sp"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/currentProfileValue"
@@ -26,24 +27,34 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/currentProfile"
             android:text="@string/n_a"
-            android:textSize="24sp"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/title1"
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/currentProfileValue"
-            android:layout_marginStart="25dp"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_below="@+id/currentProfile"
+            android:text="Progress: "
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="24sp" />
 
-        <!--TODO mic & audio-->
+        <TextView
+            android:id="@+id/progressValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/currentProfile"
+            android:layout_toEndOf="@id/progress"
+            android:ellipsize="end"
+            android:text="0/10"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="24sp" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/greeting1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/currentProfile"
+            android:layout_below="@id/progress"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
             app:strokeColor="@drawable/border_card"
@@ -52,40 +63,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic1"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic1"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio1"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio1"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting1"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting1"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check1"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -102,40 +117,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic2"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic2"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio2"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio2"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting2"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting2"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check2"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -152,40 +171,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic3"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic3"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio3"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio3"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting3"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting3"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check3"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -202,40 +225,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic4"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic4"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio4"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio4"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting4"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting4"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check4"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -252,40 +279,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic5"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic5"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio5"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio5"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting5"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting5"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check5"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -302,40 +333,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic6"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic6"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio6"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio6"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting6"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting6"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check6"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -352,40 +387,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic7"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic7"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio7"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio7"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting7"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting7"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check7"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -402,40 +441,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic8"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic8"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio8"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio8"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting8"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting8"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check8"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -452,40 +495,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic9"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic9"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio9"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio9"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting9"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting9"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check9"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -502,40 +549,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/mic10"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_mic_24" />
 
-                    <Button
-                        android:id="@+id/mic10"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_mic_24" />
+                <Button
+                    android:id="@+id/audio10"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@color/teal_700"
+                    app:icon="@drawable/ic_baseline_volume_up_24" />
 
-                    <Button
-                        android:id="@+id/audio10"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:backgroundTint="@color/teal_700"
-                        app:icon="@drawable/ic_baseline_volume_up_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/greeting10"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/greeting10"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/done10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="check10"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
     </RelativeLayout>
 

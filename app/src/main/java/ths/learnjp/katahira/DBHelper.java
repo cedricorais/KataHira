@@ -18,9 +18,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String USER_TABLE = "USER_TABLE";
     public static final String USER_ID = "USER_ID";
     public static final String USER_NAME = "USER_NAME";
-    public static final String USER_RANK = "RANK";
-    public static final String USER_GREETINGS = "USER_GREETINGS";
-    public static final String USER_PHRASES = "USER_PHRASES";
+    public static final String USER_RANK = "USER_RANK";
+    public static final String USER_PERFECTS_KATA = "USER_PERFECTS_KATA";
+    public static final String USER_PERFECTS_HIRA = "USER_PERFECTS_HIRA";
+    public static final String USER_GREETINGS = "USER_GREETINGS"; // TODO
+    public static final String USER_PHRASES = "USER_PHRASES"; // TODO
 
     public static final String SESSION_TABLE = "SESSION_TABLE";
     public static final String SESSION_ID = "SESSION_ID";
@@ -37,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_RANK + " TEXT, " + USER_GREETINGS + " INTEGER, " + USER_PHRASES + " INTEGER)";
+        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_RANK + " TEXT, " + USER_PERFECTS_KATA + " INTEGER, " + USER_PERFECTS_HIRA + " INTEGER, " + USER_GREETINGS + " INTEGER, " + USER_PHRASES + " INTEGER)";
         sqLiteDatabase.execSQL(createUserTable);
         String createSessionTable = "CREATE TABLE " + SESSION_TABLE + " (" + SESSION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SYLLABARY + " TEXT, " + MISTAKES + " INTEGER, " + SCORE + " INTEGER, " + TIME + " TEXT, " + WRONG_CHARS + " TEXT, " + DATE_TIME + " TEXT, " + USER_ID + " INTEGER, " + " FOREIGN KEY(USER_ID) REFERENCES USER_TABLE (USER_ID)  ON DELETE CASCADE)";
         sqLiteDatabase.execSQL(createSessionTable);
@@ -45,7 +47,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SESSION_TABLE);
 
+        onCreate(sqLiteDatabase);
     }
 
     public boolean checkTableData(String table) {
@@ -67,8 +72,10 @@ public class DBHelper extends SQLiteOpenHelper {
             case "newUser":
                 cv.put(USER_NAME, userModel.getName());
                 cv.put(USER_RANK, userModel.getRank());
-                cv.put(USER_GREETINGS, userModel.getGreetings());
-                cv.put(USER_PHRASES, userModel.getPhrases());
+                cv.put(USER_PERFECTS_KATA, userModel.getPerfect_kata());
+                cv.put(USER_PERFECTS_HIRA, userModel.getPerfect_hira());
+                cv.put(USER_GREETINGS, userModel.getGreetings()); // TODO
+                cv.put(USER_PHRASES, userModel.getPhrases()); // TODO
                 db.insert(USER_TABLE, null, cv);
                 cv.clear();
                 break;
@@ -85,33 +92,38 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-//    public void editProfile(String profile, String newData) {
-    public void updateData(String tag, String profile, String newData) { // TODO
+    public void updateData(String tag, String profile, String newData) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        String table = null;
-        String where = null;
+        String table = null, where = null;
         switch (tag) {
             case "name":
-//                cv.put(USER_NAME, newData);
-//                table = USER_TABLE;
-//                where = USER_NAME;
-                cv.put(SCORE, 71); // TODO remove
-                table = SESSION_TABLE; // TODO remove
-                where = SESSION_ID; // TODO remove
+                cv.put(USER_NAME, newData);
+                table = USER_TABLE;
+                where = USER_NAME;
                 break;
-            case "rank": // TODO
+            case "rank":
                 cv.put(USER_RANK, newData);
-                table = SESSION_TABLE;
-                where = SESSION_ID;
+                table = USER_TABLE;
+                where = USER_NAME;
                 break;
-            case"greetings":
+            case "perfect_kata":
+                cv.put(USER_PERFECTS_KATA, newData);
+                table = USER_TABLE;
+                where = USER_NAME;
+                break;
+            case "perfect_hira":
+                cv.put(USER_PERFECTS_HIRA, newData);
+                table = USER_TABLE;
+                where = USER_NAME;
+                break;
+            case"greetings": // TODO
                 cv.put(USER_GREETINGS, newData);
                 table = USER_TABLE;
                 where = USER_NAME;
                 break;
-            case"phrases":
+            case"phrases": // TODO
                 table = USER_TABLE;
                 where = USER_NAME;
                 cv.put(USER_PHRASES, newData);
@@ -149,10 +161,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 int userId = cursor.getInt(0);
                 String userName = cursor.getString(1);
                 String userRank = cursor.getString(2);
-                int greetings = cursor.getInt(3);
-                int phrases = cursor.getInt(4);
+                int perfect_kata = cursor.getInt(3);
+                int perfect_hira = cursor.getInt(4);
+                int greetings = cursor.getInt(5); // TODO
+                int phrases = cursor.getInt(6); // TODO
 
-                String[] data = {String.valueOf(userId), userName, userRank, String.valueOf(greetings), String.valueOf(phrases)};
+                String[] data = {String.valueOf(userId), userName, userRank, String.valueOf(perfect_kata), String.valueOf(perfect_hira), String.valueOf(greetings), String.valueOf(phrases)};
                 stringList.addAll(Arrays.asList(data));
             } while(cursor.moveToNext());
         }
@@ -200,14 +214,14 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(getAllQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                int sessionID = cursor.getInt(0); // TODO remove
+                int sessionID = cursor.getInt(0); // TODO
                 String syllabary = cursor.getString(1);
                 int mistakes = cursor.getInt(2);
                 int score = cursor.getInt(3);
                 String time = cursor.getString(4);
                 String wrongChars = cursor.getString(5);
                 String dateTime = cursor.getString(6);
-                int userID = cursor.getInt(7); // TODO remove
+                int userID = cursor.getInt(7); // TODO
 
                 SessionModel sessionModel = new SessionModel(sessionID, syllabary, mistakes, score, time, wrongChars, dateTime, userID);
                 returnList.add(sessionModel);
