@@ -59,16 +59,12 @@ public class HistoryActivity extends AppCompatActivity {
         tableLayout.addView(rowHead);
 
         List<SessionModel> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0))));
-        /*String[] asd = {"Session ID", "Session ID", "Session ID", "Syllabary", "Syllabary", "Syllabary", "Mistakes", "Mistakes", "Mistakes", "Score", "Score", "Score", "Time", "Time", "Time", "Wrong Characters", "Wrong Characters", "Wrong Characters", "Date & Time", "Date & Time", "Date & Time", "User ID", "User ID", "User ID"};
-        List<String> sessionList = new ArrayList<>(Arrays.asList(asd));*/ // TODO vertical rows test
-        List<String> sessionList = new ArrayList<>();
-        for (int a = 0; a < allSession.size(); a++) {
-            sessionList.addAll(Arrays.asList(allSession.get(a).toString().split(",(?![^\\(\\[]*[\\]\\)])")));
-        }
-        System.out.println(sessionList.size() + " " + sessionList); // TODO remove
 
         for (int rowCount = 0; rowCount < allSession.size(); rowCount++) {
             TableRow row = new TableRow(this);
+
+            List<String> sessionList = new ArrayList<>();
+            sessionList.addAll(Arrays.asList(allSession.get(rowCount).toString().split(",(?![^\\(\\[]*[\\]\\)])")));
 
             for (int columnCount = 0; columnCount < sessionList.size(); columnCount++) {
                 TextView columns = new TextView(this);
