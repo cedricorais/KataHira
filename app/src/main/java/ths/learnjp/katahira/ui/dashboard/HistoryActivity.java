@@ -44,7 +44,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         tableLayout = findViewById(R.id.table);
 //        String[] tableHeader = {"Session ID", "Date & Time", "Syllabary", "Mistakes", "Score", "Time", "Wrong Characters", "User ID"}; // TODO old
-        String[] tableHeader = {"Date & Time", "Syllabary", "Mistakes", "Score", "Time", "Wrong Characters"}; // TODO new
+        String[] tableHeader = {"Date & Time", "Syllabary", "Mistakes", "Score", "Wrong Characters", "Time"}; // TODO new
         TableRow rowHead = new TableRow(this);
         for (String rowCount : tableHeader) {
             TextView columns = new TextView(this);
@@ -59,19 +59,15 @@ public class HistoryActivity extends AppCompatActivity {
         }
         tableLayout.addView(rowHead);
 
-//        List<SessionModel> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0)))); // TODO old
-//        for (int rowCount = 0; rowCount < allSession.size(); rowCount++) { // TODO old
+        int columnCount = tableHeader.length;
+
         for (int rowCount = 0; rowCount < Global.total_session; rowCount++) { // TODO new
             TableRow row = new TableRow(this);
 
-//            List<String> sessionList = new ArrayList<>(Arrays.asList(allSession.get(rowCount).toString().split(",(?![^\\(\\[]*[\\]\\)])"))); // TODO old
-//            System.out.println(sessionList + " " + sessionList.size()); // size=8 included ids TODO old
-//            for (int columnCount = 0; columnCount < sessionList.size(); columnCount++) { // TODO old
             List<String> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0)))); // TODO new
-            System.out.println(allSession + " " + Global.total_session + " " + allSession.size()); // size=18 TODO new
-            for (int columnCount = 0; columnCount < allSession.size(); columnCount++) { // TODO new
+            for (int nextColumn = columnCount * rowCount, i = 0; i < columnCount; i++, nextColumn++) { // TODO new
                 TextView columns = new TextView(this);
-                if (columnCount == 5) {
+                if (nextColumn == 5) {
                     columns.setLayoutParams(new TableRow.LayoutParams(200, ViewGroup.LayoutParams.WRAP_CONTENT));
                 } else {
                     columns.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -80,8 +76,8 @@ public class HistoryActivity extends AppCompatActivity {
                 columns.setGravity(Gravity.CENTER);
                 columns.setTextSize(18); // TODO change
                 columns.setPadding(5, 5, 5, 5);
-//                columns.setText(sessionList.get(columnCount)); // TODO old
-                columns.setText(allSession.get(columnCount)); // TODO new
+//                columns.setText(sessionList.get(nextColumn)); // TODO old
+                columns.setText(allSession.get(nextColumn)); // TODO new
 
                 row.addView(columns);
             }
