@@ -25,7 +25,6 @@ public class Speech {
     Snackbar snackbar;
     TextView progress;
 
-    public static final int REQUEST_CODE_SPEECH_INPUT = 1;
     static SpeechRecognizer speechRecognizer;
     static Intent speechRecognizerIntent;
     public static String activity, evaluate;

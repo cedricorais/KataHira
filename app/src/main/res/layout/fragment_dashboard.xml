@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/main"
             android:layout_width="wrap_content"
-            android:layout_height="690dp">
+            android:layout_height="650dp">
 
             <TextView
                 android:id="@+id/overview"
@@ -65,7 +65,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:contentDescription="help1"
                             android:src="@drawable/ic_baseline_help_outline_24"
                             app:tint="?attr/colorOnTertiary" />
                     </LinearLayout>
@@ -100,7 +99,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:contentDescription="help2"
                             android:src="@drawable/ic_baseline_help_outline_24"
                             app:tint="?attr/colorOnTertiary" />
                     </LinearLayout>
@@ -156,7 +154,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:text="@string/progress"
+                            android:text="@string/pronun_progress"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -173,7 +171,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Greetings: "
+                            android:text="@string/greetings"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="20sp" />
 
@@ -181,9 +179,10 @@
                             android:id="@+id/greetingValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
                             android:layout_marginEnd="20dp"
                             android:gravity="center"
-                            android:text="0/10"
+                            android:text="@string/zero_10"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="20sp" />
 
@@ -193,7 +192,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:gravity="center"
-                            android:text="Phrases: "
+                            android:text="@string/phrases"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="20sp" />
 
@@ -201,8 +200,9 @@
                             android:id="@+id/phraseValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
                             android:gravity="center"
-                            android:text="0/10"
+                            android:text="@string/zero_10"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -387,7 +387,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="61dp"
-            android:contentDescription="profile"
+            android:contentDescription="@string/profile"
             app:srcCompat="@drawable/ic_baseline_person_24" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -398,7 +398,7 @@
             android:layout_alignEnd="@+id/profileFab"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="14dp"
-            android:contentDescription="delete"
+            android:contentDescription="@string/profile_delete"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_baseline_delete_24" />
         <TextView
@@ -423,7 +423,7 @@
             android:layout_above="@+id/deleteFab"
             android:layout_alignEnd="@+id/deleteFab"
             android:layout_marginBottom="14dp"
-            android:contentDescription="edit"
+            android:contentDescription="@string/profile_rename"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_baseline_edit_24" />
         <TextView
@@ -448,7 +448,7 @@
             android:layout_above="@+id/editFab"
             android:layout_alignEnd="@+id/editFab"
             android:layout_marginBottom="14dp"
-            android:contentDescription="add"
+            android:contentDescription="@string/profile_add"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_baseline_person_add_24" />
         <TextView

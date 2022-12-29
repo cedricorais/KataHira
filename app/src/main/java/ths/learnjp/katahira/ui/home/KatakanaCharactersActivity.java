@@ -17,10 +17,6 @@ public class KatakanaCharactersActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-            return;
-        }
         super.onBackPressed();
     }
     @Override

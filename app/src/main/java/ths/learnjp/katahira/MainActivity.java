@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
 //    public String[] language_names = CharaManager.getLanguages(getApplicationContext()); // ILIPAT SA DROP DOWN
+
+    boolean doubleBackToExit = false; // TODO
 
     Map current_language;
     Map current_chara_set;
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
+                NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main); // TODO
+                navController.navigate(R.id.navigation_home); // TODO
                 startActivity(intent);
                 return true;
             case R.id.tutorial:
@@ -77,6 +83,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return (super.onOptionsItemSelected(item));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExit) {
+            System.exit(0);
+            return;
+        }
+        this.doubleBackToExit = true;
+        Toast.makeText(this, "Press BACK again to exit.", Toast.LENGTH_SHORT).show();
+        new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExit = false, 2000);
     }
 
 /*    public Map setLanguageDropDown() {

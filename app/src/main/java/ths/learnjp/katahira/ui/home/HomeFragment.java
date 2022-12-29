@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import ths.learnjp.katahira.R;
@@ -25,7 +24,7 @@ public class HomeFragment extends Fragment {
     NavController navController;
     View root;
 
-    public static boolean fromDB = false; // TODO
+    public static boolean lastActivity = false; // TODO
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -70,10 +69,10 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
 //        NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.navigation_home, false, true).setRestoreState(true).build();
-        Toast.makeText(getContext(), "home " + fromDB, Toast.LENGTH_SHORT).show(); // TODO
+        Toast.makeText(getContext(), "home " + lastActivity, Toast.LENGTH_SHORT).show(); // TODO
         navController = Navigation.findNavController(root);
-        if (fromDB) {
-            fromDB = false;
+        if (lastActivity) {
+            lastActivity = false;
             navController.navigate(R.id.navigation_dashboard); // TODO fix: disables home when clicked but pressing back returns to home
         }
     }

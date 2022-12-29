@@ -85,7 +85,8 @@ public class GuessActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
-        List<SessionModel> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0))));
+//        List<SessionModel> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0)))); // TODO old
+        List<String> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0)))); // TODO new
         if (allSession.isEmpty()) {
             showAlertDialog("tutorial", this);
         }
@@ -356,10 +357,7 @@ public class GuessActivity extends AppCompatActivity {
                     alert.setMessage(R.string.exit);
                 }
                 alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                    if (getFragmentManager().getBackStackEntryCount() > 0) {
-                        getFragmentManager().popBackStack();
-                        return;
-                    }
+//                    DashboardFragment.lastActivity = true;
                     super.onBackPressed();
                 });
                 alert.setNegativeButton(R.string.no, (dialogInterface, i) -> {
@@ -474,7 +472,7 @@ public class GuessActivity extends AppCompatActivity {
                         } else {
                             dbHelper.updateData("rank", Global.selectedProfile, "Beginner");
                         }
-                        SessionModel sessionModel = new SessionModel(-1, Global.syllabary, Global.session_mistake, Global.session_score, Global.latestTime, Global.wrongChars.toString(), Global.dateTimeNow, Integer.parseInt(userData.get(0)));
+                        SessionModel sessionModel = new SessionModel(-1, Global.dateTimeNow, Global.syllabary, Global.session_mistake, Global.session_score, Global.latestTime, Global.wrongChars.toString(), Integer.parseInt(userData.get(0)));
                         dbHelper.addOne("addSession", null, sessionModel);
                     });
                     sessionSaved = true;

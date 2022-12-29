@@ -7,54 +7,79 @@
     android:background="?attr/colorTertiaryContainer"
     tools:context=".ui.home.GreetingsActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="10dp"
         tools:ignore="ScrollViewSize">
 
-        <TextView
-            android:id="@+id/currentProfile"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current Profile: "
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textSize="24sp" />
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/currentProfileValue"
+            <TextView
+                android:id="@+id/currentProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_profile"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/currentProfileValue"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="5dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxWidth="138dp"
+                android:maxLines="1"
+                android:text="@string/n_a"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/profileHelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_baseline_help_outline_24"
+                app:tint="?attr/colorOnTertiary" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/currentProfile"
-            android:text="@string/n_a"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="24sp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/currentProfile"
-            android:text="Progress: "
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textSize="24sp" />
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/progress"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/progressValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/currentProfile"
-            android:layout_toEndOf="@id/progress"
-            android:ellipsize="end"
-            android:text="0/10"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="24sp" />
+            <!-- TODO -->
+            <TextView
+                android:id="@+id/progressValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:ellipsize="end"
+                android:text="@string/zero_10"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="24sp" />
+        </LinearLayout>
 
+        <!-- TODO -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/greeting1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/progress"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
             app:strokeColor="@drawable/border_card"
@@ -87,6 +112,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting1"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -97,7 +130,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check1"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -107,7 +139,6 @@
             android:id="@+id/greeting2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting1"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -141,6 +172,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting2"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -151,7 +190,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check2"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -161,7 +199,6 @@
             android:id="@+id/greeting3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting2"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -195,6 +232,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting3"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -205,7 +250,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check3"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -215,7 +259,6 @@
             android:id="@+id/greeting4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting3"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -249,6 +292,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting4"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -259,7 +310,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check4"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -269,7 +319,6 @@
             android:id="@+id/greeting5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting4"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -300,6 +349,15 @@
                     app:icon="@drawable/ic_baseline_volume_up_24" />
 
                 <TextView
+                    android:id="@+id/wc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -313,7 +371,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check5"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -323,7 +380,6 @@
             android:id="@+id/greeting6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting5"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -357,6 +413,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting6"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -367,7 +431,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check6"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -377,7 +440,6 @@
             android:id="@+id/greeting7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting6"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -411,6 +473,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting7"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -421,7 +491,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check7"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -431,7 +500,6 @@
             android:id="@+id/greeting8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting7"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -465,6 +533,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting8"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -475,7 +551,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check8"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -485,7 +560,6 @@
             android:id="@+id/greeting9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting8"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -519,6 +593,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting9"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -529,7 +611,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check9"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
@@ -539,7 +620,6 @@
             android:id="@+id/greeting10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting9"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="?attr/colorTertiary"
             app:cardElevation="5dp"
@@ -573,6 +653,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/indicator"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="@string/greeting10"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="15sp" />
@@ -583,11 +671,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:contentDescription="check10"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>

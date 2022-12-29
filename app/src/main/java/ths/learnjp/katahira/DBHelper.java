@@ -41,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_RANK + " TEXT, " + USER_PERFECTS_KATA + " INTEGER, " + USER_PERFECTS_HIRA + " INTEGER, " + USER_GREETINGS + " INTEGER, " + USER_PHRASES + " INTEGER)";
         sqLiteDatabase.execSQL(createUserTable);
-        String createSessionTable = "CREATE TABLE " + SESSION_TABLE + " (" + SESSION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SYLLABARY + " TEXT, " + MISTAKES + " INTEGER, " + SCORE + " INTEGER, " + TIME + " TEXT, " + WRONG_CHARS + " TEXT, " + DATE_TIME + " TEXT, " + USER_ID + " INTEGER, " + " FOREIGN KEY(USER_ID) REFERENCES USER_TABLE (USER_ID)  ON DELETE CASCADE)";
+        String createSessionTable = "CREATE TABLE " + SESSION_TABLE + " (" + SESSION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DATE_TIME + " TEXT, " + SYLLABARY + " TEXT, " + MISTAKES + " INTEGER, " + SCORE + " INTEGER, " + TIME + " TEXT, " + WRONG_CHARS + " TEXT, " + USER_ID + " INTEGER, " + " FOREIGN KEY(USER_ID) REFERENCES USER_TABLE (USER_ID)  ON DELETE CASCADE)";
         sqLiteDatabase.execSQL(createSessionTable);
     }
 
@@ -80,12 +80,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 cv.clear();
                 break;
             case "addSession":
+                cv.put(DATE_TIME, sessionModel.getDate_time());
                 cv.put(SYLLABARY, sessionModel.getSyllabary());
                 cv.put(MISTAKES, sessionModel.getMistakes());
                 cv.put(SCORE, sessionModel.getScore());
                 cv.put(TIME, sessionModel.getTime());
                 cv.put(WRONG_CHARS, sessionModel.getWrong_chars());
-                cv.put(DATE_TIME, sessionModel.getDate_time());
                 cv.put(USER_ID, sessionModel.getUser_id());
                 db.insert(SESSION_TABLE, null, cv);
                 break;
@@ -186,17 +186,17 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             do {
                 int sessionId = cursor.getInt(0);
-                String syllabary = cursor.getString(1);
-                int mistakes = cursor.getInt(2);
-                int score = cursor.getInt(3);
-                String time = cursor.getString(4);
-                String wrongChars = cursor.getString(5);
-                String dateTime = cursor.getString(6);
+                String dateTime = cursor.getString(1);
+                String syllabary = cursor.getString(2);
+                int mistakes = cursor.getInt(3);
+                int score = cursor.getInt(4);
+                String time = cursor.getString(5);
+                String wrongChars = cursor.getString(6);
                 int userId = cursor.getInt(7);
 
                 int numRows = (int) DatabaseUtils.longForQuery(db, "SELECT COUNT(*) FROM " + SESSION_TABLE + " WHERE " + USER_ID + " = " + user_id, null);
 
-                String[] data = {String.valueOf(sessionId), syllabary, String.valueOf(mistakes), String.valueOf(score), time, wrongChars, dateTime, String.valueOf(userId), String.valueOf(numRows)};
+                String[] data = {String.valueOf(sessionId), dateTime, syllabary, String.valueOf(mistakes), String.valueOf(score), time, wrongChars, String.valueOf(userId), String.valueOf(numRows)};
                 stringList.addAll(Arrays.asList(data));
             } while(cursor.moveToNext());
         }
@@ -206,25 +206,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return stringList;
     }
 
-    public List<SessionModel> getAllSessions(int user_id) {
+//    public List<SessionModel> getAllSessions(int user_id) { // TODO old
+    public List<String> getAllSessions(int user_id) { // TODO new
         SQLiteDatabase db = this.getReadableDatabase();
-        List<SessionModel> returnList = new ArrayList<>();
+//        List<SessionModel> returnList = new ArrayList<>(); // TODO old
+        List<String> returnList = new ArrayList<>(); // TODO new
 
         String getAllQuery = "SELECT * FROM " + SESSION_TABLE + " WHERE " + USER_ID + " = " + user_id + " ORDER BY DATE_TIME DESC";
         Cursor cursor = db.rawQuery(getAllQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 int sessionID = cursor.getInt(0); // TODO
-                String syllabary = cursor.getString(1);
-                int mistakes = cursor.getInt(2);
-                int score = cursor.getInt(3);
-                String time = cursor.getString(4);
-                String wrongChars = cursor.getString(5);
-                String dateTime = cursor.getString(6);
+                String dateTime = cursor.getString(1);
+                String syllabary = cursor.getString(2);
+                int mistakes = cursor.getInt(3);
+                int score = cursor.getInt(4);
+                String time = cursor.getString(5);
+                String wrongChars = cursor.getString(6);
                 int userID = cursor.getInt(7); // TODO
 
-                SessionModel sessionModel = new SessionModel(sessionID, syllabary, mistakes, score, time, wrongChars, dateTime, userID);
-                returnList.add(sessionModel);
+//                SessionModel sessionModel = new SessionModel(sessionID, dateTime, syllabary, mistakes, score, time, wrongChars, userID); // TODO old
+//                returnList.add(sessionModel); // TODO old
+                String[] data = {dateTime, syllabary, String.valueOf(mistakes), String.valueOf(score), time, wrongChars}; // TODO new
+                returnList.addAll(Arrays.asList(data)); // TODO new
             } while(cursor.moveToNext());
         }
 

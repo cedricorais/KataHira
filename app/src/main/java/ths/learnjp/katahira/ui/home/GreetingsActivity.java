@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
 
-import ths.learnjp.katahira.DBHelper;
 import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
 import ths.learnjp.katahira.Speech;
@@ -30,12 +30,12 @@ import ths.learnjp.katahira.Speech;
 public class GreetingsActivity extends AppCompatActivity {
 
     Button audio1, audio2, audio3, audio4, audio5, audio6, audio7, audio8, audio9, audio10, mic1, mic2, mic3, mic4, mic5, mic6, mic7, mic8, mic9, mic10;
-    ImageView done1, done2, done3, done4, done5, done6, done7, done8, done9, done10;
+    ImageView done1, done2, done3, done4, done5, done6, done7, done8, done9, done10, profileHelp;
     TextToSpeech tts;
-    TextView profileText, progressText;
+    TextView profileText, progressText, adjust;
     View layout;
 
-    String[] phrases = {"はい", "いいえ", "お願いします", "ありがとう", "どういたしまして", "すみません", "ごめんなさい", "わかりません", "知りません", "ただいま"}; // TODO
+    String[] phrases = {"はい", "いいえ", "お願いします", "ありがとう", "どういたしまして", "すみません", "ごめんなさい", "わかりません", "知りません", "ただいま"};
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -69,6 +69,7 @@ public class GreetingsActivity extends AppCompatActivity {
 
         profileText = findViewById(R.id.currentProfileValue);
         progressText = findViewById(R.id.progressValue);
+        adjust = findViewById(R.id.wc);
 
         done1 = findViewById(R.id.done1);
         done2 = findViewById(R.id.done2);
@@ -80,22 +81,27 @@ public class GreetingsActivity extends AppCompatActivity {
         done8 = findViewById(R.id.done8);
         done9 = findViewById(R.id.done9);
         done10 = findViewById(R.id.done10);
+        profileHelp = findViewById(R.id.profileHelp);
 
-        tts = new TextToSpeech(getApplicationContext(), i -> {
-            if (i != TextToSpeech.ERROR) {
-                tts.setLanguage(Locale.JAPANESE);
-            }
-        });
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        if (dpWidth == 360) {
+            adjust.setText(R.string.WcGmWnHf);
+        } else {
+            adjust.setText(R.string.indicator);
+        }
 
         if (Global.selectedProfile == null) {
             profileText.setText(R.string.n_a);
             progressText.setText("0/10"); // TODO
-//            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Select a profile first in dashboard menu.", Snackbar.LENGTH_INDEFINITE);
-//            snackbar.setAction("Dismiss", view -> snackbar.dismiss()).show();
-            Snackbar.make(layout, "Select a profile first in dashboard menu.", Snackbar.LENGTH_INDEFINITE).setAction("Dashboard", view -> { // TODO
-                HomeFragment.fromDB = true; // TODO
+
+            Snackbar snackbar = Snackbar.make(layout, getString(R.string.require_profile), Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction(R.string.dismiss, view -> snackbar.dismiss()).show();
+            /*Snackbar.make(layout, getString(R.string.require_profile), Snackbar.LENGTH_INDEFINITE).setAction(R.string.title_dashboard, view -> { // TODO
+                HomeFragment.lastActivity = true; // TODO
                 finish();
-            }).show();
+            }).show();*/
+
             mic1.setEnabled(false);
             mic2.setEnabled(false);
             mic3.setEnabled(false);
@@ -124,6 +130,8 @@ public class GreetingsActivity extends AppCompatActivity {
 
             showCheck(false, null); // TODO
         }
+
+        profileHelp.setOnClickListener(view -> Toast.makeText(this, "help", Toast.LENGTH_SHORT).show());
 
         Speech speech = new Speech();
         speech.setupSpeechRecognizer(this, layout);
@@ -176,6 +184,12 @@ public class GreetingsActivity extends AppCompatActivity {
             checkPermission();
             speech.stopListening();
             speech.startListening("greetings", phrases[9], done10, progressText);
+        });
+
+        tts = new TextToSpeech(getApplicationContext(), i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.JAPANESE);
+            }
         });
 
         audio1.setOnClickListener(view -> {
@@ -233,7 +247,6 @@ public class GreetingsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -260,9 +273,9 @@ public class GreetingsActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Snackbar.make(layout, "Permission Granted.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(layout, getString(R.string.granted_perm), Snackbar.LENGTH_LONG).show();
         } else {
-            Snackbar.make(layout, "Please grant permission to use this feature.", Snackbar.LENGTH_LONG).setAction("Grant", view -> checkPermission()).show();
+            Snackbar.make(layout, getString(R.string.request_perm), Snackbar.LENGTH_LONG).setAction(R.string.grant, view -> checkPermission()).show();
         }
     }
 

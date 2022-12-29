@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +61,9 @@ public class DashboardFragment extends Fragment {
     boolean isAllFabVisible;
     String[] options = new String[]{"Select"};
     final List<String> selectProfile = new ArrayList<>(Arrays.asList(options));
+
+    public static boolean lastActivity = false; // TODO
+    int index = 0; // TODO
 
     DBHelper dbHelper;
     FlashView flashView  = new FlashView();
@@ -146,6 +151,7 @@ public class DashboardFragment extends Fragment {
             flashView.stopFlash(fab);
         } else {
             flashView.startFlash(fab);
+            showHelp("profile", getActivity());
         }
 
         isAllFabVisible = false;
@@ -201,14 +207,35 @@ public class DashboardFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//        if (lastActivity) {
+//            lastActivity = false;
+//            refreshFragment();
+//        }
+        profileSpin.setSelection(0);
+        profileSpin.setSelection(index);
+//        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+//            Toast.makeText(getContext(), Global.selectedProfile, Toast.LENGTH_SHORT).show();
+//            profileSpin.setSelection(selectProfile.indexOf(Global.selectedProfile));
+//        }, 5000);
+//        selectedUser(Global.selectedProfile);
+    }
+
     private void refreshFragment() {
         navController = Navigation.findNavController(root);
         navController.navigate(R.id.navigation_dashboard);
+//        selectedUser(selectProfile.get(0));
+//        selectedUser(Global.selectedProfile);
+//        profileSpin.setSelection(1);
+//        profileSpin.setSelection(selectProfile.indexOf(Global.selectedProfile));
     }
 
     private void selectedUser(String selectedText) {
         Global.selectedProfile = selectedText;
-        Toast.makeText(getContext(), String.format("'%s' is now selected", selectedText), Toast.LENGTH_SHORT).show();
+        index = selectProfile.indexOf(Global.selectedProfile); // TODO
+        Toast.makeText(getContext(), String.format(getString(R.string.profile_selected), selectedText), Toast.LENGTH_SHORT).show();
 
         List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
         Global.selectedProfileId = Integer.parseInt(userData.get(0));
@@ -264,11 +291,11 @@ public class DashboardFragment extends Fragment {
                 Global.greetings_progress = Integer.parseInt(data.get(5));
                 Global.phrases_progress = Integer.parseInt(data.get(6));
 
-                Global.syllabary = data.get(8);
-                Global.session_mistake = Integer.parseInt(data.get(9));
-                Global.session_score = Integer.parseInt(data.get(10));
-                Global.latestTime = data.get(11);
-                Global.dateTimeNow = data.get(13);
+                Global.dateTimeNow = data.get(8);
+                Global.syllabary = data.get(9);
+                Global.session_mistake = Integer.parseInt(data.get(10));
+                Global.session_score = Integer.parseInt(data.get(11));
+                Global.latestTime = data.get(12);
                 break;
         }
 
@@ -454,16 +481,16 @@ public class DashboardFragment extends Fragment {
                 View view = layoutInflater.inflate(R.layout.tutorial_layout, activity.findViewById(R.id.main), false);
 
                 ImageView img = view.findViewById(R.id.image); // TODO
-                Integer[] pics = new Integer[]{R.drawable.guess1, R.drawable.guess2, R.drawable.guess3, R.drawable.guess4, R.drawable.guess5, R.drawable.guess6, R.drawable.guess7};
+                Integer[] pics = new Integer[]{R.drawable.profile1, R.drawable.profile2, R.drawable.profile3, R.drawable.profile4, R.drawable.profile5};
                 List<Integer> tutorialPics = new ArrayList<>(Arrays.asList(pics));
                 img.setImageResource(tutorialPics.get(0));
 
                 TextView text = view.findViewById(R.id.text); // TODO
-                String[] texts = new String[]{getString(R.string.guess1), getString(R.string.guess2), getString(R.string.guess3), getString(R.string.guess4), getString(R.string.guess5), getString(R.string.guess6), getString(R.string.guess7)};
+                String[] texts = new String[]{getString(R.string.profile1), getString(R.string.profile2), getString(R.string.profile3), getString(R.string.profile4), getString(R.string.profile5)};
                 List<String> tutorialText = new ArrayList<>(Arrays.asList(texts));
                 text.setText(tutorialText.get(0));
-                
-                alert.setTitle("Profiles");
+
+                alert.setTitle(R.string.profiles_help);
                 alert.setView(view);
                 alert.setPositiveButton(R.string.next, null);
                 alert.setNegativeButton(R.string.previous, null);
@@ -494,7 +521,7 @@ public class DashboardFragment extends Fragment {
                 break;
             case "rank":
                 alert.setTitle(R.string.rank_prerequisite);
-                alert.setMessage(R.string.ranks);
+                alert.setMessage(R.string.ranks); // TODO
                 alert.setNeutralButton(R.string.close, (dialogInterface, i) -> dialogInterface.dismiss());
                 alert.show();
                 break;
