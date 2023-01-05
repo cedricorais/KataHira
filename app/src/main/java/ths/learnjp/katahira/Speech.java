@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import ths.learnjp.katahira.ui.home.GreetingsActivity;
 import ths.learnjp.katahira.ui.home.PhrasesActivity;
@@ -27,7 +28,7 @@ public class Speech {
 
     static SpeechRecognizer speechRecognizer;
     static Intent speechRecognizerIntent;
-    public static String activity, evaluate;
+    public static String activity, evaluate, key;
 
     public void setupSpeechRecognizer(Context context, View view) {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context);
@@ -39,8 +40,8 @@ public class Speech {
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
             public void onReadyForSpeech(Bundle params) {
-                snackbar = Snackbar.make(view, "Listening...", Snackbar.LENGTH_INDEFINITE);
-                snackbar.setAction("Stop", view -> onEndOfSpeech()).show();
+                snackbar = Snackbar.make(view, R.string.listen_ongoing, Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction(context.getString(R.string.stop), view -> onEndOfSpeech()).show();
             }
 
             @Override
@@ -61,7 +62,7 @@ public class Speech {
             @Override
             public void onEndOfSpeech() {
                 snackbar.dismiss();
-                Snackbar.make(view, "Listening ended.", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, context.getString(R.string.listen_end), Snackbar.LENGTH_LONG).show();
                 stopListening();
             }
 
@@ -77,27 +78,37 @@ public class Speech {
                 ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if (matches != null) {
                     if (matches.get(0).equals(evaluate)) {
-                        Toast.makeText(context, "Correct Pronunciation.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.correct_pronunciation), Toast.LENGTH_LONG).show();
                         switch (activity) {
                             case "greetings":
-                                Global.greetings_progress++; // TODO
-                                dbHelper.updateData("greetings", Global.selectedProfile, String.valueOf(Global.greetings_progress)); // TODO
-                                progress.setText(Global.greetings_progress + "/10"); // TODO
+                                if (!Objects.equals(Global.greetings.get(key), true)) {
+                                    Global.greetings.put(key, true);
+                                    Global.greetings_progress++;
+                                    dbHelper.updateData("greetings_done", Global.selectedProfile, String.valueOf(Global.greetings_progress));
+                                    dbHelper.updateData("greetings", Global.selectedProfile, String.valueOf(Global.greetings));
+                                    progress.setText(Global.greetings_progress + "/10");
 
-                                GreetingsActivity greetingsActivity = new GreetingsActivity();
-                                greetingsActivity.showCheck(true, image);
+                                    GreetingsActivity.recorded = true;
+                                    GreetingsActivity greetingsActivity = new GreetingsActivity();
+                                    greetingsActivity.showCheck(true, image, context);
+                                }
                                 break;
                             case "phrases":
-                                Global.phrases_progress++; // TODO
-                                dbHelper.updateData("phrases", Global.selectedProfile, String.valueOf(Global.phrases_progress)); // TODO
-                                progress.setText(Global.phrases_progress + "/10"); // TODO
+                                if (!Objects.equals(Global.phrases.get(key), true)) {
+                                    Global.phrases.put(key, true);
+                                    Global.phrases_progress++;
+                                    dbHelper.updateData("phrases_done", Global.selectedProfile, String.valueOf(Global.phrases_progress));
+                                    dbHelper.updateData("phrases", Global.selectedProfile, String.valueOf(Global.phrases));
+                                    progress.setText(Global.phrases_progress + "/10");
 
-                                PhrasesActivity phrasesActivity = new PhrasesActivity();
-                                phrasesActivity.showCheck(true, image);
+                                    PhrasesActivity.recorded = true;
+                                    PhrasesActivity phrasesActivity = new PhrasesActivity();
+                                    phrasesActivity.showCheck(true, image, context);
+                                }
                                 break;
                         }
                     } else {
-                        Toast.makeText(context, "Incorrect Pronunciation, try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.incorrect_pronunciation, Toast.LENGTH_LONG).show();
                     }
                 } /*else {
                     Toast.makeText(context, " Sorry, didn't catch that. Please, try again.", Toast.LENGTH_SHORT).show();
@@ -116,9 +127,10 @@ public class Speech {
         });
     }
 
-    public void startListening(String act, String phrase, ImageView img, TextView prog) {
+    public void startListening(String act, String phrase, ImageView img, TextView prog, String keyPhrase) {
         activity = act;
         evaluate = phrase;
+        key = keyPhrase;
         image = img;
         progress = prog;
         speechRecognizer.startListening(speechRecognizerIntent);

@@ -1,7 +1,5 @@
 package ths.learnjp.katahira.ui;
 
-import static ths.learnjp.katahira.Global.chara_set;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -22,12 +20,13 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 import ths.learnjp.katahira.CharacterManager;
+import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
 import ths.learnjp.katahira.Score;
 import ths.learnjp.katahira.old.OldActivity;
 import ths.learnjp.katahira.old.OldActivity2;
 
-public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SettingsActivity extends AppCompatActivity {
 
     String[] selected_option;
 
@@ -44,10 +43,29 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         selected_option = CharacterManager.getLanguages(getApplicationContext());
 
         langSpin = findViewById(R.id.lang);
-        langSpin.setOnItemSelectedListener(this);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, selected_option);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, selected_option);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         langSpin.setAdapter(adapter);
+        langSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), selected_option[position], Toast.LENGTH_LONG).show();
+                Snackbar.make(view, selected_option[position], Snackbar.LENGTH_LONG).show();
+                if (position > 0) {
+                    CharacterManager.setLanguage(getApplicationContext(), "Test"); // TODO test
+                    CharacterManager.setCharaSet("10 chars kata");
+                } else {
+                    CharacterManager.setLanguage(getApplicationContext(), "Japanese");
+                    CharacterManager.setCharaSet("Katakana");
+                }
+                Score.initializeScore();
+                System.out.println(Global.chara_set);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // some code
+            }
+        });
 
         toggleTheme = findViewById(R.id.toggleTheme); // TODO remove switch
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
@@ -100,20 +118,10 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             textView.setText(textArray[i]);
             linearLayout.addView(textView);
         }*/
-        CharacterManager.setCharaSet("Katakana");
-        Score.initializeScore(); // TODO LOAD SCORE
-        System.out.println(chara_set);
-        CharacterManager.setCharaSet("Hiragana");
-        Score.initializeScore(); // TODO LOAD SCORE
-        System.out.println(chara_set);
     }
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-            return;
-        }
         super.onBackPressed();
     }
     @Override
@@ -123,16 +131,5 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-//        Toast.makeText(getApplicationContext(), selected_option[position], Toast.LENGTH_LONG).show();
-//        Snackbar.make(view, selected_option[position], Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        //
     }
 }

@@ -58,7 +58,6 @@ public class GuessActivity extends AppCompatActivity {
     FlashView flashView  = new FlashView();
     Toasts toasts = new Toasts();
 
-    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +84,7 @@ public class GuessActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
-//        List<SessionModel> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0)))); // TODO old
-        List<String> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0)))); // TODO new
+        List<String> allSession = new ArrayList<>(dbHelper.getAllSessions(Integer.parseInt(userData.get(0))));
         if (allSession.isEmpty()) {
             showAlertDialog("tutorial", this);
         }
@@ -356,10 +354,7 @@ public class GuessActivity extends AppCompatActivity {
                 } else {
                     alert.setMessage(R.string.exit);
                 }
-                alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-//                    DashboardFragment.lastActivity = true;
-                    super.onBackPressed();
-                });
+                alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> super.onBackPressed());
                 alert.setNegativeButton(R.string.no, (dialogInterface, i) -> {
                     if (sessionStart) {
                         Global.startTimer = true;
@@ -400,23 +395,23 @@ public class GuessActivity extends AppCompatActivity {
                 final int[] index = {0};
                 final AlertDialog alertDialog = alert.create();
                 alertDialog.show();
-                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(false);
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                     index[0]++;
                     img.setImageResource(tutorialPics.get(index[0]));
                     text.setText(tutorialText.get(index[0]));
-                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.VISIBLE);
+                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(true);
                     if (index[0] == tutorialPics.size() - 1) {
-                        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.GONE);
+                        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
                     }
                 });
                 alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
                     index[0]--;
                     img.setImageResource(tutorialPics.get(index[0]));
                     text.setText(tutorialText.get(index[0]));
-                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.VISIBLE);
+                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
                     if (index[0] == 0) {
-                        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(false);
                     }
                 });
                 break;
@@ -446,7 +441,7 @@ public class GuessActivity extends AppCompatActivity {
                 Global.latestTime = (String) timeValue.getText();
 
                 alert.setTitle(R.string.result);
-                alert.setMessage(String.format("Syllabary: %s\n%s: %s\n%s: %s\n%s: %s\nWrong Characters: %s", Global.syllabary, this.getString(R.string.mistakes), Global.session_mistake, this.getString(R.string.score), Global.session_score, this.getString(R.string.time), Global.latestTime, Global.wrongChars));
+                alert.setMessage(String.format("%s %s\n%s: %s\n%s: %s\n%s: %s\nWrong Characters: %s", this.getString(R.string.syllabary), Global.syllabary, this.getString(R.string.mistakes), Global.session_mistake, this.getString(R.string.score), Global.session_score, this.getString(R.string.time), Global.latestTime, Global.wrongChars));
                 if (!sessionSaved) {
                     alert.setPositiveButton(R.string.save_close, (dialogInterface, i) -> {
                         flashView.startFlash(resetBtn);

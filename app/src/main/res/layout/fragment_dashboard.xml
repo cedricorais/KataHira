@@ -373,98 +373,111 @@
         </RelativeLayout>
     </ScrollView>
 
-    <RelativeLayout
-        android:layout_width="200dp"
-        android:layout_height="300dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/profileFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="61dp"
+        android:contentDescription="@string/profile"
+        app:srcCompat="@drawable/ic_baseline_person_24" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/profileFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="61dp"
-            android:contentDescription="@string/profile"
-            app:srcCompat="@drawable/ic_baseline_person_24" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/profileFab"
+        android:layout_alignEnd="@+id/profileFab"
+        android:layout_marginEnd="4.5dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="end"
+        android:orientation="vertical">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/deleteFab"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/profileFab"
-            android:layout_alignEnd="@+id/profileFab"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="14dp"
-            android:contentDescription="@string/profile_delete"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_baseline_delete_24" />
-        <TextView
-            android:id="@+id/deleteText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/deleteFab"
-            android:layout_alignBottom="@+id/deleteFab"
-            android:layout_marginEnd="60dp"
+            android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="@android:color/darker_gray"
-            android:elevation="5dp"
-            android:padding="5dp"
-            android:text="@string/profile_delete"
-            android:textColor="?attr/colorOnTertiary"
-            android:textSize="15sp" />
+            android:orientation="horizontal">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/editFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/deleteFab"
-            android:layout_alignEnd="@+id/deleteFab"
-            android:layout_marginBottom="14dp"
-            android:contentDescription="@string/profile_rename"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_baseline_edit_24" />
-        <TextView
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/editFab"
-            android:layout_alignBottom="@+id/editFab"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/darker_gray"
-            android:elevation="5dp"
-            android:padding="5dp"
-            android:text="@string/profile_rename"
-            android:textColor="?attr/colorOnTertiary"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/addText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/darker_gray"
+                android:elevation="5dp"
+                android:padding="5dp"
+                android:text="@string/profile_add"
+                android:textColor="?attr/colorOnTertiary"
+                android:textSize="15sp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addFab"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/profile_add"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_baseline_person_add_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/editFab"
-            android:layout_alignEnd="@+id/editFab"
-            android:layout_marginBottom="14dp"
-            android:contentDescription="@string/profile_add"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_baseline_person_add_24" />
-        <TextView
-            android:id="@+id/addText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/addFab"
-            android:layout_alignBottom="@+id/addFab"
-            android:layout_marginEnd="60dp"
             android:layout_marginBottom="8dp"
-            android:background="@android:color/darker_gray"
-            android:elevation="5dp"
-            android:padding="5dp"
-            android:text="@string/profile_add"
-            android:textColor="?attr/colorOnTertiary"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/darker_gray"
+                android:elevation="5dp"
+                android:padding="5dp"
+                android:text="@string/profile_rename"
+                android:textColor="?attr/colorOnTertiary"
+                android:textSize="15sp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/editFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/profile_rename"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_baseline_edit_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/deleteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/darker_gray"
+                android:elevation="5dp"
+                android:padding="5dp"
+                android:text="@string/profile_delete"
+                android:textColor="?attr/colorOnTertiary"
+                android:textSize="15sp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/deleteFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/profile_delete"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_baseline_delete_24" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

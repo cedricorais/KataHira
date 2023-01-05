@@ -53,6 +53,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -63,7 +64,6 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textSize="24sp" />
 
-            <!-- TODO -->
             <TextView
                 android:id="@+id/progressValue"
                 android:layout_width="wrap_content"
@@ -73,9 +73,16 @@
                 android:text="@string/zero_10"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/rankHelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_baseline_help_outline_24"
+                app:tint="?attr/colorOnTertiary" />
         </LinearLayout>
 
-        <!-- TODO -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/greeting1"
             android:layout_width="match_parent"
@@ -132,6 +139,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -192,6 +200,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -252,6 +261,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -312,6 +322,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -373,6 +384,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -433,6 +445,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -493,6 +506,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -553,6 +567,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -613,6 +628,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -673,6 +689,7 @@
                 android:layout_gravity="end"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
                 app:tint="#A149F483" />
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

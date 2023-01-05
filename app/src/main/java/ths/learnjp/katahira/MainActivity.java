@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 //    public String[] language_names = CharaManager.getLanguages(getApplicationContext()); // ILIPAT SA DROP DOWN
 
-    boolean doubleBackToExit = false; // TODO
+    boolean doubleBackToExit = false;
 
     Map current_language;
     Map current_chara_set;
@@ -52,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO Update
         // Set Japanese/Katakana as default language.
-        CharacterManager.setLanguage(getApplicationContext(), "Japanese");
-        CharacterManager.setCharaSet("Katakana");
+//        CharacterManager.setLanguage(getApplicationContext(), "Japanese");
+//        CharacterManager.setCharaSet("Katakana");
+        CharacterManager.setLanguage(getApplicationContext(), "Test"); // TODO
+        CharacterManager.setCharaSet("10 chars kata");
         // TODO DELETE
         Score.initializeScore();
 
@@ -62,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         toast.showToast(this, "Welcome!", null);
     }
 
-    @SuppressLint("ResourceType")
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menus, menu);
 //        menu.removeItem(R.id.settings); // TODO remove comment
@@ -74,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
-                NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main); // TODO
-                navController.navigate(R.id.navigation_home); // TODO
+//                NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main); // TODO
+//                navController.navigate(R.id.navigation_home);
                 startActivity(intent);
                 return true;
             case R.id.tutorial:
-                Toast.makeText(this, "tutorial", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "tutorial", Toast.LENGTH_SHORT).show(); // TODO
                 return true;
         }
         return (super.onOptionsItemSelected(item));
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         this.doubleBackToExit = true;
-        Toast.makeText(this, "Press BACK again to exit.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.prompt_exit), Toast.LENGTH_SHORT).show();
         new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExit = false, 2000);
     }
 

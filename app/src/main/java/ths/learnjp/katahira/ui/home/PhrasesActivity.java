@@ -2,15 +2,21 @@ package ths.learnjp.katahira.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +27,11 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
@@ -30,12 +40,15 @@ import ths.learnjp.katahira.Speech;
 public class PhrasesActivity extends AppCompatActivity {
 
     Button audio1, audio2, audio3, audio4, audio5, audio6, audio7, audio8, audio9, audio10, mic1, mic2, mic3, mic4, mic5, mic6, mic7, mic8, mic9, mic10;
-    ImageView done1, done2, done3, done4, done5, done6, done7, done8, done9, done10, profileHelp;
+    ImageView done1, done2, done3, done4, done5, done6, done7, done8, done9, done10, profileHelp, rankHelp;
     TextToSpeech tts;
     TextView profileText, progressText, adjust1, adjust2, adjust3;
     View layout;
 
+    List<Button> audios, mics;
+    List<ImageView> imgs;
     String[] phrases = {"おはようございます", "こんばんは", "おやすみなさい", "お名前は何ですか", "お元気ですか", "元気です", "初めまして", "ようこそ", "こんにちは", "さようなら"};
+    public static boolean recorded = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -55,6 +68,7 @@ public class PhrasesActivity extends AppCompatActivity {
         mic8 = findViewById(R.id.mic8);
         mic9 = findViewById(R.id.mic9);
         mic10 = findViewById(R.id.mic10);
+        mics = new ArrayList<>(Arrays.asList(mic1, mic2, mic3, mic4, mic5, mic6, mic7, mic8, mic9, mic10));
 
         audio1 = findViewById(R.id.audio1);
         audio2 = findViewById(R.id.audio2);
@@ -66,6 +80,7 @@ public class PhrasesActivity extends AppCompatActivity {
         audio8 = findViewById(R.id.audio8);
         audio9 = findViewById(R.id.audio9);
         audio10 = findViewById(R.id.audio10);
+        audios = new ArrayList<>(Arrays.asList(audio1, audio2, audio3, audio4, audio5, audio6, audio7, audio8, audio9, audio10));
 
         profileText = findViewById(R.id.currentProfileValue);
         progressText = findViewById(R.id.progressValue);
@@ -84,6 +99,8 @@ public class PhrasesActivity extends AppCompatActivity {
         done9 = findViewById(R.id.done9);
         done10 = findViewById(R.id.done10);
         profileHelp = findViewById(R.id.profileHelp);
+        rankHelp = findViewById(R.id.rankHelp);
+        imgs = new ArrayList<>(Arrays.asList(done1, done2, done3, done4, done5, done6, done7, done8, done9, done10));
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
@@ -99,155 +116,95 @@ public class PhrasesActivity extends AppCompatActivity {
 
         if (Global.selectedProfile == null) {
             profileText.setText(R.string.n_a);
-            progressText.setText("0/10"); // TODO
+            progressText.setText("0/10");
 
             Snackbar snackbar = Snackbar.make(layout, getString(R.string.require_profile), Snackbar.LENGTH_INDEFINITE);
-            snackbar.setAction(R.string.dismiss, view -> snackbar.dismiss()).show();
+            snackbar.setAction(R.string.close, view -> snackbar.dismiss()).show();
             /*Snackbar.make(layout, getString(R.string.require_profile), Snackbar.LENGTH_INDEFINITE).setAction(R.string.title_dashboard, view -> { // TODO
                 HomeFragment.lastActivity = true; // TODO
-                finish();
+                onBackPressed();
             }).show();*/
 
-            mic1.setEnabled(false);
-            mic2.setEnabled(false);
-            mic3.setEnabled(false);
-            mic4.setEnabled(false);
-            mic5.setEnabled(false);
-            mic6.setEnabled(false);
-            mic7.setEnabled(false);
-            mic8.setEnabled(false);
-            mic9.setEnabled(false);
-            mic10.setEnabled(false);
+            for (Button mic : mics) {
+                mic.setEnabled(false);
+            }
 
-            showCheck(false, null);
+            showCheck(false, null, null);
         } else {
             profileText.setText(Global.selectedProfile);
-            progressText.setText(Global.phrases_progress + "/10"); // TODO
-            mic1.setEnabled(true);
-            mic2.setEnabled(true);
-            mic3.setEnabled(true);
-            mic4.setEnabled(true);
-            mic5.setEnabled(true);
-            mic6.setEnabled(true);
-            mic7.setEnabled(true);
-            mic8.setEnabled(true);
-            mic9.setEnabled(true);
-            mic10.setEnabled(true);
+            progressText.setText(Global.phrases_progress + "/10");
+            if (Global.greetings_progress == 0){
+                showTutorial();
+            }
 
-            showCheck(false, null); // TODO
+            for (Button mic : mics) {
+                mic.setEnabled(true);
+            }
+
+            if (Objects.equals(Global.phrases.get("phrase0"), true)) {
+                showCheck(true, done1, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase1"), true)) {
+                showCheck(true, done2, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase2"), true)) {
+                showCheck(true, done3, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase3"), true)) {
+                showCheck(true, done4, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase4"), true)) {
+                showCheck(true, done5, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase5"), true)) {
+                showCheck(true, done6, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase6"), true)) {
+                showCheck(true, done7, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase7"), true)) {
+                showCheck(true, done8, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase8"), true)) {
+                showCheck(true, done9, null);
+            }
+            if (Objects.equals(Global.phrases.get("phrase9"), true)) {
+                showCheck(true, done10, null);
+            }
         }
-        
-        profileHelp.setOnClickListener(view -> Toast.makeText(this, "help", Toast.LENGTH_SHORT).show());
+
+        TooltipCompat.setTooltipText(profileHelp, getString(R.string.help_profile));
+        profileHelp.setOnClickListener(view -> profileHelp.performLongClick());
+        TooltipCompat.setTooltipText(rankHelp, getString(R.string.help_progress));
+        rankHelp.setOnClickListener(view -> rankHelp.performLongClick());
 
         Speech speech = new Speech();
         speech.setupSpeechRecognizer(this, layout);
-        mic1.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[0], done1, progressText);
-        });
-        mic2.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[1], done2, progressText);
-        });
-        mic3.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[2], done3, progressText);
-        });
-        mic4.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[3], done4, progressText);
-        });
-        mic5.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[4], done5, progressText);
-        });
-        mic6.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[5], done6, progressText);
-        });
-        mic7.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[6], done7, progressText);
-        });
-        mic8.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[7], done8, progressText);
-        });
-        mic9.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[8], done9, progressText);
-        });
-        mic10.setOnClickListener(view -> {
-            checkPermission();
-            speech.stopListening();
-            speech.startListening("phrases", phrases[9], done10, progressText);
-        });
+        int indexMic = 0, indexAudio = 0;
+        for (Button button : mics) {
+            int finalIndex = indexMic;
+            button.setOnClickListener(view -> {
+                checkPermission();
+                speech.stopListening();
+                speech.startListening("phrases", phrases[finalIndex], imgs.get(finalIndex), progressText, "phrase" + finalIndex);
+            });
+            indexMic++;
+        }
 
         tts = new TextToSpeech(getApplicationContext(), i -> {
             if (i != TextToSpeech.ERROR) {
                 tts.setLanguage(Locale.JAPANESE);
             }
         });
-
-        audio1.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[0], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio2.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[1], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio3.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[2], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio4.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[3], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio5.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[4], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio6.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[5], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio7.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[6], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio8.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[7], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio9.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[8], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
-        audio10.setOnClickListener(view -> {
-            speech.stopListening();
-            Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
-            tts.speak(phrases[9], TextToSpeech.QUEUE_FLUSH, null, null);
-        });
+        for (Button button : audios) {
+            int finalIndex = indexAudio;
+            button.setOnClickListener(view -> {
+                speech.stopListening();
+                Toast.makeText(this, getString(R.string.tts_playing), Toast.LENGTH_SHORT).show();
+                tts.speak(phrases[finalIndex], TextToSpeech.QUEUE_FLUSH, null, null);
+            });
+            indexAudio++;
+        }
     }
 
     @Override
@@ -269,7 +226,7 @@ public class PhrasesActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.tutorial:
-                Toast.makeText(this, "tutorial", Toast.LENGTH_SHORT).show(); // TODO
+                showTutorial();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -285,26 +242,69 @@ public class PhrasesActivity extends AppCompatActivity {
         }
     }
 
-    public void checkPermission() {
+    private void checkPermission() {
         if (ContextCompat.checkSelfPermission(PhrasesActivity.this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(PhrasesActivity.this, new String[]{ Manifest.permission.RECORD_AUDIO }, 0);
         }
     }
 
-    public void showCheck(boolean show, View view) {
+    public void showCheck(boolean show, ImageView img, Context context) {
         if (!show) {
-            done1.setVisibility(View.GONE);
-            done2.setVisibility(View.GONE);
-            done3.setVisibility(View.GONE);
-            done4.setVisibility(View.GONE);
-            done5.setVisibility(View.GONE);
-            done6.setVisibility(View.GONE);
-            done7.setVisibility(View.GONE);
-            done8.setVisibility(View.GONE);
-            done9.setVisibility(View.GONE);
-            done10.setVisibility(View.GONE);
+            for (ImageView image : imgs) {
+                image.setVisibility(View.GONE);
+            }
         } else {
-            view.setVisibility(View.VISIBLE);
+            img.setVisibility(View.VISIBLE);
+            if (recorded) {
+                ((Activity)context).finish();
+                ((Activity)context).overridePendingTransition(0, 0);
+            }
         }
+    }
+
+    private void showTutorial() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.tutorial_layout, this.findViewById(R.id.main), false);
+
+        ImageView img = view.findViewById(R.id.image);
+        Integer[] pics = new Integer[]{R.drawable.pronunciation1, R.drawable.pronunciation2, R.drawable.pronunciation3, R.drawable.pronunciation4};
+        List<Integer> tutorialPics = new ArrayList<>(Arrays.asList(pics));
+        img.setImageResource(tutorialPics.get(0));
+
+        TextView text = view.findViewById(R.id.text);
+        String[] texts = new String[]{getString(R.string.pronunciation1), getString(R.string.pronunciation2), getString(R.string.pronunciation3), getString(R.string.pronunciation4)};
+        List<String> tutorialText = new ArrayList<>(Arrays.asList(texts));
+        text.setText(tutorialText.get(0));
+
+        alert.setTitle(R.string.pronunciation_title);
+        alert.setView(view);
+        alert.setPositiveButton(R.string.next, null);
+        alert.setNegativeButton(R.string.previous, null);
+        alert.setNeutralButton(R.string.close, ((dialogInterface, i) -> dialogInterface.dismiss()));
+
+        final int[] index = {0};
+        final AlertDialog alertDialog = alert.create();
+        alertDialog.show();
+        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(false);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            index[0]++;
+            img.setImageResource(tutorialPics.get(index[0]));
+            text.setText(tutorialText.get(index[0]));
+            alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(true);
+            if (index[0] == tutorialPics.size() - 1) {
+                alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
+            }
+        });
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
+            index[0]--;
+            img.setImageResource(tutorialPics.get(index[0]));
+            text.setText(tutorialText.get(index[0]));
+            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
+            if (index[0] == 0) {
+                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(false);
+            }
+        });
     }
 }

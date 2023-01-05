@@ -5,10 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -43,6 +40,7 @@ import ths.learnjp.katahira.Global;
 import ths.learnjp.katahira.R;
 import ths.learnjp.katahira.UserModel;
 import ths.learnjp.katahira.databinding.FragmentDashboardBinding;
+import ths.learnjp.katahira.ui.home.HomeFragment;
 
 public class DashboardFragment extends Fragment {
 
@@ -52,24 +50,22 @@ public class DashboardFragment extends Fragment {
     FloatingActionButton fab, addFab, editFab, deleteFab;
     ImageView profileHelp, rankHelp;
     NavController navController;
+    Snackbar snackbar;
     Spinner profileSpin;
-    TextView rankText, totalSessionText, dateTimeText, syllabaryText, mistakesText, scoreText, timeText, greetingText, phraseText, addFabText, editFabText, deleteFabText;
-    RelativeLayout main; // TODO hide fab when touched outside
-    androidx.appcompat.widget.Toolbar tb1, tb2; // TODO hide fab when touched outside
+    TextView rankText, totalSessionText, dateTimeText, syllabaryText, mistakesText, scoreText, timeText,
+            greetingText, phraseText, addFabText, editFabText, deleteFabText;
+    RelativeLayout main;
+    androidx.appcompat.widget.Toolbar tb1, tb2;
     View root;
 
     boolean isAllFabVisible;
     String[] options = new String[]{"Select"};
     final List<String> selectProfile = new ArrayList<>(Arrays.asList(options));
 
-    public static boolean lastActivity = false; // TODO
-    int index = 0; // TODO
-
     DBHelper dbHelper;
     FlashView flashView  = new FlashView();
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
+    @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        DashboardViewModel dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
@@ -123,6 +119,8 @@ public class DashboardFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedText = (String) parent.getItemAtPosition(position);
                 if (position > 0) {
+                    snackbar = Snackbar.make(root, String.format(getString(R.string.profile_selected), selectedText), Snackbar.LENGTH_LONG);
+                    snackbar.setAnchorView(R.id.nav_view).setAction(R.string.close, view1 -> snackbar.dismiss()).show();
                     selectedUser(selectedText);
                 } else {
                     flashView.stopFlash(guessBtn);
@@ -180,14 +178,14 @@ public class DashboardFragment extends Fragment {
 
         profileHelp.setOnClickListener(view -> {
             hideFabMenus();
-            showHelp("profile", getActivity()); // TODO
+            showHelp("profile", getActivity());
         });
         rankHelp.setOnClickListener(view -> {
             hideFabMenus();
             showHelp("rank", null);
         });
 
-        main = binding.main; // TODO hide fab when touched outside
+        main = binding.main;
         tb1 = binding.tb1;
         tb2 = binding.tb2;
         main.setOnClickListener(view -> hideFabMenus());
@@ -210,43 +208,37 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        if (lastActivity) {
-//            lastActivity = false;
-//            refreshFragment();
-//        }
-        profileSpin.setSelection(0);
-        profileSpin.setSelection(index);
-//        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-//            Toast.makeText(getContext(), Global.selectedProfile, Toast.LENGTH_SHORT).show();
-//            profileSpin.setSelection(selectProfile.indexOf(Global.selectedProfile));
-//        }, 5000);
-//        selectedUser(Global.selectedProfile);
+        if (Global.selectedProfile != null) {
+            selectedUser(Global.selectedProfile);
+        }
+
+        if (HomeFragment.goToHome) {
+            HomeFragment.goToHome = false;
+            navController = Navigation.findNavController(root);
+            navController.navigate(R.id.navigation_home);
+        }
     }
 
     private void refreshFragment() {
         navController = Navigation.findNavController(root);
         navController.navigate(R.id.navigation_dashboard);
-//        selectedUser(selectProfile.get(0));
-//        selectedUser(Global.selectedProfile);
-//        profileSpin.setSelection(1);
-//        profileSpin.setSelection(selectProfile.indexOf(Global.selectedProfile));
     }
 
     private void selectedUser(String selectedText) {
         Global.selectedProfile = selectedText;
-        index = selectProfile.indexOf(Global.selectedProfile); // TODO
-        Toast.makeText(getContext(), String.format(getString(R.string.profile_selected), selectedText), Toast.LENGTH_SHORT).show();
 
         List<String> userData = new ArrayList<>(dbHelper.getProfileData(Global.selectedProfile));
         Global.selectedProfileId = Integer.parseInt(userData.get(0));
         List<String> combined = new ArrayList<>(userData);
         combined.addAll(dbHelper.getSessionData(Global.selectedProfileId));
+        System.out.println(combined);
         try {
             flashView.stopFlash(guessBtn);
             guessBtn.setEnabled(true);
             historyBtn.setEnabled(true);
             setGlobalValues("hasData", combined);
         } catch (Exception e) {
+            System.out.println(e);
             flashView.startFlash(guessBtn);
             setGlobalValues("noData", userData);
         }
@@ -263,14 +255,18 @@ public class DashboardFragment extends Fragment {
                     Global.session_perfect_hira = 0;
                     Global.greetings_progress = 0;
                     Global.phrases_progress = 0;
+
+                    Global.greetings.clear();
+                    Global.phrases.clear();
+                    for (String key : Global.keys) {
+                        Global.greetings.put(key, false);
+                        Global.phrases.put(key, false);
+                    }
+
                     guessBtn.setEnabled(false);
-                }
-                else {
-                    Global.rank = data.get(2);
-                    Global.session_perfect_kata = Integer.parseInt(data.get(3));
-                    Global.session_perfect_hira = Integer.parseInt(data.get(4));
-                    Global.greetings_progress = Integer.parseInt(data.get(5));
-                    Global.phrases_progress = Integer.parseInt(data.get(6));
+                } else {
+                    getData(data);
+
                     guessBtn.setEnabled(true);
                 }
                 Global.total_session = 0;
@@ -284,18 +280,14 @@ public class DashboardFragment extends Fragment {
                 historyBtn.setEnabled(false);
                 break;
             case "hasData":
-                Global.rank = data.get(2);
-                Global.session_perfect_kata = Integer.parseInt(data.get(3));
-                Global.session_perfect_hira = Integer.parseInt(data.get(4));
-                Global.total_session = Integer.parseInt(data.get(15));
-                Global.greetings_progress = Integer.parseInt(data.get(5));
-                Global.phrases_progress = Integer.parseInt(data.get(6));
+                getData(data);
 
-                Global.dateTimeNow = data.get(8);
-                Global.syllabary = data.get(9);
-                Global.session_mistake = Integer.parseInt(data.get(10));
-                Global.session_score = Integer.parseInt(data.get(11));
-                Global.latestTime = data.get(12);
+                Global.dateTimeNow = data.get(10);
+                Global.syllabary = data.get(11);
+                Global.session_mistake = Integer.parseInt(data.get(12));
+                Global.session_score = Integer.parseInt(data.get(13));
+                Global.latestTime = data.get(14);
+                Global.total_session = Integer.parseInt(data.get(17));
                 break;
         }
 
@@ -309,6 +301,30 @@ public class DashboardFragment extends Fragment {
         scoreText.setText(Integer.toString(Global.session_score));
         timeText.setText(Global.latestTime);
         dateTimeText.setText(Global.dateTimeNow);
+    }
+
+    private void getData(List<String> data) {
+        Global.rank = data.get(2);
+        Global.session_perfect_kata = Integer.parseInt(data.get(3));
+        Global.session_perfect_hira = Integer.parseInt(data.get(4));
+        Global.greetings_progress = Integer.parseInt(data.get(5));
+        Global.phrases_progress = Integer.parseInt(data.get(6));
+
+        Global.greetings.clear();
+        Global.phrases.clear();
+        String greets = data.get(7).substring(1, data.get(7).length() - 1);
+        String[] split_greets = greets.split(", ");
+        for (String pair : split_greets) {
+            String[] keyValue = pair.split("=");
+            Global.greetings.put(keyValue[0], Boolean.valueOf(keyValue[1]));
+        }
+        String phrase = data.get(8).substring(1, data.get(8).length() - 1);
+        String[] split_phrase = phrase.split(", ");
+        for (String pair : split_phrase) {
+            String[] keyValue = pair.split("=");
+            Global.phrases.put(keyValue[0], Boolean.valueOf(keyValue[1]));
+        }
+        System.out.println(Global.greetings + " " + Global.phrases);
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -424,9 +440,11 @@ public class DashboardFragment extends Fragment {
                 case "choose":
                     boolean check = checked[0] == -1;
                     if (!check && mode.equals("edit")) {
+                        profileSpin.setSelection(0);
                         addProfile("edit", selectedProfile[0]);
                         alertDialog.dismiss();
                     } else if (!check && mode.equals("delete")) {
+                        profileSpin.setSelection(0);
                         alertDelete(selectedProfile[0], alertDialog);
                     } else {
                         Toast.makeText(getContext(), getString(R.string.require_select), Toast.LENGTH_SHORT).show();
@@ -442,7 +460,8 @@ public class DashboardFragment extends Fragment {
         confirmBuilder.setTitle(String.format(getString(R.string.confirm_delete), selected));
         confirmBuilder.setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
             dbHelper.deleteProfile(selected);
-            Toast.makeText(getContext(), R.string.profile_deleted, Toast.LENGTH_SHORT).show();
+            snackbar = Snackbar.make(root, R.string.profile_deleted, Snackbar.LENGTH_LONG);
+            snackbar.setAnchorView(R.id.nav_view).setAction(R.string.close, view -> snackbar.dismiss()).show();
             alertDialog.dismiss();
             refreshFragment();
         });
@@ -450,14 +469,22 @@ public class DashboardFragment extends Fragment {
         alertDialog.dismiss();
     }
 
-    private void alertSave(TextInputEditText textInputEditText, String mode, String chosenProfile, AlertDialog alertDialog, String finalToastDone, String finalToastOngoing) {
+    private void alertSave(TextInputEditText textInputEditText, String mode, String chosenProfile, AlertDialog alertDialog,
+                           String finalToastDone, String finalToastOngoing) {
         Set<String> set = new HashSet<>(selectProfile);
         if(set.contains(textInputEditText.getText().toString())){
             Toast.makeText(getContext(), finalToastOngoing, Toast.LENGTH_SHORT).show();
         } else {
             switch (mode) {
                 case "new":
-                    UserModel userModel = new UserModel(-1, textInputEditText.getText().toString(), "Beginner", 0, 0, 0, 0);
+                    Global.greetings.clear();
+                    Global.phrases.clear();
+                    for (String key : Global.keys) {
+                        Global.greetings.put(key, false);
+                        Global.phrases.put(key, false);
+                    }
+                    UserModel userModel = new UserModel(-1, textInputEditText.getText().toString(), "Beginner",
+                            0, 0, 0, 0, Global.greetings, Global.phrases);
                     dbHelper.addOne("newUser", userModel, null);
                     refreshFragment();
                     break;
@@ -466,7 +493,8 @@ public class DashboardFragment extends Fragment {
                     refreshFragment();
                     break;
             }
-            Toast.makeText(getContext(), finalToastDone, Toast.LENGTH_SHORT).show();
+            snackbar = Snackbar.make(root, finalToastDone, Snackbar.LENGTH_LONG);
+            snackbar.setAnchorView(R.id.nav_view).setAction(R.string.close, view -> snackbar.dismiss()).show();
             alertDialog.dismiss();
         }
     }
@@ -480,17 +508,19 @@ public class DashboardFragment extends Fragment {
                 LayoutInflater layoutInflater = activity.getLayoutInflater();
                 View view = layoutInflater.inflate(R.layout.tutorial_layout, activity.findViewById(R.id.main), false);
 
-                ImageView img = view.findViewById(R.id.image); // TODO
+                ImageView img = view.findViewById(R.id.image);
                 Integer[] pics = new Integer[]{R.drawable.profile1, R.drawable.profile2, R.drawable.profile3, R.drawable.profile4, R.drawable.profile5};
                 List<Integer> tutorialPics = new ArrayList<>(Arrays.asList(pics));
                 img.setImageResource(tutorialPics.get(0));
 
-                TextView text = view.findViewById(R.id.text); // TODO
-                String[] texts = new String[]{getString(R.string.profile1), getString(R.string.profile2), getString(R.string.profile3), getString(R.string.profile4), getString(R.string.profile5)};
+                TextView text = view.findViewById(R.id.text);
+                String[] texts = new String[]{getString(R.string.profile1),
+                        getString(R.string.profile2), getString(R.string.profile3),
+                        getString(R.string.profile4), getString(R.string.profile5)};
                 List<String> tutorialText = new ArrayList<>(Arrays.asList(texts));
                 text.setText(tutorialText.get(0));
 
-                alert.setTitle(R.string.profiles_help);
+                alert.setTitle(R.string.profiles_title);
                 alert.setView(view);
                 alert.setPositiveButton(R.string.next, null);
                 alert.setNegativeButton(R.string.previous, null);
@@ -499,29 +529,29 @@ public class DashboardFragment extends Fragment {
                 final int[] index = {0};
                 final AlertDialog alertDialog = alert.create();
                 alertDialog.show();
-                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(false);
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                     index[0]++;
                     img.setImageResource(tutorialPics.get(index[0]));
                     text.setText(tutorialText.get(index[0]));
-                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.VISIBLE);
+                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(true);
                     if (index[0] == tutorialPics.size() - 1) {
-                        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.GONE);
+                        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
                     }
                 });
                 alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
                     index[0]--;
                     img.setImageResource(tutorialPics.get(index[0]));
                     text.setText(tutorialText.get(index[0]));
-                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setVisibility(View.VISIBLE);
+                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
                     if (index[0] == 0) {
-                        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(false);
                     }
                 });
                 break;
             case "rank":
                 alert.setTitle(R.string.rank_prerequisite);
-                alert.setMessage(R.string.ranks); // TODO
+                alert.setMessage(R.string.ranks);
                 alert.setNeutralButton(R.string.close, (dialogInterface, i) -> dialogInterface.dismiss());
                 alert.show();
                 break;

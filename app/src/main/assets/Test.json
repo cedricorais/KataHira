@@ -1,0 +1,37 @@
+{
+    "language": "Test",
+    "chara_sets": {
+      "10 chars kata": {
+        "ア": "a", "カ": "ka", "サ": "sa", "タ": "ta", "ナ": "na", "ハ": "ha", "マ": "ma", "ヤ": "ya", "ラ": "ra", "ワ": "wa"
+      },
+      "10 chars hira": {
+        "あ": "a", "か": "ka", "さ": "sa", "た": "ta", "な": "na", "は": "ha", "ま": "ma", "や": "ya", "ら": "ra", "わ": "wa"
+      }
+    },
+  "phrases": {
+    "basic_greetings": {
+      "はい": "Hai",
+      "いいえ": "Iie",
+      "おねがいします": "Onegai shimasu",
+      "ありがとう": "Arigatō",
+      "どういたしまして": "Douitashimashite",
+      "すみません": "Sumimasen",
+      "ごめんなさい": "Gomennasai",
+      "わかりません": "Wakarimasen",
+      "しりません": "Shirimasen",
+      "ただいま": "Tadaima"
+    },
+    "basic_phrases": {
+      "おはようございます": "Ohayou gozaimasu",
+      "こんばんは": "Konbanwa",
+      "おやすみなさい": "Oyasumi nasai",
+      "おなまえはなんですか？": "O-namae wa nan desu ka?",
+      "おげんきですか？": "O-genki desu ka?",
+      "げんきです": "Genki desu",
+      "はじめまして": "Hajimemashite",
+      "ようこそ": "Youkoso",
+      "こんにちは": "Konnichiwa",
+      "さようなら": "Sayounara"
+    }
+  }
+}

@@ -21,8 +21,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String USER_RANK = "USER_RANK";
     public static final String USER_PERFECTS_KATA = "USER_PERFECTS_KATA";
     public static final String USER_PERFECTS_HIRA = "USER_PERFECTS_HIRA";
-    public static final String USER_GREETINGS = "USER_GREETINGS"; // TODO
-    public static final String USER_PHRASES = "USER_PHRASES"; // TODO
+    public static final String GREETINGS_DONE = "GREETINGS_DONE";
+    public static final String PHRASES_DONE = "PHRASES_DONE";
+    public static final String GREETINGS = "GREETINGS";
+    public static final String PHRASES = "PHRASES";
 
     public static final String SESSION_TABLE = "SESSION_TABLE";
     public static final String SESSION_ID = "SESSION_ID";
@@ -39,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_RANK + " TEXT, " + USER_PERFECTS_KATA + " INTEGER, " + USER_PERFECTS_HIRA + " INTEGER, " + USER_GREETINGS + " INTEGER, " + USER_PHRASES + " INTEGER)";
+        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_RANK + " TEXT, " + USER_PERFECTS_KATA + " INTEGER, " + USER_PERFECTS_HIRA + " INTEGER, " + GREETINGS_DONE + " INTEGER, " + PHRASES_DONE + " INTEGER, " + GREETINGS + " TEXT, " + PHRASES + " TEXT)";
         sqLiteDatabase.execSQL(createUserTable);
         String createSessionTable = "CREATE TABLE " + SESSION_TABLE + " (" + SESSION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DATE_TIME + " TEXT, " + SYLLABARY + " TEXT, " + MISTAKES + " INTEGER, " + SCORE + " INTEGER, " + TIME + " TEXT, " + WRONG_CHARS + " TEXT, " + USER_ID + " INTEGER, " + " FOREIGN KEY(USER_ID) REFERENCES USER_TABLE (USER_ID)  ON DELETE CASCADE)";
         sqLiteDatabase.execSQL(createSessionTable);
@@ -74,8 +76,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 cv.put(USER_RANK, userModel.getRank());
                 cv.put(USER_PERFECTS_KATA, userModel.getPerfect_kata());
                 cv.put(USER_PERFECTS_HIRA, userModel.getPerfect_hira());
-                cv.put(USER_GREETINGS, userModel.getGreetings()); // TODO
-                cv.put(USER_PHRASES, userModel.getPhrases()); // TODO
+                cv.put(GREETINGS_DONE, userModel.getGreetings_done());
+                cv.put(PHRASES_DONE, userModel.getPhrases_done());
+                cv.put(GREETINGS, String.valueOf(userModel.getGreetings()));
+                cv.put(PHRASES, String.valueOf(userModel.getPhrases()));
                 db.insert(USER_TABLE, null, cv);
                 cv.clear();
                 break;
@@ -118,15 +122,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 table = USER_TABLE;
                 where = USER_NAME;
                 break;
-            case"greetings": // TODO
-                cv.put(USER_GREETINGS, newData);
+            case"greetings_done":
+                cv.put(GREETINGS_DONE, newData);
                 table = USER_TABLE;
                 where = USER_NAME;
                 break;
-            case"phrases": // TODO
+            case"phrases_done":
+                cv.put(PHRASES_DONE, newData);
                 table = USER_TABLE;
                 where = USER_NAME;
-                cv.put(USER_PHRASES, newData);
+                break;
+            case"greetings":
+                cv.put(GREETINGS, newData);
+                table = USER_TABLE;
+                where = USER_NAME;
+                break;
+            case"phrases":
+                cv.put(PHRASES, newData);
+                table = USER_TABLE;
+                where = USER_NAME;
                 break;
         }
         db.update(table, cv, where + " = ?", new String[]{profile});
@@ -163,10 +177,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 String userRank = cursor.getString(2);
                 int perfect_kata = cursor.getInt(3);
                 int perfect_hira = cursor.getInt(4);
-                int greetings = cursor.getInt(5); // TODO
-                int phrases = cursor.getInt(6); // TODO
+                int greetings_done = cursor.getInt(5);
+                int phrases_done = cursor.getInt(6);
+                String greetings = cursor.getString(7);
+                String phrases = cursor.getString(8);
 
-                String[] data = {String.valueOf(userId), userName, userRank, String.valueOf(perfect_kata), String.valueOf(perfect_hira), String.valueOf(greetings), String.valueOf(phrases)};
+                String[] data = {String.valueOf(userId), userName, userRank, String.valueOf(perfect_kata), String.valueOf(perfect_hira), String.valueOf(greetings_done), String.valueOf(phrases_done), greetings, phrases};
                 stringList.addAll(Arrays.asList(data));
             } while(cursor.moveToNext());
         }
@@ -206,29 +222,23 @@ public class DBHelper extends SQLiteOpenHelper {
         return stringList;
     }
 
-//    public List<SessionModel> getAllSessions(int user_id) { // TODO old
-    public List<String> getAllSessions(int user_id) { // TODO new
+    public List<String> getAllSessions(int user_id) {
         SQLiteDatabase db = this.getReadableDatabase();
-//        List<SessionModel> returnList = new ArrayList<>(); // TODO old
-        List<String> returnList = new ArrayList<>(); // TODO new
+        List<String> returnList = new ArrayList<>();
 
         String getAllQuery = "SELECT * FROM " + SESSION_TABLE + " WHERE " + USER_ID + " = " + user_id + " ORDER BY DATE_TIME DESC";
         Cursor cursor = db.rawQuery(getAllQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                int sessionID = cursor.getInt(0); // TODO
                 String dateTime = cursor.getString(1);
                 String syllabary = cursor.getString(2);
                 int mistakes = cursor.getInt(3);
                 int score = cursor.getInt(4);
                 String time = cursor.getString(5);
                 String wrongChars = cursor.getString(6);
-                int userID = cursor.getInt(7); // TODO
 
-//                SessionModel sessionModel = new SessionModel(sessionID, dateTime, syllabary, mistakes, score, time, wrongChars, userID); // TODO old
-//                returnList.add(sessionModel); // TODO old
-                String[] data = {dateTime, syllabary, String.valueOf(mistakes), String.valueOf(score), time, wrongChars}; // TODO new
-                returnList.addAll(Arrays.asList(data)); // TODO new
+                String[] data = {dateTime, syllabary, String.valueOf(mistakes), String.valueOf(score), time, wrongChars};
+                returnList.addAll(Arrays.asList(data));
             } while(cursor.moveToNext());
         }
 
